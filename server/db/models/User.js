@@ -1,4 +1,12 @@
-const Sequelize = require('sequelize')
+const {
+  STRING,
+  DECIMAL,
+  INTEGER,
+  DATE,
+  UUID, 
+  UUIDV4
+} = require('sequelize');
+//const Sequelize = require('sequelize')
 const db = require('../db')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
@@ -6,18 +14,56 @@ const axios = require('axios');
 
 const SALT_ROUNDS = 5;
 
-const User = db.define('user', {
-  username: {
-    type: Sequelize.STRING,
+const User = db.define('user',{
+  userName: {
+    type: STRING,
+    primaryKey: true,
+    required: true,
+    allowNull: false,
     unique: true,
-    allowNull: false
+    validate: { notEmpty: true },
+  },
+  name: {
+    type: STRING,
+    required: true,
+    allowNull: false,
+    unique: false, 
+    validate: { notEmpty: true },
+  },
+  address: {
+    type: STRING,
+    allowNull: false,
+    required: true,
+    unique: false,
+    validate: { notEmpty: true },
+  },
+  city: {
+    type: STRING,
+    allowNull: false,
+    required: true,
+    unique: false,
+    validate: { notEmpty: true },
+  },
+  state: {
+    type: STRING,
+    allowNull: false,
+    required: true,
+    unique: false,
+    validate: { notEmpty: true },
+  },
+  zip: {
+    type: STRING,
+    allowNull: false,
+    required: true,
+    unique: false,
+    validate: { notEmpty: true },
   },
   password: {
-    type: Sequelize.STRING,
+    type: STRING,
   }
 })
 
-module.exports = User
+module.exports = User;
 
 /**
  * instanceMethods

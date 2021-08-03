@@ -1,14 +1,34 @@
 //this is the access point for all things database related!
-
+//const Sequelize = require('sequelize');
 const db = require('./db')
 
 const User = require('./models/User')
+const Product = require('./models/Product')
+const { Order, Orderline } = require('./models/Order')
+const Country = require('./models/Country')
+const seedFakeData = require('./seedFakeData');
 
-//associations could go here!
+Product.belongsTo(Country);
+Country.hasMany(Product);
+User.hasMany(Order);
+Order.hasMany(Orderline);
+Orderline.belongsTo(Order);
+Product.hasMany(Orderline);
+
+const seedDB = async () => {
+  await db.sync({force: true});
+  await seedFakeData();
+}
+
+seedDB();
 
 module.exports = {
   db,
   models: {
     User,
+    Product,
+    Order,
+    Orderline,
+    Country
   },
 }
