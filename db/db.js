@@ -23,7 +23,7 @@ const db = new Sequelize(process.env.DATABASE_URL || 'postgres://postgres:FSA123
       unique: true
     },
     description: {
-      type: STRING,
+      type: STRING(1000),
       allowNull: false,
       required: true,
       unique: false,
@@ -56,7 +56,7 @@ const Product = db.define('product',{
     unique: false, // true
   },
   description: {
-    type: STRING,
+    type: STRING(1000),
     allowNull: false,
     required: true,
     unique: false,
@@ -75,7 +75,6 @@ const Product = db.define('product',{
     required: true,
   },
 })
-
 
 const User = db.define('user',{
   id: {
@@ -123,9 +122,61 @@ const User = db.define('user',{
   },
 })
 
+
+const Order = db.define('order',{
+  id: {
+    type: INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    required: true,
+    allowNull: false,
+    unique: true,
+    validate: { notEmpty: true },
+  },
+  orderDate: {
+    type: DATE,
+    required: true,
+    allowNull: false,
+    unique: false, 
+  },
+  status: {
+    type: STRING,
+    allowNull: false,
+    required: true,
+    unique: false,
+    validate: { notEmpty: true },
+  },
+}, {initialAutoIncrement: 1000})
+
+const Orderlines = db.define('orderlines',{
+  lineNbr: {
+    type: INTEGER,
+    required: true,
+    allowNull: false,
+    validate: { notEmpty: true },
+  },
+  quantity: {
+    type: INTEGER,
+    required: true,
+    allowNull: false,
+    unique: false, 
+  },
+  price: {
+    type: DECIMAL(9,2),
+    required: true,
+    allowNull: false,
+    unique: false, 
+  },
+
+})
+
 // associations
 Product.belongsTo(Country);
 Country.hasMany(Product);
+User.hasMany(Order);
+Order.hasMany(Orderlines);
+Orderlines.belongsTo(Order);
+Product.hasMany(Orderlines);
 
 const seedTestData = async (nbrProducts = 20, nbrUsers = 20, nbrOrders = 20, ) => {
   await db.sync({force: true});
