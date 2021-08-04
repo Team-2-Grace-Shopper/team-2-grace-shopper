@@ -15,9 +15,9 @@ const axios = require('axios');
 const SALT_ROUNDS = 5;
 
 const User = db.define('user',{
-  userName: {
+  username: {
     type: STRING,
-    primaryKey: true,
+    // primaryKey: true,
     required: true,
     allowNull: false,
     unique: true,
