@@ -16,7 +16,7 @@ Product.hasMany(Orderline);
 
 const seedDB = async () => {
   await db.sync({force: true});
-  await seedFakeData();
+  await seedFakeData(25,20,40);
 }
 
 seedDB();

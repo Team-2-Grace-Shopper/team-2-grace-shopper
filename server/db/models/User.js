@@ -17,7 +17,7 @@ const SALT_ROUNDS = 5;
 const User = db.define('user',{
   username: {
     type: STRING,
-    // primaryKey: true,
+    primaryKey: true,
     required: true,
     allowNull: false,
     unique: true,

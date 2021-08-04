@@ -3,8 +3,7 @@ const {
   DECIMAL,
   INTEGER,
   DATE,
-  UUID, 
-  UUIDV4
+  ENUM 
 } = require('sequelize');
 const db = require('../db');
 
@@ -13,6 +12,7 @@ const Order = db.define('order',{
     type: INTEGER,
     primaryKey: true,
     autoIncrement: true,
+    initialAutoIncrement: 1000,
     required: true,
     allowNull: false,
     unique: true,
@@ -25,13 +25,20 @@ const Order = db.define('order',{
     unique: false, 
   },
   status: {
-    type: STRING,
+    type: ENUM("open", "closed"),
     allowNull: false,
     required: true,
     unique: false,
     validate: { notEmpty: true },
   },
-}, {initialAutoIncrement: 1000})
+  type: {
+    type: ENUM("cart", "order"),
+    allowNull: false,
+    required: true,
+    unique: false,
+    validate: { notEmpty: true },
+  },
+})
 
 const Orderline = db.define('orderlines',{
   lineNbr: {
