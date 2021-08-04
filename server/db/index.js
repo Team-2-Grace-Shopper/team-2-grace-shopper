@@ -9,6 +9,7 @@ const seedFakeData = require('./seedFakeData');
 
 Product.belongsTo(Country);
 Country.hasMany(Product);
+Order.belongsTo(User);
 User.hasMany(Order);
 Order.hasMany(Orderline);
 Orderline.belongsTo(Order);
