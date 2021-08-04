@@ -41,7 +41,8 @@ const seedFakeData = async (nbrProducts = 20, nbrUsers = 20, nbrOrders = 20) => 
       city: faker.address.city(),
       state: faker.address.stateAbbr(),
       zip: faker.address.zipCode(),
-      username: username
+      username: username,
+      password: '123'
     })
   }
 
@@ -50,7 +51,8 @@ const seedFakeData = async (nbrProducts = 20, nbrUsers = 20, nbrOrders = 20) => 
       orderDate: new Date() - (Math.random() * 10000000000),
       status: Math.random() < .5 ? 'open' : 'closed',
       type: Math.random() < .5 ? 'cart' : 'order',
-      userUsername: userUsernames[Math.floor(Math.random()*nbrUsers)]
+//      userUsername: userUsernames[Math.floor(Math.random()*nbrUsers)]
+      userId: Math.ceil(Math.random()*nbrUsers),
     })
     const nbrLines = Math.ceil(Math.random() * 3)
     for (let j = 0; j < nbrLines; j++){
