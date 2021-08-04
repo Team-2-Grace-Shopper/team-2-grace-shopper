@@ -37,7 +37,7 @@ const seedFakeData = async (nbrProducts = 20, nbrUsers = 20, nbrOrders = 20, ) =
       city: faker.address.city(),
       state: faker.address.stateAbbr(),
       zip: faker.address.zipCode(),
-      userName: faker.internet.email()
+      username: faker.internet.email()
     })
     // console.log(x)
   }
