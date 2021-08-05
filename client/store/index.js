@@ -3,9 +3,9 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import auth from './auth'
-import usersReducer from './users'
-import productsReducer from './products'
-import ordersReducer from './orders'
+import { usersReducer } from './users'
+import { productsReducer } from './products'
+import { ordersReducer } from './orders'
 
 //COMBINE REDUCERS
 
