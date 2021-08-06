@@ -4,7 +4,8 @@ const {
   INTEGER,
   DATE,
   UUID, 
-  UUIDV4
+  UUIDV4,
+  BOOLEAN
 } = require('sequelize');
 //const Sequelize = require('sequelize')
 const db = require('../db')
@@ -60,6 +61,11 @@ const User = db.define('user',{
   },
   password: {
     type: STRING,
+  },
+  isAdmin: {
+    type: BOOLEAN,
+    required: true,
+    defaultValue: false,
   }
 })
 
