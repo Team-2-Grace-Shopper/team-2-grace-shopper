@@ -21,12 +21,44 @@ const seedFakeData = async (nbrProducts = 20, nbrUsers = 20, nbrOrders = 20) => 
 
   const products = [];
   for (let i = 0; i < nbrProducts; i++){
+    const listPrice = (Math.random()*20).toFixed(2);
+    const type = Math.random() < .35 ? 'accessory' : 'coffee';
+    let category;
+    if (type === 'accessory'){
+      category = Math.random() < .5 ? 'mug' : 'grinder'
+    } else {
+      const rand = Math.random();
+      switch (true){
+        case rand < .2:
+          category = 'roast-light';
+          break;
+        case rand < .4:
+          category = 'roast-medium';
+          break;
+        case rand < .6:
+          category = 'roast-dark';
+          break;
+        case rand < .8:
+          category = 'decaf';
+          break;
+        default:
+          category = 'flavored';
+      }
+    }
     const x = await Product.create({
       name: faker.commerce.productName(),
       description: faker.lorem.paragraph(1),
-      price: (Math.random()*20).toFixed(2),
+      price: listPrice,
+      salePrice: (listPrice*(Math.random())).toFixed(2),
       inventory: Math.round((Math.random()*1000)),
-      countryId: Math.ceil(Math.random()*coffeeCountries.length)
+      countryId: Math.ceil(Math.random()*coffeeCountries.length),
+      weight: Math.round((Math.random()*128)),
+      isFeatured: Math.random() < .2 ? true : false,
+      onSale: Math.random() < .3 ? true : false,
+      rating: (Math.random()*5).toFixed(1),
+      type: type,
+      category: category,
+
     })
     products.push(x.id)
   }
@@ -42,7 +74,8 @@ const seedFakeData = async (nbrProducts = 20, nbrUsers = 20, nbrOrders = 20) => 
       state: faker.address.stateAbbr(),
       zip: faker.address.zipCode(),
       username: username,
-      password: '123'
+      password: '123',
+      isAdmin: Math.random() < .3 ? true : false,
     })
   }
 
