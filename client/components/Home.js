@@ -13,7 +13,6 @@ export class Home extends React.Component {
     await this.props.getProducts()
   }
   render () {
-    console.log(this.props.products)
     const products = this.props.products
     return (
     <div>
