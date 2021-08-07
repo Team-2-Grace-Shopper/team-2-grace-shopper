@@ -26,6 +26,7 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             <Route path="/coffees" component={Coffees} />
             <Route path="/accessories" component={Accessories} />
+            <Route path='/profile' exact render={(routeProps) => <EditProfile {...routeProps} /> } />
           </Switch>
         ) : (
           <Switch>
