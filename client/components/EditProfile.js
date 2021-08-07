@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateUser, loadUserInfo } from './store/users';
+import { updateUser, getUser } from '../store/users';
 
 class _EditProfile extends React.Component {
   constructor(props){
@@ -18,15 +18,15 @@ class _EditProfile extends React.Component {
   }
 
   async componentDidMount() {
+    console.log('CDM', this.props)
     if (this.props.mode === 'edit'){
       console.log('editing...', this.props.mode)
+      this.setState({ loading: true });
+      await this.props.getUser(this.props.username)
+      this.setState({ loading: false })
     } else {
-      console.log('adding...', this.props.mode)
+        console.log('adding...', this.props.mode)
     }
-    // read user information
-    this.setState({ loading: true });
-    await this.props.loadUserInfo()
-    this.setState({loading: false})
   }
 
   handleChange(ev) {
@@ -44,23 +44,69 @@ class _EditProfile extends React.Component {
 
   render() {
     return (
-      <div> some data
+      <div>
+        <h3>{this.state.message}</h3>
+
+        {this.props.mode === 'edit' ?
+          <h1>Edit Profile</h1> 
+          :
+          <h1>Create Profile</h1>}
+          <form onSubmit={this.handleSubmit} >
+            <label>ID (email):
+              <input type="text" 
+                     name="username" 
+                     autoFocus 
+                     required 
+                     value={ this.state.username }
+                     onChange={this.handleChange} />
+            </label>
+            <label>Address:
+              <input type="text" 
+                     name="address" 
+                     required 
+                     value={ this.state.address }
+                     onChange={this.handleChange} />
+            </label>
+            <label>City:
+              <input type="text" 
+                     name="city" 
+                     required 
+                     value={ this.state.city }
+                     onChange={this.handleChange} />
+            </label>
+            <label>State:
+              <input type="text" 
+                     name="state" 
+                     required 
+                     value={ this.state.state }
+                     onChange={this.handleChange} />
+            </label>
+            <label>Zip:
+              <input type="text" 
+                     name="zip" 
+                     required 
+                     value={ this.state.zip }
+                     onChange={this.handleChange} />
+            </label>
+            <button>Save</button>
+          </form>
       </div>
     )
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
+  console.log('in MSTP', state, ownProps)
   return {
     username: state.auth.username,
-    mode: ownProps.history.location.state.mode,
+    mode: ownProps.location.state.mode,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     updateUser: (user) => dispatch(updateUser(user)),
-    loadUserInfo: (username) => dispatch(loadUserInfo(username))
+    getUser: (username) => dispatch(getUser(username))
   }
 }
 

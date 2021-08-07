@@ -47,15 +47,15 @@ const Product = db.define('product',{
   },
   imageUrl1: {
     type: STRING,
-    defaultValue: '/def_campus_image.jpg'
+    defaultValue: '/images/sample_image.webp'
   },
   imageUrl2: {
     type: STRING,
-    defaultValue: '/def_campus_image.jpg'
+    defaultValue: '/images/sample_image.webp'
   },
   imageUrl3: {
     type: STRING,
-    defaultValue: '/def_campus_image.jpg'
+    defaultValue: '/images/sample_image.webp'
   },
   price: {
     type: DECIMAL(9,2),
