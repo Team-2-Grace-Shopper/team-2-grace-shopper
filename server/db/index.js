@@ -20,9 +20,8 @@ const seedDB = async () => {
   await seedFakeData(25,30,40);
 }
 
-seedDB();
-
 module.exports = {
+  seedDB,
   db,
   models: {
     User,

@@ -12,9 +12,14 @@ const Navbar = ({handleClick, isLoggedIn, name}) => (
         <div>
           {/* The navbar will show these links after you log in */}
           <div>
-            <Link to="/coffee">Coffee</Link>
+            <Link to="/coffees">Coffee</Link>
             <Link to="/accessories">Accessories</Link>
             <Link to="/sale">Sale</Link>
+            <Link to={{
+              pathname: "/profile",
+              state: { mode: 'edit'
+              }
+            }}>Register</Link>
           </div>
           <div>
             <a href="#">Search</a>
@@ -25,11 +30,16 @@ const Navbar = ({handleClick, isLoggedIn, name}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <div>
-            <Link to="/coffee">Coffee</Link>
+          <ul>
+            <Link to="/coffees">Coffee</Link>
             <Link to="/accessories">Accessories</Link>
             <Link to="/sale">Sale</Link>
-          </div>
+            <Link to={{
+              pathname: "/profile",
+              state: { mode: 'new'
+              }
+            }}>Profile</Link>
+            </ul>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
         </div>
