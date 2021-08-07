@@ -19,7 +19,7 @@ const Navbar = ({handleClick, isLoggedIn, name}) => (
               pathname: "/profile",
               state: { mode: 'edit'
               }
-            }}>Register</Link>
+            }}>Profile</Link>
           </div>
           <div>
             <a href="#">Search</a>
@@ -38,7 +38,7 @@ const Navbar = ({handleClick, isLoggedIn, name}) => (
               pathname: "/profile",
               state: { mode: 'new'
               }
-            }}>Profile</Link>
+            }}>Register</Link>
             </ul>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
