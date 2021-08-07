@@ -10,9 +10,17 @@ the auth store file imports it so I'm dropping it here for now
 //ACTION TYPES
  
 const GET_USERS = 'GET_USERS';
+const GET_USER = 'GET_USER';
 const CREATE_USER = 'CREATE_USER';
  
 //ACTION CREATORS
+
+const _getUser = (user) => {
+    return {
+        type: GET_USER, 
+        user
+    };
+};
 
 const _getUsers = (users) => {
     return {
@@ -30,6 +38,13 @@ const _createUser = (user) => {
  
 
 //THUNK CREATORS
+
+export const getUser = (username) => {
+    return async (dispatch) => {
+        const { data: user } = await axios.get(`/api/users/${username}`);
+        dispatch(_getUsers(user));
+    };
+};
 
 export const getUsers = () => {
     return async (dispatch) => {
@@ -53,6 +68,8 @@ export const createUser = (user, history) => {
 
 export const usersReducer = (state = [], action) => {
     switch (action.type) {
+        case GET_USER:
+            return action.username;
         case GET_USERS:
             return action.users;
         case CREATE_USER:
