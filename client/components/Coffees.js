@@ -30,8 +30,8 @@ export class Coffees extends React.Component {
                 <div className= 'allCoffees'>
                     { coffees.map(coffee => 
                         <div key= { coffee.id }>
-                            <Link to={`coffees`}>
-                                <img src={coffee.imageUrl1} />
+                            <Link to={`coffees/${coffee.id}`}>
+                                <img src={ coffee.imageUrl1 } />
                                 <h4>{ coffee.name }</h4>
                                 <h2>${ coffee.price }</h2>
                             </Link>
