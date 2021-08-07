@@ -15,6 +15,11 @@ const Navbar = ({handleClick, isLoggedIn, name}) => (
             <Link to="/coffees">Coffee</Link>
             <Link to="/accessories">Accessories</Link>
             <Link to="/sale">Sale</Link>
+            <Link to={{
+              pathname: "/profile",
+              state: { mode: 'edit'
+              }
+            }}>Register</Link>
           </div>
           <div>
             <a href="#">Search</a>
@@ -29,7 +34,12 @@ const Navbar = ({handleClick, isLoggedIn, name}) => (
             <Link to="/coffees">Coffee</Link>
             <Link to="/accessories">Accessories</Link>
             <Link to="/sale">Sale</Link>
-          </ul>
+            <Link to={{
+              pathname: "/profile",
+              state: { mode: 'new'
+              }
+            }}>Profile</Link>
+            </ul>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
         </div>
