@@ -23,14 +23,16 @@ export class Home extends React.Component {
         <h2>
           Featured Items
         </h2>
-        { products.map( product => 
-          <div key={ product.name }>
-            <Link to={`products/${product.id}`}>
-              <img src={ product.imgUrl1 } />
-              <h3>{ product.name }</h3>
-            </Link>
-          </div>
-        )}
+        <div>
+          { products.map( product => 
+            <div key={ product.name }>
+              <Link to={`products/${product.id}`}>
+                <img src={ product.imgUrl1 } />
+                <h3>{ product.name }</h3>
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </div>
     )
