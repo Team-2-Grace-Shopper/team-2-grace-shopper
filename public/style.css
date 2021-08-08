@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-@import 'bootstrap/dist/css/bootstrap.min.css';
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -13,6 +12,14 @@ h1, h2 {
 h1, h2, h3, p, a {
   padding:0;
   margin:0;
+}
+button {
+  border: 0;
+  background:0;
+  font-size: 1em;
+  cursor: pointer;
+  font-weight: normal;
+  box-shadow: 0;
 }
 a {
   text-decoration: none;
@@ -49,15 +56,28 @@ nav a, nav p {
   margin: 1em;
 }
 
-
-
-#loginSignup {
-  width:100%;
+/*************/
+/* dropdown */
+#account-dropdown {
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  position: absolute;
+  top: 5em;
+  right: 2em;
 }
-#loginSignup * {
-  width:100%;
+#account-dropdown ul {
+  margin: 0;
+  padding: 1em;
 }
+#account-dropdown li {
+  list-style:none;
+  padding: 0 1em;
 
+}
+#account-dropdown li:hover {
+  background-color: #dbdbdb;
+  border-radius: 10px;
+}
 
 
 
@@ -117,4 +137,16 @@ nav a, nav p {
 }
 .itemList button {
   padding: 1em 2em;
+}
+
+
+
+
+/**************/
+/* Admin Link */
+#admin-link {
+  display: block;
+  position:fixed;
+  right:1em;
+  bottom: 2em;
 }

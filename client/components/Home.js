@@ -27,7 +27,7 @@ export class Home extends React.Component {
           { products.map( product => 
             <div key={ product.name }>
               <Link to={`products/${product.id}`}>
-                <img src={ product.imgUrl1 } />
+                <img src={ product.imageUrl1 } />
                 <h3>{ product.name }</h3>
               </Link>
             </div>

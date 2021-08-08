@@ -6,6 +6,7 @@ import EditProfile from './components/EditProfile';
 import Home from './components/Home';
 import Coffees from './components/Coffees'
 import Accessories from './components/Accessories'
+import ProductsAdmin from './components/ProductsAdmin'
 import {me} from './store'
 
 /**
@@ -27,6 +28,7 @@ class Routes extends Component {
             <Route path="/coffees" component={Coffees} />
             <Route path="/accessories" component={Accessories} />
             <Route path='/profile' exact render={(routeProps) => <EditProfile {...routeProps} /> } />
+            <Route path='/products-admin' exact render={ProductsAdmin} />
           </Switch>
         ) : (
           <Switch>
