@@ -1,30 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   padding: 1em;
   font-size: 16px;
 }
-h1, h2 {
-  font-family: 'Special Elite', cursive;
+h1,
+h2 {
+  font-family: "Special Elite", cursive;
 }
-h1, h2, h3, p, a {
-  padding:0;
-  margin:0;
+h1,
+h2,
+h3,
+p,
+a {
+  padding: 0;
+  margin: 0;
+}
+p,
+a,
+span {
+  line-height: 1.5;
+}
+span {
+  font-size: 0.85em;
+}
+.disabled {
+  color: #999;
+  text-decoration: line-through;
 }
 button {
   border: 0;
-  background:0;
+  background: 0;
   font-size: 1em;
   cursor: pointer;
   font-weight: normal;
   box-shadow: 0;
 }
+.cta {
+  background-color: #222;
+  color: #fff;
+  padding: 1em 2em;
+}
 a {
   text-decoration: none;
   color: inherit;
-  display:block;
+  display: block;
 }
 
 form div {
@@ -34,24 +56,25 @@ form div {
 
 /**************/
 /* Navigation */
-#navbar{
+#navbar {
   border-bottom: 1px solid #dbdbdb;
   padding-bottom: 1em;
-  display:flex;
+  display: flex;
   justify-content: space-between;
 }
 .logo {
-  font-family: 'Special Elite', cursive;
+  font-family: "Special Elite", cursive;
 }
 nav > div > div {
   width: fit-content;
   display: inline-block;
 }
 nav > div > div:first-child {
-  margin-right:2em;
+  margin-right: 2em;
 }
 
-nav a, nav p {
+nav a,
+nav p {
   display: inline-block;
   margin: 1em;
 }
@@ -70,22 +93,19 @@ nav a, nav p {
   padding: 1em;
 }
 #account-dropdown li {
-  list-style:none;
+  list-style: none;
   padding: 0 1em;
-
 }
 #account-dropdown li:hover {
   background-color: #dbdbdb;
   border-radius: 10px;
 }
 
-
-
 /**************/
 /* Home */
 .hero {
   height: 500px;
-  background-image: url('https://cdn.shopify.com/s/files/1/0056/4562/files/Project_Flywheel_Vanilla_Hero_1_1500x.jpg?v=1627657803');
+  background-image: url("https://cdn.shopify.com/s/files/1/0056/4562/files/Project_Flywheel_Vanilla_Hero_1_1500x.jpg?v=1627657803");
   background-repeat: no-repeat;
   background-size: cover;
   margin-bottom: 2em;
@@ -93,7 +113,7 @@ nav a, nav p {
 
 /**************/
 /* Product List */
-.itemList > div{
+.itemList > div {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -104,20 +124,20 @@ nav a, nav p {
   width: 24%;
   border: 1px solid #dbdbdb;
   padding-bottom: 1em;
-  margin-top:1em;
+  margin-top: 1em;
 }
 .itemList h3 {
   width: 90%;
   margin: 0 auto;
 }
 .itemList img {
-  display:block;
-  width:100%;
+  display: block;
+  width: 100%;
   margin-bottom: 1em;
 }
 .itemList ul {
-  width:40%;
-  padding:5%;
+  width: 40%;
+  padding: 5%;
   display: inline-block;
 }
 .itemList li {
@@ -125,28 +145,52 @@ nav a, nav p {
   list-style: none;
   width: 1.5em;
   text-align: center;
-  border:1px solid #dbdbdb;
+  border: 1px solid #dbdbdb;
 }
 .itemList li:last-child {
   background-color: #ededed;
 }
 .itemList p {
-  display:inline-block;
+  display: inline-block;
   width: fit-content;
-  padding:5%;
+  padding: 5%;
 }
 .itemList button {
   padding: 1em 2em;
 }
-
-
-
-
 /**************/
-/* Admin Link */
-#admin-link {
+/* Product List - ADMIN */
+.itemList-admin {
+  padding-top: 2em;
+}
+.itemList-admin > div > div {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+  border-bottom: 1px solid #dbdbdb;
+  padding: 2em 0;
+}
+.itemList-admin > div > div:last-child {
+  border-bottom: 0;
+}
+.itemList-admin > div > div > * {
+  width: fit-content;
+  display: inline-block;
+  vertical-align: top;
+  padding: 1em;
+}
+.itemList-admin img {
+  max-width: 10em;
   display: block;
-  position:fixed;
-  right:1em;
-  bottom: 2em;
+}
+.product-basicInfo {
+  width: 20vw;
+  min-width: 20vw;
+  max-width: 20vw;
+}
+.product-description {
+  width: 20vw;
+  min-width: 20vw;
+  max-width: 20vw;
 }
