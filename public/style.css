@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import 'bootstrap/dist/css/bootstrap.min.css';
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -42,10 +43,21 @@ nav > div > div {
 nav > div > div:first-child {
   margin-right:2em;
 }
-nav a {
+
+nav a, nav p {
   display: inline-block;
   margin: 1em;
 }
+
+
+
+#loginSignup {
+  width:100%;
+}
+#loginSignup * {
+  width:100%;
+}
+
 
 
 
@@ -58,19 +70,51 @@ nav a {
   background-size: cover;
   margin-bottom: 2em;
 }
-.featuredItems > div{
+
+/**************/
+/* Product List */
+.itemList > div{
   width: 100%;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  text-align: center;
 }
-.featuredItems > div > div {
+.itemList > div > div {
   width: 24%;
   border: 1px solid #dbdbdb;
   padding-bottom: 1em;
   margin-top:1em;
 }
-.featuredItems h3 {
+.itemList h3 {
   width: 90%;
   margin: 0 auto;
+}
+.itemList img {
+  display:block;
+  width:100%;
+  margin-bottom: 1em;
+}
+.itemList ul {
+  width:40%;
+  padding:5%;
+  display: inline-block;
+}
+.itemList li {
+  display: inline-block;
+  list-style: none;
+  width: 1.5em;
+  text-align: center;
+  border:1px solid #dbdbdb;
+}
+.itemList li:last-child {
+  background-color: #ededed;
+}
+.itemList p {
+  display:inline-block;
+  width: fit-content;
+  padding:5%;
+}
+.itemList button {
+  padding: 1em 2em;
 }
