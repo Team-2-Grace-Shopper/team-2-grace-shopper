@@ -118,3 +118,24 @@ nav a, nav p {
 .itemList button {
   padding: 1em 2em;
 }
+
+/* JP */
+.profile{
+  margin-top: 5rem;
+}
+.formfield {
+  display: flex;
+}
+.formfield > label{
+  flex-basis: 45%;
+  display: flex;
+  justify-content: flex-end;
+  flex:1;
+  padding-right: 10px;
+  align-items: center;
+}
+.formfield > input{
+  flex:1.75;
+  margin-top: 5px;
+}
+/* JP */

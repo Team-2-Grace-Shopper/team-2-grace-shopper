@@ -11,22 +11,19 @@ class _EditProfile extends React.Component {
       city: '',
       state: '',
       zip: '',
-      loading: false
+      loading: false,
+      message: 'message area (if needed)',
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async componentDidMount() {
-    console.log('CDM', this.props)
-    if (this.props.mode === 'edit'){
-      console.log('editing...', this.props.mode)
-      this.setState({ loading: true });
-      await this.props.getUser(this.props.username)
-      this.setState({ loading: false })
-    } else {
-        console.log('adding...', this.props.mode)
-    }
+   componentDidMount() {
+    console.log('CDM 1',this.props)
+    this.setState({ loading: true });
+    this.setState({city: 'xxx'})
+//    await this.props.getUser(this.props.username)
+    this.setState({ loading: false })
   }
 
   handleChange(ev) {
@@ -42,64 +39,72 @@ class _EditProfile extends React.Component {
     this.props.updateUser(this.state);
   }
 
-  render() {
+  render(props) {
+    if (this.state.loading) {
+      return 'Retrieving your information...';
+    }
     return (
       <div>
-        <h3>{this.state.message}</h3>
-
-        {this.props.mode === 'edit' ?
-          <h1>Edit Profile</h1> 
-          :
-          <h1>Create Profile</h1>}
-          <form onSubmit={this.handleSubmit} >
-            <label>ID (email):
-              <input type="text" 
-                     name="username" 
-                     autoFocus 
-                     required 
-                     value={ this.state.username }
-                     onChange={this.handleChange} />
-            </label>
-            <label>Address:
-              <input type="text" 
-                     name="address" 
-                     required 
-                     value={ this.state.address }
-                     onChange={this.handleChange} />
-            </label>
-            <label>City:
+        <h1 className="profile">Edit Profile</h1> 
+        <h2>props.name</h2>
+        <h3>{ this.state.message }</h3>
+        <h4>Personal Info</h4>
+        <form onSubmit={this.handleSubmit} >
+          <div className="formfield">
+            <label>Email</label>
+            <input type="text" 
+                   name="username" 
+                   disabled
+                   value = { this.state.username }
+                   onChange = { this.handleChange } />
+          </div>
+          <div className="formfield">
+            <label>Address</label>
+            <input type="text" 
+                   name="address" 
+                   autoFocus 
+                   required 
+                   value={ this.state.address }
+                   onChange={this.handleChange} />
+          </div>
+          <div className="formfield">
+            <label>City</label>
               <input type="text" 
                      name="city" 
                      required 
                      value={ this.state.city }
                      onChange={this.handleChange} />
-            </label>
-            <label>State:
+          </div>
+          <div className="formfield">
+            <label>State</label>
               <input type="text" 
-                     name="state" 
-                     required 
-                     value={ this.state.state }
-                     onChange={this.handleChange} />
-            </label>
-            <label>Zip:
-              <input type="text" 
-                     name="zip" 
-                     required 
-                     value={ this.state.zip }
-                     onChange={this.handleChange} />
-            </label>
+                    name="state" 
+                    required 
+                    value={ this.state.state }
+                    onChange={this.handleChange} />
+          </div>
+          <div className="formfield">
+            <label>Zip</label>
+            <input type="text" 
+                    name="zip" 
+                    required 
+                    value={ this.state.zip }
+                    onChange={this.handleChange} />
+          </div>
+          <div className="formfield">
+          <label> </label>
             <button>Save</button>
-          </form>
-      </div>
+          </div>
+        </form>
+    </div>
     )
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('in MSTP', state, ownProps)
+  console.log('in MSTP', state.auth.username, state.auth)
   return {
     username: state.auth.username,
-    mode: ownProps.location.state.mode,
   }
 }
 
