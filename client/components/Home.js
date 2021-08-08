@@ -19,7 +19,7 @@ export class Home extends React.Component {
       <div className = 'hero'>
         <img src='' />
       </div>
-      <div className='featuredItems'>
+      <div className='itemList'>
         <h2>
           Featured Items
         </h2>

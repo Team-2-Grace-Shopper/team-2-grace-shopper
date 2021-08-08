@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
@@ -26,6 +26,7 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             <Route path="/coffees" component={Coffees} />
             <Route path="/accessories" component={Accessories} />
+            {/* <Route path="/edit-profile" component={editProfile} /> */}
           </Switch>
         ) : (
           <Switch>

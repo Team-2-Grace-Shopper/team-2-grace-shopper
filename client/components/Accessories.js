@@ -19,17 +19,25 @@ export class Accessories extends React.Component {
         const accessories = this.props.accessories
         return (
             <div>
-                <div className= 'allAccessories'>
-                    { accessories.map(accessory => 
-                        <div key= { accessory.id }>
-                            <Link to={`accessories`}>
-                                <p>Rating: { accessory.rating }</p>
-                                <img src= { accessory.imgUrl1}></img>
-                                <h4>{ accessory.name }</h4>
-                                <h2>${ accessory.price }</h2>
-                            </Link>
-                        </div>
-                    )}
+                <div className= 'itemList'>
+                    <div>
+                        { accessories.map(accessory => 
+                            <div key= { accessory.id }>
+                                <Link to={`accessories`}>
+                                    <img src= { accessory.imageUrl1}></img>
+                                    <h3>{ accessory.name }</h3>
+                                    <span>Rating: { accessory.rating }</span>
+                                </Link>
+                                <ul>
+                                    <li>-</li>
+                                    <li>1</li>
+                                    <li>+</li>
+                                </ul>
+                                <p>${ accessory.price }</p>
+                                <button>ADD TO CART</button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         )

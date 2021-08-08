@@ -27,16 +27,25 @@ export class Coffees extends React.Component {
                 </div>
                 <div className= 'Type'>
                 </div>
-                <div className= 'allCoffees'>
-                    { coffees.map(coffee => 
-                        <div key= { coffee.id }>
-                            <Link to={`coffees/${coffee.id}`}>
-                                <img src= { coffee.imgUrl1} />
-                                <h4>{ coffee.name }</h4>
-                                <h2>${ coffee.price }</h2>
-                            </Link>
-                        </div>
-                    )}
+                <div className= 'itemList'>
+                    <div>
+                        { coffees.map(coffee => 
+                            <div key= { coffee.id }>
+                                <Link to={`coffees/${coffee.id}`}>
+                                    <img src= { coffee.imageUrl1} />
+                                    <h3>{ coffee.name }</h3>
+                                    <span>Rating: { coffee.rating }</span>
+                                </Link>
+                                <ul>
+                                    <li>-</li>
+                                    <li>1</li>
+                                    <li>+</li>
+                                </ul>
+                                <p>${ coffee.price }</p>
+                                <button>ADD TO CART</button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         )
