@@ -10,7 +10,7 @@ const AccountDropdown = ({handleClick, isLoggedIn, name, isAdmin}) => (
         <p>You are Admin</p>
         <hr />
         <li><Link to="/profile">My profile</Link></li>
-        <li><Link to="">My orders</Link></li>
+        <li><Link to="/orderhistory">My orders</Link></li>
         <hr />
         <li><Link to="/products-admin">Manage products</Link></li>
         <li><Link to="">Manage users</Link></li>
@@ -20,7 +20,7 @@ const AccountDropdown = ({handleClick, isLoggedIn, name, isAdmin}) => (
       :
       <ul>
         <li><Link to="/profile">My profile</Link></li>
-        <li><Link to="">My orders</Link></li>
+        <li><Link to="/orderhistory">My orders</Link></li>
         <hr />
         <p onClick={handleClick}>Logout</p>
       </ul>
