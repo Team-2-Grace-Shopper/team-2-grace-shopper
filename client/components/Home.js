@@ -19,7 +19,7 @@ export class Home extends React.Component {
       <div className = 'hero'>
         <img src='' />
       </div>
-      <div className='featuredItems'>
+      <div className='itemList'>
         <h2>
           Featured Items
         </h2>
@@ -27,7 +27,7 @@ export class Home extends React.Component {
           { products.map( product => 
             <div key={ product.name }>
               <Link to={`products/${product.id}`}>
-                <img src={ product.imgUrl1 } />
+                <img src={ product.imageUrl1 } />
                 <h3>{ product.name }</h3>
               </Link>
             </div>
