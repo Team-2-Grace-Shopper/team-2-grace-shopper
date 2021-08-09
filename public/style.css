@@ -158,6 +158,51 @@ nav p {
 .itemList button {
   padding: 1em 2em;
 }
+
+/* JP */
+.profile{
+  margin-top: 5rem;
+}
+.profilecontainer{
+  display:flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+.profilecontainer:nth-child(1){
+  flex-basis: 30%;
+}
+.profilecontainer:nth-child(2){
+  flex-basis: 70%;
+}
+#profileform{
+  display: flex;
+  flex-direction: column;
+}
+.formfield {
+  display: flex;
+}
+.formfield > label{
+  flex-basis: 45%;
+  display: flex;
+  justify-content: flex-end;
+  flex:1;
+  padding-right: 10px;
+  align-items: center;
+}
+.formfield > input{
+  flex:1.75;
+  margin-top: 5px;
+}
+.profilehdr * {
+  margin-top: 40px;
+}
+.profilehdr > h2 {
+  margin-left: 15px;
+}
+.profilehdr > h3 {
+  margin-left: 30px;
+}
+/* JP */
 /**************/
 /* Product List - ADMIN */
 .itemList-admin {

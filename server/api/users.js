@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const { models: { User }} = require('../db')
 module.exports = router
+
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -10,6 +11,33 @@ router.get('/', async (req, res, next) => {
       attributes: ['id', 'username', 'name', 'address', 'city', 'state', 'zip']
     })
     res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:id', async (req, res, next) => {
+  const id = req.params.id * 1;
+  try {
+    const user = await User.findAll({
+      where: { id: id },
+      attributes: ['id', 'username', 'name', 'address', 'city', 'state', 'zip']
+    })
+    res.json(user)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/:id', async (req, res, next) => {
+  console.log('IN POST', req.body)
+  const id = req.body.id * 1;
+  try {
+    const user = await User.update(
+       req.body ,
+      { where: { id: id },
+    })
+    res.json(user)
   } catch (err) {
     next(err)
   }
