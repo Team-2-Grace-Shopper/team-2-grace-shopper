@@ -22,9 +22,9 @@ export class Accessories extends React.Component {
                 <div className= 'allAccessories'>
                     { accessories.map(accessory => 
                         <div key= { accessory.id }>
-                            <Link to={`accessories`}>
+                            <Link to={`accessories/${accessory.id}`}>
                                 <p>Rating: { accessory.rating }</p>
-                                <img src= { accessory.imgUrl1}></img>
+                                <img src= { accessory.imageUrl1}></img>
                                 <h4>{ accessory.name }</h4>
                                 <h2>${ accessory.price }</h2>
                             </Link>

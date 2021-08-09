@@ -7,6 +7,8 @@ import Home from './components/Home';
 import Coffees from './components/Coffees'
 import Accessories from './components/Accessories'
 import {me} from './store'
+import ChosenCoffee from './components/ChosenCoffee';
+import ChosenAccessory from './components/ChosenAccessory';
 
 /**
  * COMPONENT
@@ -27,6 +29,8 @@ class Routes extends Component {
             <Route path="/coffees" component={Coffees} />
             <Route path="/accessories" component={Accessories} />
             <Route path='/profile' exact render={(routeProps) => <EditProfile {...routeProps} /> } />
+            <Route exact path='/coffees/:id' component={ChosenCoffee}/>
+            <Route exact path='/accessories/:id' component={ChosenAccessory}/>
           </Switch>
         ) : (
           <Switch>
