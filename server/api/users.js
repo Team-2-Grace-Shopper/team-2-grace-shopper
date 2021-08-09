@@ -30,7 +30,7 @@ router.get('/:id', async (req, res, next) => {
 })
 
 router.post('/:id', async (req, res, next) => {
-  console.log('IN POST', req.body)
+//  console.log('IN POST', req.body)
   const id = req.body.id * 1;
   try {
     const user = await User.update(

@@ -41,11 +41,6 @@ class Navbar extends Component {
               <Link to="/coffees">Coffee</Link>
               <Link to="/accessories">Accessories</Link>
               <Link to="/sale">Sale</Link>
-              <Link to={{
-                pathname: "/profile",
-                state: { mode: 'edit'
-                }
-              }}>Profile</Link>
             </div>
             <div>
               <a href="#">Search</a>
@@ -63,7 +58,7 @@ class Navbar extends Component {
               <Link to="/accessories">Accessories</Link>
               <Link to="/sale">Sale</Link>
               <Link to={{
-                pathname: "/profile",
+                pathname: "/register",
                 state: { mode: 'new'
                 }
               }}>Register</Link>

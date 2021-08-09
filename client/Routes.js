@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Coffees from "./components/Coffees";
 import Accessories from "./components/Accessories";
 import ProductsAdmin from "./components/ProductsAdmin";
+import OrderHistory from './components/OrderHistory';
 import { me } from "./store";
 
 /**
@@ -29,6 +30,7 @@ class Routes extends Component {
             <Route path="/accessories" component={Accessories} />
             <Route path="/profile" component={EditProfile} />
             <Route path="/products-admin" component={ProductsAdmin} />
+            <Route path="/orderhistory" component={OrderHistory} />
           </Switch>
         ) : (
           <Switch>
