@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
+import { getOrdersForPage } from '../store/orders';
+
 
 export class OrderList extends React.Component {
   constructor(props){
     super(props)
   }
   render(){
-//    console.log('***',this.props)
     const { data, offset, pageCount} = this.props;
     const thisPage = data.slice(offset, offset+pageCount)
     return (
@@ -33,6 +34,7 @@ class _OrderHistory extends React.Component {
   }
 
   async componentDidMount(){
+    await this.props.getOrdersForPage();
     await this.getDataFromServer();
     this.setState(Object.assign({}, this.state, {data:this.state.allData.slice(0,this.state.pageCount)}))
     console.log('all data', this.state.allData)
@@ -88,7 +90,13 @@ class _OrderHistory extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  const parms ={ offset : 1, limit : 10, id: 1};
+  return {
+    getOrdersForPage: () => dispatch(getOrdersForPage(parms)),
+  }
+}
 //const OrderHistory = connect(mapStateToProps, mapDispatchToProps)(_OrderHistory)
-const OrderHistory = connect()(_OrderHistory)
+const OrderHistory = connect(null,mapDispatchToProps)(_OrderHistory)
 
 export default OrderHistory;
