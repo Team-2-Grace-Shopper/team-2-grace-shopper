@@ -6,6 +6,9 @@ import EditProfile from "./components/EditProfile";
 import Home from "./components/Home";
 import Coffees from "./components/Coffees";
 import Accessories from "./components/Accessories";
+import CartView from "./components/cart-components/CartView";
+import Checkout from "./components/cart-components/Checkout";
+import Confirmation from "./components/cart-components/Confirmation";
 import ProductsAdmin from "./components/ProductsAdmin";
 import { me } from "./store";
 
@@ -22,18 +25,22 @@ class Routes extends Component {
 
     return (
       <div>
-        {isLoggedIn ? (
-          <Switch>
+        <Switch>
+            <Route path="/" exact component={Home} />
             <Route path="/home" component={Home} />
             <Route path="/coffees" component={Coffees} />
             <Route path="/accessories" component={Accessories} />
+            <Route path="/cart" exact component={CartView} />
+            <Route path="/cart/checkout" component={Checkout} />
+            <Route path="/cart/confirmation" component={Confirmation} />
+        </Switch>
+        {isLoggedIn ? (
+          <Switch>
             <Route path="/profile" component={EditProfile} />
             <Route path="/products-admin" component={ProductsAdmin} />
           </Switch>
         ) : (
           <Switch>
-            <Route path="/profile" component={EditProfile} />
-            <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
           </Switch>
