@@ -12,13 +12,14 @@ the auth store file imports it so I'm dropping it here for now
 const GET_USERS = 'GET_USERS';
 const GET_USER = 'GET_USER';
 const CREATE_USER = 'CREATE_USER';
+const UPDATE_USER = 'UPDATE_USER';
  
 //ACTION CREATORS
 
-const _getUser = (user) => {
+const _getUser = (users) => {
     return {
         type: GET_USER, 
-        user
+        users
     };
 };
 
@@ -39,10 +40,10 @@ const _createUser = (user) => {
 
 //THUNK CREATORS
 
-export const getUser = (username) => {
+export const getUser = (id) => {
     return async (dispatch) => {
-        const { data: user } = await axios.get(`/api/users/${username}`);
-        dispatch(_getUsers(user));
+        const { data: users } = await axios.get(`/api/users/${id}`);
+        dispatch(_getUser(users));
     };
 };
 
@@ -62,14 +63,21 @@ export const createUser = (user, history) => {
     };
 };
 
-
+export const updateUser = (user) => {
+    const id = user.id;
+    return async (dispatch) => {
+        const { data: updated } = await axios.post(`/api/users/${id}`, user);
+//        dispatch(_updateUser(updated));
+//        history.push('/'); /* Wherever we want to redirect! */ 
+    };
+};
 
 //REDUCER
 
 export const usersReducer = (state = [], action) => {
     switch (action.type) {
         case GET_USER:
-            return action.username;
+            return action.users;
         case GET_USERS:
             return action.users;
         case CREATE_USER:
