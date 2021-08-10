@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
       include: [User, Orderline],
       where: {type: 'order'}
     })
-    res.json(users)
+    res.json(users) // WHY IS THIS USERS?
   } catch (err) {
     next(err)
   }
@@ -20,12 +20,12 @@ router.get('/page', async (req, res, next) => {
   try {
     const { id, limit, offset } = req.query;
     console.log('IN API, req.params=', req.query)
-    const users = await Order.findAll({
+    const orderss = await Order.findAll({
       attributes: ['id', 'orderDate', 'status', 'type'],
       include: [User, Orderline],
       where: {type: 'order', userId: id}
     })
-    res.json(users)
+    res.json(orders)
   } catch (err) {
     next(err)
   }
