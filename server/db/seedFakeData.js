@@ -8,7 +8,7 @@ const Product = require('./models/Product')
 const { Order, Orderline } = require('./models/Order')
 const db = require('./db');
 
-const seedFakeData = async (nbrProducts = 20, nbrUsers = 20, nbrOrders = 20) => {
+const seedFakeData = async (nbrProducts = 50, nbrUsers = 50, nbrOrders = 100) => {
   await db.sync({force: true});
 
   coffeeCountries.forEach(async (country, i) => {
@@ -79,14 +79,47 @@ const seedFakeData = async (nbrProducts = 20, nbrUsers = 20, nbrOrders = 20) => 
     })
   }
 
+//  create orders (half open, half closed)
   for (let i = 0; i < nbrOrders; i++){
+    const status = Math.random() < .5 ? 'open' : 'closed';
     const x = await Order.create({
       orderDate: new Date() - (Math.random() * 10000000000),
-      status: Math.random() < .5 ? 'open' : 'closed',
-      type: Math.random() < .5 ? 'cart' : 'order',
-//      userUsername: userUsernames[Math.floor(Math.random()*nbrUsers)]
+      status: status,
+      type: 'order',
+      ...(status === 'closed' && { billToName: faker.name.firstName() + ' ' + faker.name.lastName(), 
+                                   billToAddress: faker.address.streetAddress(),
+                                   billToCity: faker.address.city(),
+                                   billToState: faker.address.stateAbbr(),
+                                   billToZip: faker.address.zipCode(),
+                                   shipToName: faker.name.firstName() + ' ' + faker.name.lastName(), 
+                                   shipToAddress: faker.address.streetAddress(),
+                                   shipToCity: faker.address.city(),
+                                   shipToState: faker.address.stateAbbr(),
+                                   shipToZip: faker.address.zipCode(),
+                                  }),
       userId: Math.ceil(Math.random()*nbrUsers),
     })
+    const nbrLines = Math.ceil(Math.random() * 3)
+    for (let j = 0; j < nbrLines; j++){
+      await Orderline.create({
+        lineNbr: j+1,
+        quantity: Math.ceil(Math.random()*10),
+        price: (Math.random()*20).toFixed(2),
+        orderId: x.id,
+        productId: products[Math.floor(Math.random()*nbrProducts)]
+      })
+    }
+  }
+
+  //    create a cart for half the users
+  for (let i = 0; i < (nbrUsers / 2); i++){
+    const x = await Order.create({
+      orderDate: new Date() - (Math.random() * 10000000000),
+      status: 'open',
+      type: 'cart',
+      userId: i+1,
+    })
+
     const nbrLines = Math.ceil(Math.random() * 3)
     for (let j = 0; j < nbrLines; j++){
       await Orderline.create({

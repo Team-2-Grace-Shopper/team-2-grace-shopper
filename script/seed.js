@@ -4,13 +4,15 @@ const {seedDB, db, models: {User} } = require('../server/db')
 
 
 async function runSeed() {
-  console.log('seeding...')
+  console.log('seeding starting...')
   try {
     await seedDB()
   } catch (err) {
+    console.log('seeding aborting...')
     console.error(err)
     process.exitCode = 1
   } finally {
+    console.log('seeding complete...')
     console.log('closing db connection')
     await db.close()
     console.log('db connection closed')

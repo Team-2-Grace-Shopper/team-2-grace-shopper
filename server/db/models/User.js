@@ -33,31 +33,19 @@ const User = db.define('user',{
   },
   address: {
     type: STRING,
-    allowNull: false,
-    required: true,
     unique: false,
-    validate: { notEmpty: true },
   },
   city: {
     type: STRING,
-    allowNull: false,
-    required: true,
     unique: false,
-    validate: { notEmpty: true },
   },
   state: {
     type: STRING,
-    allowNull: false,
-    required: true,
     unique: false,
-    validate: { notEmpty: true },
   },
   zip: {
     type: STRING,
-    allowNull: false,
-    required: true,
     unique: false,
-    validate: { notEmpty: true },
   },
   password: {
     type: STRING,
