@@ -67,8 +67,6 @@ export const updateUser = (user) => {
     const id = user.id;
     return async (dispatch) => {
         const { data: updated } = await axios.post(`/api/users/${id}`, user);
-//        dispatch(_updateUser(updated));
-//        history.push('/'); /* Wherever we want to redirect! */ 
     };
 };
 
