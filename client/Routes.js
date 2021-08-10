@@ -5,7 +5,9 @@ import { Login, Signup } from "./components/AuthForm";
 import EditProfile from "./components/EditProfile";
 import Home from "./components/Home";
 import Coffees from "./components/Coffees";
+import ChosenCoffee from "./components/ChosenCoffee";
 import Accessories from "./components/Accessories";
+import ChosenAccessory from "./components/ChosenAccessory";
 import CartView from "./components/cart-components/CartView";
 import Checkout from "./components/cart-components/Checkout";
 import Confirmation from "./components/cart-components/Confirmation";
@@ -29,6 +31,10 @@ class Routes extends Component {
         <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/home" component={Home} />
+            <Route exact path="/coffees" component={Coffees} />
+            <Route exact path='/coffees/:id' component={ChosenCoffee}/>
+            <Route exact path="/accessories" component={Accessories} />
+            <Route exact path='/accessories/:id' component={ChosenAccessory}/>
             <Route path="/coffees" component={Coffees} />
             <Route path="/accessories" component={Accessories} />
             <Route path="/cart" exact component={CartView} />
@@ -41,6 +47,7 @@ class Routes extends Component {
             <Route path="/products-admin" component={ProductsAdmin} />
             <Route path="/orderhistory" component={OrderHistory} />
           </Switch>
+          
         ) : (
           <Switch>
             <Route path="/login" component={Login} />
