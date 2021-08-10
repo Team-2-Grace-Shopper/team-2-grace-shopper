@@ -1,50 +1,64 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../store";
 
-const AccountDropdown = ({handleClick, isLoggedIn, name, isAdmin}) => (
+const AccountDropdown = ({ handleClick, isLoggedIn, name, isAdmin }) => (
   <div id="account-dropdown">
-    { isAdmin ? 
+    {isAdmin ? (
       <ul>
         <p>You are Admin</p>
         <hr />
-        <li><Link to="/profile">My profile</Link></li>
-        <li><Link to="/orderhistory">My orders</Link></li>
+        <li>
+          <Link to="/profile">My profile</Link>
+        </li>
+        <li>
+          <Link to="/orderhistory">My orders</Link>
+        </li>
         <hr />
-        <li><Link to="/products-admin">Manage products</Link></li>
-        <li><Link to="">Manage users</Link></li>
+        <li>
+          <Link to="/products-admin">Manage products</Link>
+        </li>
+        <li>
+          <Link to="/users-admin">Manage users</Link>
+        </li>
         <hr />
-        <li><p onClick={handleClick}>Logout</p></li>
+        <li>
+          <p onClick={handleClick}>Logout</p>
+        </li>
       </ul>
-      :
+    ) : (
       <ul>
-        <li><Link to="/profile">My profile</Link></li>
-        <li><Link to="/orderhistory">My orders</Link></li>
+        <li>
+          <Link to="/profile">My profile</Link>
+        </li>
+        <li>
+          <Link to="/orderhistory">My orders</Link>
+        </li>
         <hr />
         <p onClick={handleClick}>Logout</p>
       </ul>
-    }
+    )}
   </div>
-)
+);
 
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     name: state.auth.name,
     isAdmin: state.auth.isAdmin,
-    isLoggedIn: !!state.auth.id
-  }
-}
+    isLoggedIn: !!state.auth.id,
+  };
+};
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
-      dispatch(logout())
-    }
-  }
-}
+      dispatch(logout());
+    },
+  };
+};
 
-export default connect(mapState, mapDispatch)(AccountDropdown)
+export default connect(mapState, mapDispatch)(AccountDropdown);

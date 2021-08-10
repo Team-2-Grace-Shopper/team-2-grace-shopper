@@ -10,7 +10,8 @@ import CartView from "./components/cart-components/CartView";
 import Checkout from "./components/cart-components/Checkout";
 import Confirmation from "./components/cart-components/Confirmation";
 import ProductsAdmin from "./components/ProductsAdmin";
-import OrderHistory from './components/OrderHistory';
+import UsersAdmin from "./components/UsersAdmin";
+import OrderHistory from "./components/OrderHistory";
 import { me } from "./store";
 
 /**
@@ -27,18 +28,19 @@ class Routes extends Component {
     return (
       <div>
         <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/home" component={Home} />
-            <Route path="/coffees" component={Coffees} />
-            <Route path="/accessories" component={Accessories} />
-            <Route path="/cart" exact component={CartView} />
-            <Route path="/cart/checkout" component={Checkout} />
-            <Route path="/cart/confirmation" component={Confirmation} />
+          <Route path="/" exact component={Home} />
+          <Route path="/home" component={Home} />
+          <Route path="/coffees" component={Coffees} />
+          <Route path="/accessories" component={Accessories} />
+          <Route path="/cart" exact component={CartView} />
+          <Route path="/cart/checkout" component={Checkout} />
+          <Route path="/cart/confirmation" component={Confirmation} />
         </Switch>
         {isLoggedIn ? (
           <Switch>
             <Route path="/profile" component={EditProfile} />
             <Route path="/products-admin" component={ProductsAdmin} />
+            <Route path="/users-admin" component={UsersAdmin} />
             <Route path="/orderhistory" component={OrderHistory} />
           </Switch>
         ) : (

@@ -16,7 +16,6 @@ export class ProductsAdmin extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const products = this.props.products;
     return (
       <div>
