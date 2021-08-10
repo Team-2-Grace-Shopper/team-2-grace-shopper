@@ -2,7 +2,6 @@ const router = require('express').Router()
 module.exports = router
 const { models: { Product, Country }} = require('../db')
 
-/* before Shanntal's edit
 router.get('/', async (req, res, next) => {
   try {
     const users = await Product.findAll({
@@ -14,16 +13,12 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
-*/
 
-//Shanntal's edit
-router.get('/', async (req, res, next) => {
+//Shanntal change 8/9:
+router.get('/coffee/:id', async (req, res, next) => {
   try {
-    const users = await Product.findAll({
-      //attributes: ['id', 'name', 'price', 'inventory'],
-      include: [Country]
-    })
-    res.json(users)
+    const coffee = await Product.findByPk(req.params.id)
+    res.send(coffee)
   } catch (err) {
     next(err)
   }

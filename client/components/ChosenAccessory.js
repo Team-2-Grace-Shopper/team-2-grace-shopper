@@ -8,7 +8,7 @@ import {getProducts} from'../store/products';
 
 const ChosenAccessory = ({ products, match }) => {
 
-        const chosenAccessory = products.filter(accessory=> accessory.id === match.params.id)
+        const chosenAccessory = products.filter(accessory=> accessory.id === match.params.id)[0]
         return (
             <div>
                 <div className= 'chosenAccessory' key={chosenAccessory.id}>

@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import React, {Component, Fragment} from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
-import { Login, Signup } from './components/AuthForm';
-import EditProfile from './components/EditProfile';
-import Home from './components/Home';
-import Coffees from './components/Coffees'
-import Accessories from './components/Accessories'
-import {me} from './store'
-import ChosenCoffee from './components/ChosenCoffee';
-import ChosenAccessory from './components/ChosenAccessory';
-=======
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
@@ -18,11 +5,12 @@ import { Login, Signup } from "./components/AuthForm";
 import EditProfile from "./components/EditProfile";
 import Home from "./components/Home";
 import Coffees from "./components/Coffees";
+import ChosenCoffee from "./components/ChosenCoffee";
 import Accessories from "./components/Accessories";
+import ChosenAccessory from "./components/ChosenAccessory";
 import ProductsAdmin from "./components/ProductsAdmin";
 import OrderHistory from './components/OrderHistory';
 import { me } from "./store";
->>>>>>> 422f6a0b7596ee3517f01aa003d9e82576cb4a44
 
 /**
  * COMPONENT
@@ -40,24 +28,25 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/coffees" component={Coffees} />
-            <Route path="/accessories" component={Accessories} />
-<<<<<<< HEAD
-            <Route path='/profile' exact render={(routeProps) => <EditProfile {...routeProps} /> } />
+            <Route exact path="/coffees" component={Coffees} />
             <Route exact path='/coffees/:id' component={ChosenCoffee}/>
+            <Route exact path="/accessories" component={Accessories} />
             <Route exact path='/accessories/:id' component={ChosenAccessory}/>
-=======
             <Route path="/profile" component={EditProfile} />
             <Route path="/products-admin" component={ProductsAdmin} />
             <Route path="/orderhistory" component={OrderHistory} />
->>>>>>> 422f6a0b7596ee3517f01aa003d9e82576cb4a44
           </Switch>
         ) : (
           <Switch>
             <Route path="/profile" component={EditProfile} />
-            <Route path="/" exact component={Login} />
+            <Route path="/" exact component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route exact path="/coffees" component={Coffees} />
+            <Route path="/coffees/:id" render={(routeProps) => <ChosenCoffee {...routeProps} />}/>
+            <Route exact path='/coffees/:id' component={ChosenCoffee}/>
+            <Route exact path="/accessories" component={Accessories} />
+            <Route exact path='/accessories/:id' component={ChosenAccessory}/>
           </Switch>
         )}
       </div>
