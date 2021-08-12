@@ -1,7 +1,9 @@
-import React from 'react'
+import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 import {getProducts} from'../store/products';
+import AllCoffeesCard from './AllCoffeesCard';
+import ChosenCoffeeCard from './ChosenCoffeeCard';
 
 //need to create addCart button
 //need to create button to increment & decrement count
@@ -53,10 +55,7 @@ class ChosenCoffee extends React.Component {
 
 
     render() {
-        console.log('PROPS:', this.props)
         const chosenCoffee = this.props.products.filter(product => product.id === this.props.match.params.id)[0]
-        console.log('CHOSEN COFFEE:' + chosenCoffee)
-        console.log('PRODUCTS:' + this.props.products)
         
         if (!chosenCoffee) {
            //const NewProductsArray = getProducts()
@@ -65,7 +64,8 @@ class ChosenCoffee extends React.Component {
         }
         
         return (
-            <div>
+            /*
+            <div className= 'singleItem'>
                 <div className= 'chosenCoffee' key={chosenCoffee.id}>
                     <img src={chosenCoffee.imageUrl} />
                     <p>Rating: { chosenCoffee.rating }</p>
@@ -84,6 +84,8 @@ class ChosenCoffee extends React.Component {
                 </div>
                 
             </div>
+            */
+           <ChosenCoffeeCard chosenCoffee= { chosenCoffee } key={chosenCoffee.id} />
         )
     }
 } 
@@ -114,4 +116,30 @@ export default connect(mapStateToProps, mapDispatchToProps)(ChosenCoffee);
                         )
                     })}
                 </div>
+*/
+
+
+/*  without having the ChosenCoffeeCard:
+return (
+            <div className= 'singleItem'>
+                <div className= 'chosenCoffee' key={chosenCoffee.id}>
+                    <img src={chosenCoffee.imageUrl} />
+                    <p>Rating: { chosenCoffee.rating }</p>
+                    <h1>{ chosenCoffee.name }</h1>
+                    <p>{ chosenCoffee.description }</p>
+                    <p>{ chosenCoffee.weight }oz</p>
+                </div>
+                <div>
+                    <ul>
+                        <li>-</li>
+                        <li>1</li>
+                        <li>+</li>
+                    </ul>
+                    <p>${ chosenCoffee.price }</p>
+                    <button>ADD TO CART</button>
+                </div>
+                
+            </div>
+        )
+
 */

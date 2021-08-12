@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
 import {getProducts} from'../store/products';
+import AllCoffeesCard from './AllCoffeesCard';
 
 //need to create addCart button
 //need to create button to increment & decrement count
@@ -17,6 +18,7 @@ export class Coffees extends React.Component {
 
     render () {
         const coffees = this.props.coffees
+        
         return (
             <div>
                 <div className= 'sortBy'>
@@ -29,21 +31,9 @@ export class Coffees extends React.Component {
                 </div>
                 <div className= 'itemList'>
                     <div>
-                        { coffees.map(coffee => 
-                            <div key= { coffee.id }>
-                                <Link to={`/coffees/${coffee.id}`}>
-                                    <img src= { coffee.imageUrl1} />
-                                    <h3>{ coffee.name }</h3>
-                                    <span>Rating: { coffee.rating }</span>
-                                </Link>
-                                <ul>
-                                    <li>-</li>
-                                    <li>1</li>
-                                    <li>+</li>
-                                </ul>
-                                <p>${ coffee.price }</p>
-                                <button>ADD TO CART</button>
-                            </div>
+                        { 
+                        coffees.map(coffee => 
+                       <AllCoffeesCard coffee= { coffee } key={coffee.id}/>
                         )}
                     </div>
                 </div>
