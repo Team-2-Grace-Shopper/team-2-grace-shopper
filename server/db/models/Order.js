@@ -88,6 +88,21 @@ const Order = db.define('order',{
     required: false,
     unique: false,
   },
+  trackingNumber: {
+    type: STRING,
+    required: false,
+    unique: false,
+  },
+  email: {
+    type: STRING,
+    required: false,
+    unique: false,
+  },
+  shipDate: {
+    type: DATE,
+    required: false,
+    unique: false,
+  },
 
 })
 
