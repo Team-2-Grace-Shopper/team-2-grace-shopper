@@ -38,6 +38,57 @@ const Order = db.define('order',{
     unique: false,
     validate: { notEmpty: true },
   },
+  shipToName: {
+    type: STRING,
+    required: false,
+    unique: false, 
+  },
+  shipToAddress: {
+    type: STRING,
+    required: false,
+    unique: false,
+  },
+  shipToCity: {
+    type: STRING,
+    required: false,
+    unique: false,
+  },
+  shipToState: {
+    type: STRING,
+    required: false,
+    unique: false,
+  },
+  shipToZip: {
+    type: STRING,
+    required: false,
+    unique: false,
+  },
+  billToName: {
+    type: STRING,
+    required: false,
+    unique: false, 
+  },
+  billToAddress: {
+    type: STRING,
+    required: false,
+    unique: false,
+  },
+  billToCity: {
+    type: STRING,
+    required: false,
+    unique: false,
+  },
+  billToState: {
+    type: STRING,
+    required: false,
+    unique: false,
+  },
+  billToZip: {
+    type: STRING,
+    required: false,
+    unique: false,
+  },
+
 })
 
 const Orderline = db.define('orderlines',{

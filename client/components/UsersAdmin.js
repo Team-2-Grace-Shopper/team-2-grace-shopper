@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUsers } from "../store/users";
-import { getOrders } from "../store/orders";
 
 //need to create addCart button
 //need to create button to increment & decrement count
@@ -14,12 +13,10 @@ export class UsersAdmin extends React.Component {
 
   async componentDidMount() {
     await this.props.getUsers();
-    await this.props.getOrders();
   }
 
   render() {
     const users = this.props.users;
-    const orders = this.props.orders;
     return (
       <div>
         <div className="itemList-admin">
@@ -39,21 +36,16 @@ export class UsersAdmin extends React.Component {
                   </span>
                 </Link>
                 <p className="product-description">
-                  All orders
+                  <span>Total : </span>
+                  {user.orders && user.orders.length} orders
                   <br />
-                  {/* {orders.onSale ? (
-                    <p>
-                      <span className="disabled">${product.price}</span> $
-                      {product.salePrice} / {product.weight}lbs
-                    </p>
-                  ) : (
-                    <p>
-                      ${product.price} / {product.weight}lbs
-                    </p>
-                  )} */}
+                  <br />
+                  <span>View order list</span>
                 </p>
                 <p>
-                  <button className="cta">Edit Users</button>
+                  <Link to="/profile-admin" className="cta">
+                    Edit Users
+                  </Link>
                 </p>
               </div>
             ))}
@@ -73,7 +65,6 @@ const mapState = (state) => {
 
 const mapDispatchToProps = {
   getUsers,
-  getOrders,
 };
 
 export default connect(mapState, mapDispatchToProps)(UsersAdmin);

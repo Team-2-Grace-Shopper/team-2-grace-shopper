@@ -57,7 +57,7 @@ export class ProductsAdmin extends React.Component {
                   <span>Rating: {product.rating}</span>
                 </Link>
                 <p className="product-description">{product.description}</p>
-                <p>
+                <div>
                   {product.onSale ? (
                     <p>
                       <span className="disabled">${product.price}</span> $
@@ -71,7 +71,7 @@ export class ProductsAdmin extends React.Component {
                   <p>Inventory: {product.inventory}</p>
                   <br />
                   <button className="cta">Edit Product</button>
-                </p>
+                </div>
               </div>
             ))}
           </div>

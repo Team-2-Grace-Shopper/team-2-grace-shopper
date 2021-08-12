@@ -5,9 +5,10 @@ body {
   font-family: "Roboto", sans-serif;
   padding: 1em;
   font-size: 16px;
+  margin: 0;
+  padding: 0;
 }
-h1,
-h2 {
+h1 {
   font-family: "Special Elite", cursive;
 }
 h1,
@@ -23,12 +24,22 @@ a,
 span {
   line-height: 1.5;
 }
-span {
+span,
+label {
   font-size: 0.85em;
+}
+input,
+select {
+  padding: 1em 2em;
+  border-radius: 10px;
+  border: 1px solid #e4e4e4;
 }
 .disabled {
   color: #999;
   text-decoration: line-through;
+}
+.clickable {
+  cursor: pointer;
 }
 button {
   border: 0;
@@ -49,56 +60,112 @@ a {
   display: block;
 }
 
-form div {
+/* form div {
   margin: 1em;
   display: inline-block;
-}
+} */
 
 /**************/
 /* Navigation */
 #navbar {
   border-bottom: 1px solid #dbdbdb;
-  padding-bottom: 1em;
+  padding: 0 2em;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  z-index: 999;
 }
 .logo {
   font-family: "Special Elite", cursive;
-}
-nav > div > div {
-  width: fit-content;
-  display: inline-block;
-}
-nav > div > div:first-child {
-  margin-right: 2em;
+  color: #222;
+  margin: 0;
 }
 
-nav a,
-nav p {
+#navbar > div > div {
+  margin: 0;
+  padding: 0;
   display: inline-block;
-  margin: 1em;
+  line-height: 1.5;
+}
+#navbar > div:first-child {
+  display: inline-block;
+}
+@media only screen and (max-width: 890px) {
+  #navbar > div:first-child > a:first-child {
+    font-size: 0.7em;
+    width: 100px;
+    line-height: 1;
+    vertical-align: middle;
+    padding: 0.8em 0 0.2em 0;
+    display: inline-block;
+  }
+}
+
+#navbar a,
+#navbar p {
+  display: inline-block;
+  margin: 0 1em;
+  padding: 1em 0;
+  line-height: 3em;
+}
+#navbar > div > a:first-child {
+  margin: 0 2em 0 0;
+}
+#navbar > div:first-child > div > a:hover,
+#navbar p:hover {
+  border-bottom: 10px solid #222;
+  line-height: calc(3em - 19px);
+}
+.container {
+  padding: 2em;
+}
+.timedAlert h3 {
+  padding: 0.5em 1em;
+  background-color: #222;
+  border-radius: 10px;
+  color: #fff;
+  margin-bottom: 2em;
 }
 
 /*************/
 /* dropdown */
 #account-dropdown {
   background-color: #fff;
-  border: 1px solid #dbdbdb;
   position: absolute;
-  top: 5em;
+  top: 5.1em;
   right: 2em;
+  text-align: center;
+  box-shadow: 0 5px 10px #dbdbdb;
 }
 #account-dropdown ul {
   margin: 0;
-  padding: 1em;
+  border-bottom: 1em solid #222;
+  padding-inline-start: 0;
+}
+#account-dropdown ul > div {
+  border-top: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
+}
+#account-dropdown span:first-child {
+  width: 100%;
+  padding: 1em 0;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 0.8em;
 }
 #account-dropdown li {
   list-style: none;
-  padding: 0 1em;
 }
 #account-dropdown li:hover {
-  background-color: #dbdbdb;
-  border-radius: 10px;
+  background-color: #f7f7f7;
+}
+#account-dropdown a {
+  padding: 0 1em;
+}
+#account-dropdown span:hover,
+#account-dropdown a:hover {
+  border: 0;
 }
 
 /**************/
@@ -108,11 +175,15 @@ nav p {
   background-image: url("https://cdn.shopify.com/s/files/1/0056/4562/files/Project_Flywheel_Vanilla_Hero_1_1500x.jpg?v=1627657803");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center right;
   margin-bottom: 2em;
 }
 
 /**************/
 /* Product List */
+.itemList {
+  padding-bottom: 5em;
+}
 .itemList > div {
   width: 100%;
   display: flex;
@@ -160,48 +231,52 @@ nav p {
 }
 
 /* JP */
-.profile{
-  margin-top: 5rem;
-}
-.profilecontainer{
-  display:flex;
+#profilecontainer {
+  display: flex;
   flex-direction: row;
-  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
-.profilecontainer:nth-child(1){
-  flex-basis: 30%;
-}
-.profilecontainer:nth-child(2){
-  flex-basis: 70%;
-}
-#profileform{
+#profileleft {
   display: flex;
-  flex-direction: column;
-}
-.formfield {
-  display: flex;
-}
-.formfield > label{
-  flex-basis: 45%;
-  display: flex;
-  justify-content: flex-end;
-  flex:1;
-  padding-right: 10px;
+  flex-basis: calc(40% - 4em);
   align-items: center;
+  background-color: #f7f7f7;
+  min-height: calc(100vh - 9em);
+  height: max-content;
 }
-.formfield > input{
-  flex:1.75;
-  margin-top: 5px;
+#profileright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: calc(60% - 4em);
+  min-height: calc(100vh - 9em);
 }
-.profilehdr * {
-  margin-top: 40px;
+
+.formfield label {
+  position: relative;
+  margin-left: 10px;
+  background-color: #fff;
+  align-items: center;
+  font-weight: bold;
+  z-index: 99;
+  top: -4em;
+  padding: 0 0.5em;
 }
-.profilehdr > h2 {
-  margin-left: 15px;
+.formfield > input {
+  margin-top: 0.5em;
+  padding: 1em;
+  width: calc(100% - 2em);
 }
-.profilehdr > h3 {
-  margin-left: 30px;
+.formfield > select {
+  margin-top: 0.5em;
+  padding: 1em;
+  width: 100%;
 }
+/* .profilehdr * {
+  padding-top: 2rem;
+} */
 /* #orderhistory ul {
   display: inline-block;
   padding-left: 15px;
@@ -238,11 +313,14 @@ nav p {
   border: 1px solid rgb(198, 197, 202);
 }
 
-/* JP */
+/* JP END */
 /**************/
 /* Product List - ADMIN */
 .itemList-admin {
   padding-top: 2em;
+}
+.itemList-admin h2 {
+  text-align: center;
 }
 .itemList-admin > div > div {
   display: flex;
@@ -274,4 +352,18 @@ nav p {
   width: 20vw;
   min-width: 20vw;
   max-width: 20vw;
+}
+
+/**************/
+/* Footer */
+#footer {
+  width: 100%;
+  background-color: #222;
+  color: #ededed;
+}
+#footer div {
+  width: calc(100% - 4em);
+  padding: 2em;
+  text-align: center;
+  letter-spacing: 0.03em;
 }
