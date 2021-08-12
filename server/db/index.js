@@ -14,6 +14,7 @@ User.hasMany(Order);
 Order.hasMany(Orderline);
 Orderline.belongsTo(Order);
 Product.hasMany(Orderline);
+Orderline.belongsTo(Product);
 
 const seedDB = async () => {
   await db.sync({ force: true });

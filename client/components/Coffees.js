@@ -1,7 +1,9 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { getProducts } from "../store/products";
+import React from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom'
+import {getProducts} from'../store/products';
+import AllCoffeesCard from './AllCoffeesCard';
+
 
 //need to create addCart button
 //need to create button to increment & decrement count
@@ -15,37 +17,36 @@ export class Coffees extends React.Component {
     await this.props.getProducts();
   }
 
-  render() {
-    const coffees = this.props.coffees;
-    return (
-      <div className="container">
-        <div className="sortBy"></div>
-        <div className="Region"></div>
-        <div className="Roast"></div>
-        <div className="Type"></div>
-        <div className="itemList">
-          <div>
-            {coffees.map((coffee) => (
-              <div key={coffee.id}>
-                <Link to={`/coffees/${coffee.id}`}>
-                  <img src={coffee.imageUrl1} />
-                  <h3>{coffee.name}</h3>
-                  <span>Rating: {coffee.rating}</span>
-                </Link>
-                <ul>
-                  <li>-</li>
-                  <li>1</li>
-                  <li>+</li>
-                </ul>
-                <p>${coffee.price}</p>
-                <button>ADD TO CART</button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
+    render () {
+        const coffees = this.props.coffees
+        
+        return (
+            <div>
+                <div className= 'sortBy'>
+                </div>
+                <div className= 'Region'>
+                </div>
+                <div className= 'Roast'>
+                </div>
+                <div className= 'Type'>
+                </div>
+                <div className= 'itemList'>
+                    <div>
+                        { 
+                        coffees.map(coffee => 
+                       <AllCoffeesCard coffee= { coffee } key={coffee.id}/>
+                        )}
+                    </div>
+                </div>
+            </div>
+        )
+    }
+} 
+
+const mapState = state => {
+    return {
+        coffees: state.products.filter(product => product.type === 'coffee')
+    }
 }
 
 const mapState = (state) => {

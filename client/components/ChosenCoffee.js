@@ -1,7 +1,9 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { getProducts } from "../store/products";
+import React from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {getProducts} from'../store/products';
+import AllCoffeesCard from './AllCoffeesCard';
+import ChosenCoffeeCard from './ChosenCoffeeCard';
 
 //need to create addCart button
 //need to create button to increment & decrement count
@@ -65,28 +67,41 @@ class ChosenCoffee extends React.Component {
       return <h1>Item Not Found</h1>;
     }
 
-    return (
-      <div className="container">
-        <div className="chosenCoffee" key={chosenCoffee.id}>
-          <img src={chosenCoffee.imageUrl} />
-          <p>Rating: {chosenCoffee.rating}</p>
-          <h1>{chosenCoffee.name}</h1>
-          <p>{chosenCoffee.description}</p>
-          <p>{chosenCoffee.weight}oz</p>
-        </div>
-        <div>
-          <ul>
-            <li>-</li>
-            <li>1</li>
-            <li>+</li>
-          </ul>
-          <p>${chosenCoffee.price}</p>
-          <button>ADD TO CART</button>
-        </div>
-      </div>
-    );
-  }
-}
+    render() {
+        const chosenCoffee = this.props.products.filter(product => product.id === this.props.match.params.id)[0]
+        
+        if (!chosenCoffee) {
+           //const NewProductsArray = getProducts()
+           getProducts()
+           return <h1>Item Not Found</h1>
+        }
+        
+        return (
+            /*
+            <div className= 'singleItem'>
+                <div className= 'chosenCoffee' key={chosenCoffee.id}>
+                    <img src={chosenCoffee.imageUrl} />
+                    <p>Rating: { chosenCoffee.rating }</p>
+                    <h1>{ chosenCoffee.name }</h1>
+                    <p>{ chosenCoffee.description }</p>
+                    <p>{ chosenCoffee.weight }oz</p>
+                </div>
+                <div>
+                    <ul>
+                        <li>-</li>
+                        <li>1</li>
+                        <li>+</li>
+                    </ul>
+                    <p>${ chosenCoffee.price }</p>
+                    <button>ADD TO CART</button>
+                </div>
+                
+            </div>
+            */
+           <ChosenCoffeeCard chosenCoffee= { chosenCoffee } key={chosenCoffee.id} />
+        )
+    }
+} 
 
 const mapStateToProps = (state) => {
   console.log("Is it executing?", state.products);
@@ -112,4 +127,29 @@ export default connect(mapStateToProps, mapDispatchToProps)(ChosenCoffee);
                         )
                     })}
                 </div>
+*/
+
+/*  without having the ChosenCoffeeCard:
+return (
+            <div className= 'singleItem'>
+                <div className= 'chosenCoffee' key={chosenCoffee.id}>
+                    <img src={chosenCoffee.imageUrl} />
+                    <p>Rating: { chosenCoffee.rating }</p>
+                    <h1>{ chosenCoffee.name }</h1>
+                    <p>{ chosenCoffee.description }</p>
+                    <p>{ chosenCoffee.weight }oz</p>
+                </div>
+                <div>
+                    <ul>
+                        <li>-</li>
+                        <li>1</li>
+                        <li>+</li>
+                    </ul>
+                    <p>${ chosenCoffee.price }</p>
+                    <button>ADD TO CART</button>
+                </div>
+                
+            </div>
+        )
+
 */

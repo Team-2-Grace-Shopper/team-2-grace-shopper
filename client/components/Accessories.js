@@ -1,7 +1,8 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { getProducts } from "../store/products";
+import React from 'react'
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom'
+import {getProducts} from '../store/products';
+import AllAccessoriesCard from './AllAccessoriesCard';
 
 //need to create addCart button
 //need to create button to increment & decrement count
@@ -15,6 +16,7 @@ export class Accessories extends React.Component {
     await this.props.getProducts();
   }
 
+  
   render() {
     const accessories = this.props.accessories;
     return (
