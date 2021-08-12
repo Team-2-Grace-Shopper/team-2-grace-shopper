@@ -49,7 +49,7 @@ export const createOrder = (order, history) => {
 
 
 export const getOrdersForPage = (parms) => {
-    console.log('PARMS:', parms)
+    console.log('in thunk - PARMS:', parms)
     return async (dispatch) => {
         const { data: orders } = await axios.get('/api/orders/page', {params: parms})
         console.log('ORDERS', orders)
