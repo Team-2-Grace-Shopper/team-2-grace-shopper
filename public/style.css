@@ -54,6 +54,12 @@ button {
   color: #fff;
   padding: 1em 2em;
 }
+.ctadisabled{
+  background-color: #666;
+  color: #fff;
+  padding: 1em 2em;
+  cursor: default;
+}
 a {
   text-decoration: none;
   color: inherit;
@@ -183,6 +189,16 @@ a {
 /* Product List */
 .itemList {
   padding-bottom: 5em;
+}
+.itemList ul button {
+  padding: 0;
+  border: 1px solid #dbdbdb;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+.itemList ul li {
+  border: none;
 }
 .itemList > div {
   width: 100%;
