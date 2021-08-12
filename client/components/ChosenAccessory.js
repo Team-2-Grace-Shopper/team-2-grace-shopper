@@ -1,9 +1,8 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-import {getProducts} from'../store/products';
-import ChosenAccessoryCard from './ChosenAccessoryCard';
-
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { getProducts } from "../store/products";
+import ChosenAccessoryCard from "./ChosenAccessoryCard";
 
 //need to create addCart button
 //need to create button to increment & decrement count
@@ -51,17 +50,14 @@ class ChosenAccessory extends React.Component {
     console.log("CHOSEN Accessory:" + chosenAccessory);
     console.log("PRODUCTS:" + this.props.products);
 
-    render() {
-        const chosenAccessory = this.props.products.filter(product => product.id === this.props.match.params.id)[0]
-        
-        if (!chosenAccessory) {
-           //const NewProductsArray = getProducts()
-           getProducts()
-           return <h1>Item Not Found</h1>
-        }
-        
-        return (
-           /* 
+    if (!chosenAccessory) {
+      //const NewProductsArray = getProducts()
+      getProducts();
+      return <h1>Item Not Found</h1>;
+    }
+
+    return (
+      /* 
             <div className= 'singleItem'>
                 <div className= 'chosenAccessory' key={chosenAccessory.id}>
                     <img src={chosenAccessory.imageUrl} />
@@ -82,9 +78,8 @@ class ChosenAccessory extends React.Component {
                 
             </div>
             */
-           <ChosenAccessoryCard chosenAccessory= { chosenAccessory } />
-        )
-    }
+      <ChosenAccessoryCard chosenAccessory={chosenAccessory} />
+    );
 
     return (
       <div className="container">

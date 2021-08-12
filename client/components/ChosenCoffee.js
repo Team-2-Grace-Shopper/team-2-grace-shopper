@@ -1,9 +1,9 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-import {getProducts} from'../store/products';
-import AllCoffeesCard from './AllCoffeesCard';
-import ChosenCoffeeCard from './ChosenCoffeeCard';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { getProducts } from "../store/products";
+import AllCoffeesCard from "./AllCoffeesCard";
+import ChosenCoffeeCard from "./ChosenCoffeeCard";
 
 //need to create addCart button
 //need to create button to increment & decrement count
@@ -67,17 +67,8 @@ class ChosenCoffee extends React.Component {
       return <h1>Item Not Found</h1>;
     }
 
-    render() {
-        const chosenCoffee = this.props.products.filter(product => product.id === this.props.match.params.id)[0]
-        
-        if (!chosenCoffee) {
-           //const NewProductsArray = getProducts()
-           getProducts()
-           return <h1>Item Not Found</h1>
-        }
-        
-        return (
-            /*
+    return (
+      /*
             <div className= 'singleItem'>
                 <div className= 'chosenCoffee' key={chosenCoffee.id}>
                     <img src={chosenCoffee.imageUrl} />
@@ -98,10 +89,10 @@ class ChosenCoffee extends React.Component {
                 
             </div>
             */
-           <ChosenCoffeeCard chosenCoffee= { chosenCoffee } key={chosenCoffee.id} />
-        )
-    }
-} 
+      <ChosenCoffeeCard chosenCoffee={chosenCoffee} key={chosenCoffee.id} />
+    );
+  }
+}
 
 const mapStateToProps = (state) => {
   console.log("Is it executing?", state.products);
