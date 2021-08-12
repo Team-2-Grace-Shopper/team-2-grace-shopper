@@ -212,7 +212,7 @@ class _EditProfile extends React.Component {
             </div>
 
             <div className="formfield">
-              <button className="cta" disabled={this.state.enableSave}>
+              <button className={this.state.enableSave ? 'ctadisabled' : 'cta'} disabled={this.state.enableSave}>
                 Save
               </button>
               <span>(*) - required field</span>
