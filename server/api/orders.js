@@ -22,7 +22,6 @@ router.get('/page', async (req, res, next) => {
     console.log('IN API, req.params=', req.query)
     const orders = await Order.findAll({
       // attributes: ['id', 'orderDate', 'status', 'type'],
-      // include: [User, Orderline],
       include: [{ model: User}, 
                 { model: Orderline, include: Product }],
 
