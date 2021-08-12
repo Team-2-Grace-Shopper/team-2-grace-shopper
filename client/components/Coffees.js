@@ -20,7 +20,7 @@ export class Coffees extends React.Component {
     const coffees = this.props.coffees;
 
     return (
-      <div>
+      <div className="container">
         <div className="sortBy"></div>
         <div className="Region"></div>
         <div className="Roast"></div>
