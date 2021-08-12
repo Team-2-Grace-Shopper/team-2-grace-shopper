@@ -5,9 +5,9 @@ const Footer = () => {
     <div id="footer">
       <div>
         <span>
-          Copyright © Grace Coffee. All rights reserved.
+          Copyright © 2021 by Grace Coffee. All rights reserved.
           <br />
-          John Pirog + Evee Kim + Ian Milliken + Shanntal Morel
+          Evee Kim + Ian Milliken + Shanntal Morel + John Pirog
         </span>
       </div>
     </div>

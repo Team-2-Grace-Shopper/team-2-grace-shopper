@@ -122,7 +122,7 @@ const OrderDetail = (props) => {
           </tbody>
         </table>
       </div>
-  
+
       )
     }
 
@@ -190,40 +190,41 @@ class _OrderHistory extends React.Component {
     }
     return (
       <div id="profilecontainer">
-        <div id="profileleft">
-          <h1 className="profilehdr">Order Status</h1> 
-          <div className="profilehdr">
-            <h2>{ this.props.name }</h2>
-            <h3>Open orders shown first</h3>
+        <div id="profileleft" className="container">
+          <div>
+            <h1 className="profilehdr">Order Status</h1> 
+            <div className="profilehdr">
+              <h2>{ this.props.name }</h2>
+              <h3>Open orders shown first</h3>
+            </div>
           </div>
         </div>
-        <div id="profileright">
-          <p></p>
+        <div id="profileright" className="container">
+          <div>
   
-          <OrderList data={this.props.allOrders} handleDetailClick={this.handleDetailClick} offset={this.state.offset} pageCount={this.state.pageCount} />
+            <OrderList data={this.props.allOrders} handleDetailClick={this.handleDetailClick} offset={this.state.offset} pageCount={this.state.pageCount} />
 
-          { this.state.totalOrders > this.state.pageCount &&         
-              <ReactPaginate
-                previousLabel={'previous'}
-                nextLabel={'next'}
-                breakLabel={'...'}
-                breakClassName={'break-me'}
-                pageCount={this.state.pageCount}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
-                onPageChange={this.handlePageClick}
-                containerClassName={'pagination'}
-                previousLinkClassName={"pagination__link"}
-                nextLinkClassName={"pagination__link"}
-                disabledClassName={"pagination__link--disabled"}
-                activeClassName={"pagination__link--active"}
-              />
-          }
-          <h1>*** ==> {this.state.showDetails}</h1>
-          { this.state.showDetails !== null &&
-            <OrderDetail orderDetails={this.props.allOrders[this.state.showDetails]}/>
-          }
-
+            { this.state.totalOrders > this.state.pageCount &&         
+                <ReactPaginate
+                  previousLabel={'previous'}
+                  nextLabel={'next'}
+                  breakLabel={'...'}
+                  breakClassName={'break-me'}
+                  pageCount={this.state.pageCount}
+                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={5}
+                  onPageChange={this.handlePageClick}
+                  containerClassName={'pagination'}
+                  previousLinkClassName={"pagination__link"}
+                  nextLinkClassName={"pagination__link"}
+                  disabledClassName={"pagination__link--disabled"}
+                  activeClassName={"pagination__link--active"}
+                />
+            }
+            { this.state.showDetails !== null &&
+              <OrderDetail orderDetails={this.props.allOrders[this.state.showDetails]}/>
+            }
+            </div>
         </div>
       </div>
     );
