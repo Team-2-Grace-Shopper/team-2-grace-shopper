@@ -4,17 +4,18 @@ import {Link} from 'react-router-dom'
 import {getProducts} from'../store/products';
 import AllCoffeesCard from './AllCoffeesCard';
 
+
 //need to create addCart button
 //need to create button to increment & decrement count
 
 export class Coffees extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    async componentDidMount() {
-        await this.props.getProducts()
-    }
+  async componentDidMount() {
+    await this.props.getProducts();
+  }
 
     render () {
         const coffees = this.props.coffees
@@ -48,8 +49,14 @@ const mapState = state => {
     }
 }
 
+const mapState = (state) => {
+  return {
+    coffees: state.products.filter((product) => product.type === "coffee"),
+  };
+};
+
 const mapDispatchToProps = {
-    getProducts
-}
+  getProducts,
+};
 
 export default connect(mapState, mapDispatchToProps)(Coffees);

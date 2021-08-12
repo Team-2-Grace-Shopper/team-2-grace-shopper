@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getUser, updateUser } from "../store/users";
 
-class _EditProfile extends React.Component {
+class _EditProfileAdmin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -239,6 +239,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const EditProfile = connect(mapStateToProps, mapDispatchToProps)(_EditProfile);
+const EditProfileAdmin = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_EditProfileAdmin);
 
-export default EditProfile;
+export default EditProfileAdmin;

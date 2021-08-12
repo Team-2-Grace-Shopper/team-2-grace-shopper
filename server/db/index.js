@@ -1,11 +1,11 @@
 //this is the access point for all things database related!
-const db = require('./db')
+const db = require("./db");
 
-const User = require('./models/User')
-const Product = require('./models/Product')
-const { Order, Orderline } = require('./models/Order')
-const Country = require('./models/Country')
-const seedFakeData = require('./seedFakeData');
+const User = require("./models/User");
+const Product = require("./models/Product");
+const { Order, Orderline } = require("./models/Order");
+const Country = require("./models/Country");
+const seedFakeData = require("./seedFakeData");
 
 Product.belongsTo(Country);
 Country.hasMany(Product);
@@ -17,9 +17,9 @@ Product.hasMany(Orderline);
 Orderline.belongsTo(Product);
 
 const seedDB = async () => {
-  await db.sync({force: true});
+  await db.sync({ force: true });
   await seedFakeData();
-}
+};
 
 module.exports = {
   seedDB,
@@ -29,6 +29,6 @@ module.exports = {
     Product,
     Order,
     Orderline,
-    Country
+    Country,
   },
-}
+};

@@ -1,50 +1,84 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../store";
 
-const AccountDropdown = ({handleClick, isLoggedIn, name, isAdmin}) => (
+const AccountDropdown = ({ handleClick, isLoggedIn, name, isAdmin }) => (
   <div id="account-dropdown">
-    { isAdmin ? 
-      <ul>
-        <p>You are Admin</p>
-        <hr />
-        <li><Link to="/profile">My profile</Link></li>
-        <li><Link to="/orderhistory">My orders</Link></li>
-        <hr />
-        <li><Link to="/products-admin">Manage products</Link></li>
-        <li><Link to="">Manage users</Link></li>
-        <hr />
-        <li><p onClick={handleClick}>Logout</p></li>
-      </ul>
-      :
-      <ul>
-        <li><Link to="/profile">My profile</Link></li>
-        <li><Link to="/orderhistory">My orders</Link></li>
-        <hr />
-        <p onClick={handleClick}>Logout</p>
-      </ul>
-    }
+    {isLoggedIn ? (
+      /* if user is logged in */
+      <div>
+        {isAdmin ? (
+          <ul>
+            <li>
+              <Link to="/profile">My profile</Link>
+            </li>
+            <li>
+              <Link to="/orderhistory">My orders</Link>
+            </li>
+            <div>
+              <span>You are Admin</span>
+              <li>
+                <Link to="/products-admin">Manage products</Link>
+              </li>
+              <li>
+                <Link to="/users-admin">Manage users</Link>
+              </li>
+            </div>
+            <li>
+              <span className="clickable" onClick={handleClick}>
+                Logout
+              </span>
+            </li>
+          </ul>
+        ) : (
+          <ul>
+            <li>
+              <Link to="/profile">My profile</Link>
+            </li>
+            <li>
+              <Link to="/orderhistory">My orders</Link>
+            </li>
+            <hr />
+            <span className="clickable" onClick={handleClick}>
+              Logout
+            </span>
+          </ul>
+        )}
+      </div>
+    ) : (
+      /* if user is NOT logged in */
+      <div>
+        <ul>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
+        </ul>
+      </div>
+    )}
   </div>
-)
+);
 
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     name: state.auth.name,
     isAdmin: state.auth.isAdmin,
-    isLoggedIn: !!state.auth.id
-  }
-}
+    isLoggedIn: !!state.auth.id,
+  };
+};
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
-      dispatch(logout())
-    }
-  }
-}
+      dispatch(logout());
+    },
+  };
+};
 
-export default connect(mapState, mapDispatch)(AccountDropdown)
+export default connect(mapState, mapDispatch)(AccountDropdown);

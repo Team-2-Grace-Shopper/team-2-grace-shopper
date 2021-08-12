@@ -45,14 +45,27 @@ export default connect(mapStateToProps)(ChosenCoffee);
 */
 
 class ChosenCoffee extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    async componentDidMount() {
-        await this.props.getProducts();
-    }
+  async componentDidMount() {
+    await this.props.getProducts();
+  }
 
+  render() {
+    console.log("PROPS:", this.props);
+    const chosenCoffee = this.props.products.filter(
+      (product) => product.id === this.props.match.params.id
+    )[0];
+    console.log("CHOSEN COFFEE:" + chosenCoffee);
+    console.log("PRODUCTS:" + this.props.products);
+
+    if (!chosenCoffee) {
+      //const NewProductsArray = getProducts()
+      getProducts();
+      return <h1>Item Not Found</h1>;
+    }
 
     render() {
         const chosenCoffee = this.props.products.filter(product => product.id === this.props.match.params.id)[0]
@@ -91,19 +104,17 @@ class ChosenCoffee extends React.Component {
 } 
 
 const mapStateToProps = (state) => {
-    console.log('Is it executing?', state.products)
-    return {
-        products: state.products
-    }
-}
+  console.log("Is it executing?", state.products);
+  return {
+    products: state.products,
+  };
+};
 
 const mapDispatchToProps = {
-    getProducts
-}
-
+  getProducts,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChosenCoffee);
-
 
 /* Incase we add reviews:
 <div className= 'reviews'>
@@ -117,7 +128,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(ChosenCoffee);
                     })}
                 </div>
 */
-
 
 /*  without having the ChosenCoffeeCard:
 return (
