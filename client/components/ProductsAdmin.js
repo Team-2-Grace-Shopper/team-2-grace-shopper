@@ -68,7 +68,8 @@ export class ProductsAdmin extends React.Component {
                       ${product.price} / {product.weight}lbs
                     </p>
                   )}
-                  <p>Inventory: {product.inventory}</p>
+                  <span>Inventory: {product.inventory}</span>
+                  <br />
                   <br />
                   <button className="cta">Edit Product</button>
                 </div>

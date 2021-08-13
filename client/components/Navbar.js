@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
+import { Icon } from '@iconify/react';
 import AccountDropdown from "./AccountDropdown";
 
 class Navbar extends Component {
@@ -46,43 +47,37 @@ class Navbar extends Component {
             <div>
               {/* The navbar will show these links after you log in */}
               <a href="#">
-                <img
-                  src="https://developer.apple.com/design/human-interface-guidelines/ios/images/icons/tab_bar_icons/TabBar_Search.png"
-                  width="15"
-                />
+                <Icon icon="bx:bx-search" width="20" />
               </a>
               <Link to="/cart">
-                <img
-                  src="https://freeiconshop.com/wp-content/uploads/edd/shopping-bag-outline.png"
-                  width="18px"
-                />
+                <Icon icon="bx:bx-shopping-bag" width="20" />
               </Link>
-              <button onClick={this.showDropdown}>Hi, {name}</button>
+              <button onClick={this.showDropdown}><Icon icon="bx:bx-user-circle" width="20" /> {name}</button>
               {this.state.showDropdown ? <AccountDropdown /> : null}
             </div>
           ) : (
-            <div>
-              {/* The navbar will show these links before you log in */}
-              <a href="#">
-                <img
-                  src="https://developer.apple.com/design/human-interface-guidelines/ios/images/icons/tab_bar_icons/TabBar_Search.png"
-                  width="15"
-                />
-              </a>
-              <Link to="/cart">
-                <img
-                  src="https://freeiconshop.com/wp-content/uploads/edd/shopping-bag-outline.png"
-                  width="18px"
-                />
-              </Link>
-              <button onClick={this.showDropdown}>
-                <img
-                  src="https://developer.apple.com/design/human-interface-guidelines/ios/images/icons/tab_bar_icons/person-crop-circle.png"
-                  width="15px"
-                />
-              </button>
-              {this.state.showDropdown ? <AccountDropdown /> : null}
-              {/* <Link
+              <div>
+                {/* The navbar will show these links before you log in */}
+                <a href="#">
+                  <img
+                    src="https://developer.apple.com/design/human-interface-guidelines/ios/images/icons/tab_bar_icons/TabBar_Search.png"
+                    width="15"
+                  />
+                </a>
+                <Link to="/cart">
+                  <img
+                    src="https://freeiconshop.com/wp-content/uploads/edd/shopping-bag-outline.png"
+                    width="18px"
+                  />
+                </Link>
+                <button onClick={this.showDropdown}>
+                  <img
+                    src="https://developer.apple.com/design/human-interface-guidelines/ios/images/icons/tab_bar_icons/person-crop-circle.png"
+                    width="15px"
+                  />
+                </button>
+                {this.state.showDropdown ? <AccountDropdown /> : null}
+                {/* <Link
                 to={{
                   pathname: "/register",
                   state: { mode: "new" },
@@ -94,8 +89,8 @@ class Navbar extends Component {
                 />{" "}
                 Register
               </Link> */}
-            </div>
-          )}
+              </div>
+            )}
         </nav>
       </div>
     );
