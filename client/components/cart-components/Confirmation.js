@@ -15,7 +15,7 @@ const Confirmation = ({ orders }) => {
 }
 
 const mapStateToProps = ({ orders }) => {
-    // const order = orders.find((order) => order.id) || {};
+
     return({
         orders
     })
