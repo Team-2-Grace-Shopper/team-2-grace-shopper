@@ -32,3 +32,17 @@ router.get('/page', async (req, res, next) => {
     next(err)
   }
 })
+
+// router.get('/cart', async (req, res, next) => {
+//   try {
+//     const { userId } = req.query;
+//     const orders = await Order.findAll({
+//       include: [{ model: User}, 
+//                 { model: Orderline, include: Product }],
+//       where: {type: 'cart', userId: userId}
+//     })
+//     res.json(orders)
+//   } catch (err) {
+//     next(err)
+//   }
+// })

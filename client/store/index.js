@@ -6,6 +6,7 @@ import auth from './auth'
 import { usersReducer } from './users'
 import { productsReducer } from './products'
 import { ordersReducer } from './orders'
+import { cartReducer } from './cart'
 
 //COMBINE REDUCERS
 
@@ -13,7 +14,8 @@ const reducer = combineReducers({
   auth,
   users: usersReducer,
   products: productsReducer,
-  orders: ordersReducer
+  orders: ordersReducer,
+  cart: cartReducer
  });
 
  //CREATE STORE

@@ -1,33 +1,67 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { getCart } from '../../store/cart'
 import {Link} from 'react-router-dom';
 
-const CartView = ({ orders }) => {
+class CartView extends React.Component {
+    constructor() {
+        super();
+    }
 
-    return (
-        <div>
-            <div className='itemList'>
-                <h2>Shopping Cart</h2>
-                <div>
-                    {/* { products.map( product => 
-                        <div key={ product.name }>
-                            <Link to={`products/${product.id}`}>
-                                <img src={ product.imageUrl1 } />
-                                <h3>{ product.name }</h3>
-                            </Link>
-                        </div>
-                    )} */}
+   async componentDidMount() {
+        const { userId } = this.props;
+        await this.props.getCart(userId);
+       
+        // else {
+        //     local storage something?
+        // }
+    }
+
+    render () {
+        if (!this.props.newCart) {
+            return <h1>Loading your cart...</h1>
+        }
+        const { userId } = this.props;
+        const { newCart } = this.props;
+        console.log('This is props', this.props)
+        
+        return (
+            <div>
+                <div className='itemList'>
+                    <h2>Shopping Cart</h2>
+                    <div>
+                           { 
+                           newCart.orderlines.map( orderline => 
+                               <div key={orderline.id}>
+                                   <p>{orderline.lineNbr}</p>
+                                   {/* <Link to={`products/${orderline.productId}`}>
+                                       <p>{ product.name }</p>
+                                   </Link> */}
+                                   <p>Quantity: {orderline.quantity}</p>
+                                   <p>Price: {orderline.price}</p>
+                                   <p>Line Total: {orderline.price * orderline.quantity}</p>
+                               </div>
+                           )}
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+       
+   
 }
 
-const mapStateToProps = ({ orders }) => {
-    // const order = orders.find((order) => order.id) || {};
+const mapStateToProps = ({ auth, cart }) => {
+   const userId = auth.id;
+   const newCart = cart[0];
     return({
-        orders
+        userId,
+        newCart
     })
 }
 
-export default connect(mapStateToProps)(CartView);
+const mapDispatchToProps = (dispatch) => ({
+    getCart: (userId) => dispatch(getCart(userId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartView);
