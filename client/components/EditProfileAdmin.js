@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getUser, updateUser } from "../store/users";
+import { getUser, getUsers, updateUser } from "../store/users";
 
 class _EditProfileAdmin extends React.Component {
   constructor(props) {
@@ -15,8 +15,11 @@ class _EditProfileAdmin extends React.Component {
 
   async componentDidMount() {
     this.setState({ loading: true });
-    await this.props.getUser(this.props.id);
-    const user = this.props.users[0];
+    await this.props.getUsers();
+    const _user = await this.props.users.filter((user) => { return user.id === parseInt(this.props.match.params.id) })
+    const user = _user[0]
+    console.log('USEERR', user)
+    console.log('PROPS', this.props)
     this.setState({
       loading: false,
       username: user.username,
@@ -73,13 +76,14 @@ class _EditProfileAdmin extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     if (this.state.loading) {
       return "Retrieving your information...";
     }
     return (
       <div id="profilecontainer">
         <div className="container" id="profileleft">
-          <h2 className="profilehdr">Update Your Profile</h2>
+          <h2 className="profilehdr">Update<br />{this.state.name}'s<br />profile</h2>
         </div>
         {/* <div className="profilehdr">
           
@@ -89,6 +93,8 @@ class _EditProfileAdmin extends React.Component {
             <span className="timedAlert">
               {this.state.message && <h3> {this.state.message} </h3>}
             </span>
+            <h2>{this.state.name}</h2>
+            <br />
             <div className="formfield">
               <input
                 type="text"
@@ -212,12 +218,13 @@ class _EditProfileAdmin extends React.Component {
             </div>
 
             <div className="formfield">
+              <span>(*) - required field</span>
               <button className="cta" disabled={this.state.enableSave}>
                 Save
               </button>
-              <span>(*) - required field</span>
-              <label> </label>
+              <a href="/users-admin" className="hyperlink"><span>Back to user list</span></a>
             </div>
+
           </form>
         </div>
       </div>
@@ -228,7 +235,8 @@ class _EditProfileAdmin extends React.Component {
 const mapStateToProps = (state) => {
   return {
     id: state.auth.id,
-    users: state.users,
+    user: state.user,
+    users: state.users
   };
 };
 
@@ -236,6 +244,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateUser: (user) => dispatch(updateUser(user)),
     getUser: (id) => dispatch(getUser(id)),
+    getUsers: () => dispatch(getUsers())
   };
 };
 

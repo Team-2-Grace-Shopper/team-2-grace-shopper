@@ -16,7 +16,9 @@ export class UsersAdmin extends React.Component {
   }
 
   render() {
-    const users = this.props.users;
+    const users = []
+      .concat(this.props.users)
+      .sort((a, b) => (a.id > b.id ? 1 : -1));
     return (
       <div>
         <div className="itemList-admin">
@@ -43,7 +45,7 @@ export class UsersAdmin extends React.Component {
                   <span>View order list</span>
                 </p>
                 <p>
-                  <Link to="/profile-admin" className="cta">
+                  <Link to={`/users-admin/${user.id}`} className="cta">
                     Edit Users
                   </Link>
                 </p>

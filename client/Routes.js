@@ -15,6 +15,7 @@ import ProductsAdmin from "./components/ProductsAdmin";
 import UsersAdmin from "./components/UsersAdmin";
 import OrderHistory from "./components/OrderHistory";
 import EditProfileAdmin from "./components/EditProfileAdmin";
+import Account from "./components/Account";
 import { me } from "./store";
 
 /**
@@ -46,17 +47,18 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/profile" component={EditProfile} />
+            <Route path="/account" component={Account} />
             <Route path="/products-admin" component={ProductsAdmin} />
-            <Route path="/users-admin" component={UsersAdmin} />
+            <Route path="/users-admin" exact component={UsersAdmin} />
             <Route path="/orderhistory" component={OrderHistory} />
-            <Route path="/profile-admin" component={EditProfileAdmin} />
+            <Route path="/users-admin/:id" exact component={EditProfileAdmin} />
           </Switch>
         ) : (
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-          </Switch>
-        )}
+            <Switch>
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={Signup} />
+            </Switch>
+          )}
       </div>
     );
   }
