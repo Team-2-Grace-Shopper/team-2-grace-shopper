@@ -68,7 +68,7 @@ button {
   letter-spacing: 0.05em;
   cursor: default;
 }
-a {
+.itemList a, #navbar a {
   text-decoration: none;
   color: inherit;
   display: block;

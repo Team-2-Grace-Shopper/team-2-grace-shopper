@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 
 const AllAccessoriesCard = ({ accessory }) => {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
     return (
         <div key= { accessory.id }>
             <Link to={`/accessories/${accessory.id}`}>

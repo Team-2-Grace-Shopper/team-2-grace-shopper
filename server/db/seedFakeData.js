@@ -96,6 +96,9 @@ const seedFakeData = async (nbrProducts = 50, nbrUsers = 50, nbrOrders = 100) =>
                                    shipToCity: faker.address.city(),
                                    shipToState: faker.address.stateAbbr(),
                                    shipToZip: faker.address.zipCode(),
+                                   email: faker.internet.email(),
+                                   trackingNumber: 'EV938507560CN',
+                                   shipDate: new Date() - (Math.random() * 10000000000)
                                   }),
       userId: Math.ceil(Math.random()*nbrUsers),
     })

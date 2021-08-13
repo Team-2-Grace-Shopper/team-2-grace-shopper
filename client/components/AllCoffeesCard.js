@@ -5,6 +5,7 @@ import StarRatings from "react-star-ratings";
 //useState-> function, pass in arg as a default value. Will use default value to create state for this compondent and will return an array with 2 times. 1st- value, 2nd setState function exclusively for that value
 
 const AllCoffeesCard = ({ coffee }) => {
+
   const [count, setCount] = useState(0);
   return (
     <div key={coffee.id}>
@@ -34,6 +35,7 @@ const AllCoffeesCard = ({ coffee }) => {
     </div>
   );
 };
+
 
 export default AllCoffeesCard;
 
