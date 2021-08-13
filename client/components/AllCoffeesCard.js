@@ -6,7 +6,7 @@ import StarRatings from "react-star-ratings";
 
 const AllCoffeesCard = ({ coffee }) => {
 
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   return (
     <div key={coffee.id}>
       <Link to={`/coffees/${coffee.id}`}>

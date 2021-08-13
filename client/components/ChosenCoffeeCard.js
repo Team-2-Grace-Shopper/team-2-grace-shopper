@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import StarRatings from "react-star-ratings";
 
 //useState-> function, pass in arg as a default value. Will use default value to create state for this compondent and will return an array with 2 times. 1st- value, 2nd setState function exclusively for that value
 
@@ -9,8 +10,17 @@ const ChosenCoffeeCard = ({ chosenCoffee }) => {
         <div key= { chosenCoffee.id }>
             <div className= 'singleItem'>
                 <div className= 'chosenCoffee' key={chosenCoffee.id}>
+                    <span>
+                        <StarRatings
+                            rating={chosenCoffee.rating * 1}
+                            starRatedColor="gold"
+                            numberOfStars={5}
+                            name="rating"
+                            starDimension="15px"
+                            starSpacing="0px"
+                        />
+                    </span>
                     <img src={chosenCoffee.imageUrl} />
-                    <p>Rating: { chosenCoffee.rating }</p>
                     <h1>{ chosenCoffee.name }</h1>
                     <p>{ chosenCoffee.description }</p>
                     <p>{ chosenCoffee.weight }oz</p>
@@ -23,12 +33,12 @@ const ChosenCoffeeCard = ({ chosenCoffee }) => {
             </div>
             
             <ul>
-                <button onClick={() => setCount(count - 1)}>-</button>
+                <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
                 <li>{count}</li>
                 <button onClick={() => setCount(count + 1)}>+</button>
             </ul>
             <p>${ chosenCoffee.price }</p>
-            <button>ADD TO CART</button>
+            <button className={count > 0 ? "cta" : "ctadisabled"}>ADD TO CART</button>
         </div>
     )
 }
