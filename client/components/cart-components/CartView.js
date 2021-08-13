@@ -11,10 +11,6 @@ class CartView extends React.Component {
    async componentDidMount() {
         const { userId } = this.props;
         await this.props.getCart(userId);
-       
-        // else {
-        //     local storage something?
-        // }
     }
 
     render () {
