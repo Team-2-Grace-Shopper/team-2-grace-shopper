@@ -5,21 +5,10 @@ import { getOrdersForPage } from '../store/orders';
 import dateFormat from 'dateformat';
 import NumberFormat from 'react-number-format';
 
-import { addToCart } from '../store/cart'; // TEST
-
 const OrderList = (props) => {
   const { data, offset, pageCount, showDetails, handleDetailClick} = props;
-  // const handleDetailClick = (ev) => {
-  //   console.log('clicked', ev.target.dataset.i)
-  // }
-//  const thisPage = ordersToDisplay.slice(offset, offset+pageCount)
 
   return(
-      // <div id="project-comments" className="commentList">
-      //   <li>
-      //     {thisPage.map((c,i) => <ul key={i}>Order #{i} - {c}</ul> )}
-      //   </li>
-      // </div>      
       <table id="orderstatustable">
         <thead>
           <tr>
@@ -27,7 +16,7 @@ const OrderList = (props) => {
             <th>Date</th>
             <th>Status</th>
             <th>Number of Items</th>
-            <th>Order Total</th>
+            <th>Product Total</th>
             <th></th>
           </tr>
         </thead>
@@ -58,7 +47,6 @@ const OrderList = (props) => {
         })}
         </tbody>
       </table>
-
     )
   }
 
@@ -180,12 +168,9 @@ const OrderDetail = (props) => {
                 height="500"
                 >
                 </iframe>
-            
       </div>
-
       )
     }
-
 
 class _OrderHistory extends React.Component {
   constructor(){
@@ -201,8 +186,6 @@ class _OrderHistory extends React.Component {
     this.handleDetailClick = this.handleDetailClick.bind(this);
   }
    handleDetailClick = (idx) => {
-     console.log('setting state to ', idx)
-    // const newArr = this.state.showDetails.map((c,i) => i === idx ? !c : c)
     this.setState(Object.assign({}, this.state, {showDetails: idx }))
   }
 
@@ -223,16 +206,13 @@ class _OrderHistory extends React.Component {
     for (let i=0;i < 32; i++){
       res[i] = Math.random()*32
     }
-//    console.log('res', res)
     this.setState(Object.assign({}, this.state, {allData:res} ))
   }
 
   handlePageClick = (data) => {
-    console.log('clicked', data)
     const { selected } = data;
     const start = selected * this.state.pageCount;
     const res = this.state.allData.slice(start, start + this.state.pageCount)
-    console.log('new data', res)
     this.setState(Object.assign({}, this.state, {data: res} ))
 
     // read those rows from the server instead of an array
@@ -245,7 +225,7 @@ class _OrderHistory extends React.Component {
 
   render() {
     if (!this.props.allOrders || this.props.allOrders.length === 0){
-      return <h2>There are no orders in the system</h2>
+      return <h2 style={{marginTop: 20, textAlign: 'center', marginBottom: 20}}>There are no orders in the system</h2>
     }
     return (
       <div id="profilecontainer">
