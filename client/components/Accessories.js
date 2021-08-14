@@ -48,24 +48,8 @@ export class Accessories extends React.Component {
         </div>
         <div className="itemList col3">
           <div>
-            {accessories.map(accessory => (
+            {accessories.map((accessory) => (
               <AllAccessoriesCard accessory={accessory} key={accessory.id} />
-              // <div>
-              //   <div key={accessory.id}>
-              //     <Link to={`accessories/${accessory.id}`}>
-              //       <img src={accessory.imageUrl1}></img>
-              //       <h3>{accessory.name}</h3>
-              //       <span>Rating: {accessory.rating}</span>
-              //     </Link>
-              //     <ul>
-              //       <li>-</li>
-              //       <li>1</li>
-              //       <li>+</li>
-              //     </ul>
-              //     <p>${accessory.price}</p>
-              //     <button>ADD TO CART</button>
-              //   </div>
-              // </div>
             ))}
           </div>
         </div>

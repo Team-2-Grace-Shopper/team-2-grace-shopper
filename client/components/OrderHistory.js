@@ -6,6 +6,8 @@ import { getOrdersForPage } from '../store/orders';
 import dateFormat from 'dateformat';
 import NumberFormat from 'react-number-format';
 
+import { addToCart } from '../store/cart'; // TEST
+
 const OrderList = (props) => {
   const { data, offset, pageCount, showDetails, handleDetailClick } = props;
   // const handleDetailClick = (ev) => {
@@ -245,8 +247,9 @@ class _OrderHistory extends React.Component {
   };
 
   render() {
-    //    console.log('***', this.props)
-    if (!this.props.allOrders || this.props.allOrders.length === 0) {
+
+    if (!this.props.allOrders || this.props.allOrders.length === 0){
+
       return <h2>There are no orders in the system</h2>
     }
     return (

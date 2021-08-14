@@ -3,7 +3,8 @@ const {
   DECIMAL,
   INTEGER,
   DATE,
-  ENUM 
+  ENUM,
+  NOW
 } = require('sequelize');
 const db = require('../db');
 
@@ -23,6 +24,7 @@ const Order = db.define('order',{
     required: true,
     allowNull: false,
     unique: false, 
+    defaultValue: NOW
   },
   status: {
     type: ENUM("open", "closed"),

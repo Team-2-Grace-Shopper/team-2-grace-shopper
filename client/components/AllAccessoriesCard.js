@@ -33,7 +33,6 @@ const AllAccessoriesCard = ({ accessory }) => {
                 <p>${accessory.price}</p>
                 <button>ADD TO CART</button>
             </div>
-
         </div>
     )
 }
