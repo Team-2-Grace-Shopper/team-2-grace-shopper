@@ -17,6 +17,8 @@ import OrderHistory from "./components/OrderHistory";
 import EditProfileAdmin from "./components/EditProfileAdmin";
 import Account from "./components/Account";
 import { me } from "./store";
+import EditProductAdmin from "./components/EditProductAdmin";
+
 
 /**
  * COMPONENT
@@ -48,10 +50,11 @@ class Routes extends Component {
           <Switch>
             <Route path="/profile" component={EditProfile} />
             <Route path="/account" component={Account} />
-            <Route path="/products-admin" component={ProductsAdmin} />
+            <Route path="/products-admin" exact component={ProductsAdmin} />
             <Route path="/users-admin" exact component={UsersAdmin} />
             <Route path="/orderhistory" component={OrderHistory} />
             <Route path="/users-admin/:id" exact component={EditProfileAdmin} />
+            <Route path="/products-admin/:id" exact component={EditProductAdmin} />
           </Switch>
         ) : (
             <Switch>
