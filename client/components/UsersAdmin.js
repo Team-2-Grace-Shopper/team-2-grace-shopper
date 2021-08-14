@@ -28,7 +28,7 @@ export class UsersAdmin extends React.Component {
             {users.map((user) => (
               <div key={user.id}>
                 <span>{user.id}</span>
-                <Link to={"/"} className="product-basicInfo">
+                <Link to={`/users-admin/${user.id}`} className="product-basicInfo">
                   <h3>{user.name}</h3>
                   <span>User name: {user.username}</span>
                   <br />

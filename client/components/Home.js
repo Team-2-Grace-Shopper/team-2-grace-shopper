@@ -19,12 +19,12 @@ export class Home extends React.Component {
         <div className="hero">
           <img src="" />
         </div>
-        <div className="itemList container">
-          <h2>Featured Items</h2>
+        <h2>Featured Items</h2>
+        <div className="itemList col4 container">
           <div>
             {products.map((product, idx) => {
               return idx < 4 ? (
-                <div key={product.name}>
+                <div className="itemcard" key={product.name}>
                   <Link
                     to={
                       product.type === "coffee"
@@ -33,12 +33,15 @@ export class Home extends React.Component {
                     }
                   >
                     <img src={product.imageUrl1} />
+                    <br />
                     <h3>{product.name}</h3>
                   </Link>
                 </div>
               ) : null;
             })}
+
           </div>
+
         </div>
       </div>
     );
