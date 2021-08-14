@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 //useState-> function, pass in arg as a default value. Will use default value to create state for this compondent and will return an array with 2 times. 1st- value, 2nd setState function exclusively for that value
 
-const _AllCoffeesCard = ({ coffee }) => {
+const _AllCoffeesCard = ({ coffee, userId }) => {
     const [count, setCount] = useState(1);
     return (
         <div key= { coffee.id }>
@@ -32,7 +32,7 @@ const _AllCoffeesCard = ({ coffee }) => {
                 <p>${ coffee.price }</p>
             </div>
             <button className={count > 0 ? 'cta' : 'ctadisabled'}
-                    onClick={() => addToCart(0,'product',99,99.99)}
+                    onClick={() => addToCart(userId, coffee.id, count, coffee.price)}
                     >ADD TO CART</button>
         </div>
     )
