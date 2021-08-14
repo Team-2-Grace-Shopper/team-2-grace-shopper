@@ -244,11 +244,6 @@ class _OrderHistory extends React.Component {
   };
 
   render() {
-//    console.log('***', this.props)
-console.log('adding to cart')
-addToCart(0,'XXXXX',100,99.99)
-addToCart(0,'YYYY',100,99.99)
-
     if (!this.props.allOrders || this.props.allOrders.length === 0){
       return <h2>There are no orders in the system</h2>
     }
