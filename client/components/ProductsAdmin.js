@@ -45,8 +45,8 @@ export class ProductsAdmin extends React.Component {
                     {product.isFeatured ? (
                       <span>Yes</span>
                     ) : (
-                      <span className="disabled">No</span>
-                    )}
+                        <span className="disabled">No</span>
+                      )}
                   </p>
                   <br />
                   <span>Type: {product.type}</span>
@@ -64,14 +64,14 @@ export class ProductsAdmin extends React.Component {
                       {product.salePrice} / {product.weight}lbs
                     </p>
                   ) : (
-                    <p>
-                      ${product.price} / {product.weight}lbs
-                    </p>
-                  )}
+                      <p>
+                        ${product.price} / {product.weight}lbs
+                      </p>
+                    )}
                   <span>Inventory: {product.inventory}</span>
                   <br />
                   <br />
-                  <button className="cta">Edit Product</button>
+                  <Link to={`/products-admin/${product.id}`} className="cta">Edit Product</Link>
                 </div>
               </div>
             ))}

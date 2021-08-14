@@ -8,30 +8,37 @@ const AllCoffeesCard = ({ coffee }) => {
 
   const [count, setCount] = useState(0);
   return (
-    <div key={coffee.id}>
-      <Link to={`/coffees/${coffee.id}`}>
-        <img src={coffee.imageUrl1} />
-        <h3>{coffee.name}</h3>
-      </Link>
-      <span>
-        <StarRatings
-          rating={coffee.rating * 1}
-          starRatedColor="gold"
-          numberOfStars={5}
-          name="rating"
-          starDimension="15px"
-          starSpacing="0px"
-        />
-      </span>
+    <div key={coffee.id} className="itemcard">
       <div>
-        <ul>
-          <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
-          <li>{count}</li>
-          <button onClick={() => setCount(count + 1)}>+</button>
-        </ul>
-        <p>${coffee.price}</p>
+        <Link to={`/coffees/${coffee.id}`}>
+          <img src={coffee.imageUrl1} />
+        </Link>
+        <span>
+          <StarRatings
+            rating={coffee.rating * 1}
+            starRatedColor="gold"
+            numberOfStars={5}
+            name="rating"
+            starDimension="15px"
+            starSpacing="0px"
+          />
+        </span>
+        <Link to={`/coffees/${coffee.id}`}>
+          <h3>{coffee.name}</h3>
+        </Link>
       </div>
-      <button className={count > 0 ? "cta" : "ctadisabled"}>ADD TO CART</button>
+
+      <div>
+        <div>
+          <ul>
+            <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
+            <li>{count}</li>
+            <button onClick={() => setCount(count + 1)}>+</button>
+          </ul>
+          <p>{coffee.price}<span> /lb</span></p>
+        </div>
+        <button className={count > 0 ? "cta" : "ctadisabled"}>ADD TO CART</button>
+      </div>
     </div>
   );
 };
