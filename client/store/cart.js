@@ -46,8 +46,8 @@ export const getCart = (userId) => {
             store.dispatch(_getCart([JSON.parse(window.localStorage.getItem('cart'))])) ;
         } else {
             store.dispatch(_getCart([{ userId: 0, orderlines: [] }])); 
-            return;
         }
+        return;
     }
     return async (dispatch) => {
         const { data: cart } = await axios.get('/api/cart', {params: {userId} })
