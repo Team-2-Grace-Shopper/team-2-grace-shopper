@@ -73,6 +73,7 @@ class _EditProfile extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     if (this.state.loading) {
       return "Retrieving your information...";
     }
@@ -85,10 +86,14 @@ class _EditProfile extends React.Component {
           
         </div> */}
         <div className="container" id="profileright">
+
           <form onSubmit={this.handleSubmit} id="profileform">
+
             <span className="timedAlert">
               {this.state.message && <h3> {this.state.message} </h3>}
             </span>
+            <h2>{this.props.users[0].name}</h2>
+            <br />
             <div className="formfield">
               <input
                 type="text"
