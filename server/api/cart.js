@@ -27,3 +27,25 @@ router.delete('/cartItems/:id', async (req, res, next) => {
       next(err);
   }
 });
+
+router.post("/", async (req, res, next) => {
+  try {
+    const cart = await Order.create(req.body, {returning: true} );
+    res.json(cart);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/line", async (req, res, next) => {
+  try {
+    const cart = await Orderline.create(req.body, { returning: true });
+    res.json(cart);
+
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+

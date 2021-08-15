@@ -1,6 +1,5 @@
 const router = require('express').Router()
 module.exports = router
-//const { ids } = require('webpack')
 const { models: { Order, User, Orderline, Product }} = require('../db')
 
 router.get('/', async (req, res, next) => {

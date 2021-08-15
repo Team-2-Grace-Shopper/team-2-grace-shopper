@@ -5,29 +5,33 @@ import { authenticate } from '../store'
 /**
  * COMPONENT
  */
+
 const AuthForm = props => {
   const { name, displayName, handleSubmit, error } = props
-
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input name="username" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit" className="cta">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
+    <div id="profilecontainer">
+      <div className="container" id="profileleft">
+        <h2 className="profilehdr">{displayName}</h2>
+      </div>
+      {/* <div className="profilehdr">
+          
+        </div> */}
+      <div className="container" id="profileright">
+        <form onSubmit={handleSubmit} name={name} id="profileform">
+          <div className="formfield">
+            <input name="username" type="text" />
+            <label htmlFor="username">Username</label>
+          </div>
+          <div className="formfield">
+            <input name="password" type="password" />
+            <label htmlFor="password">Password</label>
+          </div>
+          <div>
+            <button type="submit" className="cta">{displayName}</button>
+          </div>
+          {error && error.response && <div> {error.response.data} </div>}
+        </form>
+      </div>
     </div>
   )
 }
@@ -59,6 +63,7 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
+      console.log('LOGIN PROP', evt.target.username.value)
       const formName = evt.target.name
       const username = evt.target.username.value
       const password = evt.target.password.value

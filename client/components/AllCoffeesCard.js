@@ -6,13 +6,13 @@ import { connect } from 'react-redux';
 
 //useState-> function, pass in arg as a default value. Will use default value to create state for this compondent and will return an array with 2 times. 1st- value, 2nd setState function exclusively for that value
 
-const _AllCoffeesCard = ({ coffee }) => {
+const _AllCoffeesCard = ({ coffee, userId }) => {
     const [count, setCount] = useState(1);
     return (
-        <div key= { coffee.id }>
+        <div key= { coffee.id } className="itemcard">
+          <div>
             <Link to={`/coffees/${coffee.id}`}>
                 <img src= { coffee.imageUrl1} />
-                <h3>{ coffee.name }</h3>
             </Link>
             <span><StarRatings
                 rating={ coffee.rating * 1 }
@@ -23,6 +23,11 @@ const _AllCoffeesCard = ({ coffee }) => {
                 starSpacing="0px"
                 />
             </span>
+            <Link to={`/coffees/${coffee.id}`}>
+                <h3>{ coffee.name }</h3>
+            </Link>
+          </div>
+          <div>
             <div>
                 <ul>
                     <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
@@ -32,11 +37,17 @@ const _AllCoffeesCard = ({ coffee }) => {
                 <p>${ coffee.price }</p>
             </div>
             <button className={count > 0 ? 'cta' : 'ctadisabled'}
-                    onClick={() => addToCart(0,'product',99,99.99)}
+                    onClick={() => addToCart(userId, coffee.id, count, coffee.price)}
                     >ADD TO CART</button>
+           </div>
         </div>
     )
 }
+
+
+
+
+//to do the add to cart you'll have to connect it
 
 const mapStateToProps = (state) => {
     return {
@@ -50,3 +61,4 @@ const mapStateToProps = (state) => {
   }
   const AllCoffeesCard = connect(mapStateToProps, mapDispatchToProps)(_AllCoffeesCard)
   export default AllCoffeesCard;
+

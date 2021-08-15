@@ -24,6 +24,10 @@ a,
 span {
   line-height: 1.5;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 span,
 label {
   font-size: 0.85em;
@@ -61,18 +65,14 @@ button {
   text-transform: uppercase;
 }
 .ctadisabled {
-  background-color: #666;
+  background-color: #ddd;
   color: #fff;
   padding: 1em 2em;
   font-size: 0.8em;
   letter-spacing: 0.05em;
   cursor: default;
 }
-.itemList a, #navbar a {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
+
 
 /* form div {
   margin: 1em;
@@ -155,10 +155,13 @@ button {
   top: 5.1em;
   right: 2em;
   text-align: center;
+  border-bottom: 0.5em solid #222;
+  border-left: 1px solid #dbdbdb;
+  border-right: 1px solid #dbdbdb;
+  z-index: 99;
 }
 #account-dropdown ul {
   margin: 0;
-  border-bottom: 1em solid #222;
   padding-inline-start: 0;
 }
 #account-dropdown ul > div {
@@ -200,17 +203,21 @@ button {
 
 /**************/
 /* Product List */
-.itemList {
+.filterList {
+  display:flex;
+}
+.itemList{
   padding-bottom: 5em;
 }
-.itemList h3 {
+.itemList h3{
   width: 90%;
   margin: 0 auto;
 }
-.itemList img {
+.itemList img{
   display: block;
   width: 100%;
-  margin-bottom: 1em;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 .itemList p {
   display: inline-block;
@@ -245,16 +252,100 @@ button {
   flex-wrap: wrap;
   text-align: center;
 }
-/* Set each card width and style */
-.itemList > div > div {
-  width: 24%;
-  border: 1px solid #dbdbdb;
-  padding-bottom: 1em;
+.filter {
+  width:20%;
+  padding-right: 4%;
   margin-top: 1em;
 }
+.filter > div {
+  padding-top: 0.5em;
+}
+.filter > div > div {
+  margin-bottom: 0.5em;
+}
+
+/* each item card decoration on item list */
+.col3 .itemcard {
+  width: 32%;
+}
+.col4 .itemcard {
+  width: 24%;
+}
+.itemcard {
+  border: 1px solid #dbdbdb;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+  overflow:hidden;
+}
+.itemcard:hover {
+  box-shadow: 2px 2px 4px #ddd;
+  border: 1px solid #222;
+}
+.itemcard:hover img{
+  transform: scale(1.01);
+  overflow:hidden;
+}
+
+/* Filter radio button style */
+.filter input[type="checkbox"],
+.filter input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.filter label {
+  position: relative;
+  margin-right: 1em;
+  padding-left: 2em;
+  padding-right: 1em;
+  line-height: 2;
+  cursor: pointer;
+  display: inline-block
+}
+.filter label:before {
+  box-sizing: border-box;
+  content: " ";
+  position: absolute;
+  top: 0.3em;
+  left: 0;
+  display: block;
+  width: 1.4em;
+  height: 1.4em;
+  border: 1px solid #999;
+  border-radius: .25em;
+  z-index: -1;
+  display: inline-block
+}
+.filter input[type="radio"] + label::before {
+  border-radius: 1em;
+}
+/* Checked */
+.filter input[type="radio"]:checked + label {
+  padding-left: 1em;
+  font-weight:bold;
+}
+.filter input[type="radio"]:checked + label:before {
+  top: 0;
+  width: 100%;
+  height: 2em;
+  background: #ededed;
+  border: 1px solid #999;
+}
+
+/* Transition */
+.filter label,
+.filter label::before {
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+/* Filter radio button style END*/
 
 /*** Single Item Views ***/
-
 /* JP */
 #profilecontainer {
   display: flex;
@@ -345,9 +436,10 @@ button {
   margin: 0 1em;
 }
 
-/* .profilehdr * {
-  padding-top: 2rem;
-} */
+
+.flex-v-remover #profileright{
+  align-items: normal;
+}
 #orderhistory ul {
   display: inline-block;
   padding-left: 15px;
@@ -358,11 +450,17 @@ tr,
 td,
 th {
   border: 1px solid rgb(198, 197, 202);
+  border-spacing: 0;
+  border-collapse: collapse;
+  padding: 0.2em 0.5em;
 }
 #orderstatustable {
   width: 100%;
   border: 1px solid black;
   overflow-x: auto;
+}
+#orderstatustable th{
+  background-color: #ededed;
 }
 .tblcenter {
   text-align: center;
@@ -378,6 +476,8 @@ th {
 }
 #orderdetails {
   border: 1px solid black;
+  width:100%;
+  display: inline-block;
 }
 #orderstatusdetailtable {
   width: 90%;
@@ -386,12 +486,13 @@ th {
   margin-top: 0.1rem;
   margin-bottom: 0.75rem;
 }
-#orderstatustable tr:nth-child(even) {
-  background-color: lightblue;
+
+/* #orderstatustable tr:nth-child(even) {
+  background-color: #ededed;
 }
 #orderstatusdetailtable tr:nth-child(even) {
   background-color: white;
-}
+} */
 
 .pagination {
   display: flex;
@@ -463,6 +564,15 @@ th {
 }
 
 /**************/
+/* LOGIN */
+
+
+
+
+
+
+
+/**************/
 /* Footer */
 #footer {
   width: 100%;
@@ -474,4 +584,46 @@ th {
   padding: 2em;
   text-align: center;
   letter-spacing: 0.03em;
+}
+#confirmationcontainer{
+  background-color: wheat;
+  border:1px solid black;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  border-radius: 3%;
+}
+#confirmationinnercontainer{
+  border-radius: 2%;
+  background-color: white;
+  border:1px solid black;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  padding: 20px;
+}
+#confirmationcontainer h3{
+  color:green;
+}
+#confirmimg{
+  height: 4rem;
+  width: auto;
+}
+#confirmcheck{
+  height: 2rem;
+  width: auto;
+}
+#confirmationcontainer a{
+  text-decoration: red;
+}
+#confirmtop{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+#confirmtop h3{
+  margin-left: 5rem;
 }
