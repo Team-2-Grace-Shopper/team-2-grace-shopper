@@ -5,6 +5,7 @@ import store from './index';
  
 const GET_CART = 'GET_CART';
 const CREATE_CART = 'CREATE_CART';
+const DELETE_CART_ITEM = 'DELETE_CART_ITEM'
  
 //ACTION CREATORS
 
@@ -22,14 +23,20 @@ const _createCart = (cart) => {
     };
 };
 
+const _deleteCartItem = (cartItem) => {
+    return {
+      type: DELETE_CART_ITEM,
+      cartItem
+    };
+};
+
 //THUNK CREATORS
 
-
-// export const createOrder = (order, history) => {
+// needs refactoring for localStorage version
+// export const createCart = (order) => {
 //     return async (dispatch) => {
 //         const { data: created } = await axios.post('/api/orders', order);
-//         dispatch(_createOrder(created));
-//         history.push('/orders'); /* Wherever we want to redirect! */ 
+//         dispatch(_createCart(created));
 //     };
 // };
 
@@ -39,8 +46,8 @@ export const getCart = (userId) => {
             store.dispatch(_getCart([JSON.parse(window.localStorage.getItem('cart'))])) ;
         } else {
             store.dispatch(_getCart([{ userId: 0, orderlines: [] }])); 
-            return;
         }
+        return;
     }
     return async (dispatch) => {
         const { data: cart } = await axios.get('/api/cart', {params: {userId} })
@@ -48,22 +55,18 @@ export const getCart = (userId) => {
     }
 }
 
-
-
-//REDUCER
-
-export const cartReducer = (state = [], action) => {
-    switch (action.type) {
-        case GET_CART:
-            return action.cart;
-        case CREATE_CART:
-            return [...state, action.cart];
-        default:
-            return state
-    };
+export const deleteCartItem = (cartItem) => {
+  return async (dispatch) => {
+      await axios.delete(`/api/cart/cartItems/${cartItem.id}`);
+      dispatch(_deleteCartItem(cartItem));
+  };
 };
 
-export const addToCart = async (userId, productId, quantity, price) => {
+
+
+// below function is not a thunk and not called with dispatch (does not update state)
+
+export const addToCart = async (userId, productId, quantity, price, product) => {
 
   let myCart;
 
@@ -77,7 +80,7 @@ export const addToCart = async (userId, productId, quantity, price) => {
       }
       const productIdx = myCart.orderlines.findIndex(c => c.productId === productId)
       if (productIdx === -1){
-        myCart.orderlines.push({ productId, quantity, price});
+        myCart.orderlines.push({ productId, quantity, price, product });
       } else {
         myCart.orderlines[productIdx].quantity += quantity;
       }
@@ -100,5 +103,21 @@ export const addToCart = async (userId, productId, quantity, price) => {
         const newLine = await axios.post('/api/cart/line', { lineNbr: lineNbr, orderId: id, productId: productId, quantity: quantity, price: price })
         break;
     }
-
+    getCart(userId); // this is done to update state with the cart so Nav can show the cart items
 }
+
+
+//REDUCER
+
+export const cartReducer = (state = [], action) => {
+  switch (action.type) {
+      case GET_CART:
+          return action.cart;
+      case CREATE_CART:
+          return [...state, action.cart];
+      case DELETE_CART_ITEM:
+          return state[0].orderlines.filter((orderline) => orderline.id !== action.cartItem.id);
+      default:
+          return state
+  };
+};

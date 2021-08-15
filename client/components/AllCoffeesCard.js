@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 import { addToCart } from '../store/cart';
 import { connect } from 'react-redux';
+import toast, { Toaster } from 'react-hot-toast';
+const notify = () => toast('Added to cart!', {duration: 4000, position: 'top-center'});
 
 //useState-> function, pass in arg as a default value. Will use default value to create state for this compondent and will return an array with 2 times. 1st- value, 2nd setState function exclusively for that value
 
-const _AllCoffeesCard = ({ coffee, userId }) => {
+const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
     const [count, setCount] = useState(1);
     return (
         <div key= { coffee.id } className="itemcard">
+        <Toaster/>
           <div>
             <Link to={`/coffees/${coffee.id}`}>
                 <img src= { coffee.imageUrl1} />
@@ -37,7 +40,9 @@ const _AllCoffeesCard = ({ coffee, userId }) => {
                 <p>${ coffee.price }</p>
             </div>
             <button className={count > 0 ? 'cta' : 'ctadisabled'}
-                    onClick={() => addToCart(userId, coffee.id, count, coffee.price)}
+                    onClick={() => {
+                      addToCart(userId, coffee.id, count, coffee.price, coffee)
+                    }}
                     >ADD TO CART</button>
            </div>
         </div>
@@ -56,7 +61,10 @@ const mapStateToProps = (state) => {
   }
   const mapDispatchToProps = (dispatch) => {
     return {
-      addToCart: (userId, productId, quantity, price ) => dispatch(addToCart(userId, productId, quantity, price)),
+      addToCart: (userId, productId, quantity, price, product ) => {
+        addToCart(userId, productId, quantity, price, product);
+        notify();
+      },
     }
   }
   const AllCoffeesCard = connect(mapStateToProps, mapDispatchToProps)(_AllCoffeesCard)
