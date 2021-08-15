@@ -80,7 +80,7 @@ export const addToCart = async (userId, productId, quantity, price, product) => 
       }
       const productIdx = myCart.orderlines.findIndex(c => c.productId === productId)
       if (productIdx === -1){
-        myCart.orderlines.push({ productId, quantity, price});
+        myCart.orderlines.push({ productId, quantity, price, product });
       } else {
         myCart.orderlines[productIdx].quantity += quantity;
       }
