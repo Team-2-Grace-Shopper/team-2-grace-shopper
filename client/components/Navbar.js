@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { logout } from "../store";
 import { Icon } from '@iconify/react';
 import AccountDropdown from "./AccountDropdown";
+//import { cartReducer } from "../store/cart";
+//import { getCart } from "../store/cart";
 
 class Navbar extends Component {
   constructor(props) {
@@ -35,7 +37,10 @@ class Navbar extends Component {
         <div>
           <Link to="/home">
             <h1 className="logo">Grace Coffee.</h1>
-          </Link>
+            {/* MOVE BELOW TO OVER THE CART */}
+            <h1>{ this.props.nbrCartItems } items in cart</h1>
+            {/* MOVE ABOVE TO OVER THE CART */}
+            </Link>
           <div>
             <Link to="/coffees">Coffee</Link>
             <Link to="/accessories">Accessories</Link>
@@ -105,6 +110,7 @@ const mapState = (state) => {
     name: state.auth.name,
     isAdmin: state.auth.isAdmin,
     isLoggedIn: !!state.auth.id,
+    nbrCartItems: state.cart.length > 0 ? state.cart[0].orderlines.length : 0,
   };
 };
 

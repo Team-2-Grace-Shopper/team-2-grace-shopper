@@ -64,6 +64,8 @@ export const deleteCartItem = (cartItem) => {
 
 
 
+// below function is not a thunk and not called with dispatch (does not update state)
+
 export const addToCart = async (userId, productId, quantity, price) => {
 
   let myCart;
@@ -90,6 +92,7 @@ export const addToCart = async (userId, productId, quantity, price) => {
         let id;
         let lineNbr;
         if (cart.length === 0){
+            console.log('adding a cart header')
             // no cart so create one
             const {data: cart2 } = await axios.post('/api/cart', {userId: userId, status: 'open', type: 'cart', shipToName: 'BILLL'})
             id = cart2.id;    // use the ID of the new order(cart)
@@ -98,10 +101,12 @@ export const addToCart = async (userId, productId, quantity, price) => {
             id = cart[0].id;  // use the ID of the existing order(cart)
             lineNbr = cart[0].orderlines.length + 1;
         }
+        console.log('===> using order ID', id)
         const newLine = await axios.post('/api/cart/line', { lineNbr: lineNbr, orderId: id, productId: productId, quantity: quantity, price: price })
+        console.log('+++++ created line', newLine)
         break;
     }
-
+    getCart(userId); // this is done to update state with the cart so Nav can show the cart items
 }
 
 
