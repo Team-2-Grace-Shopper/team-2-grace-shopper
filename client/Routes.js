@@ -14,6 +14,7 @@ import Confirmation from "./components/cart-components/Confirmation";
 import ProductsAdmin from "./components/ProductsAdmin";
 import UsersAdmin from "./components/UsersAdmin";
 import OrderHistory from "./components/OrderHistory";
+import OrderConfirmation from "./components/OrderConfirmation";
 import EditProfileAdmin from "./components/EditProfileAdmin";
 import Account from "./components/Account";
 import { me } from "./store";
@@ -45,6 +46,7 @@ class Routes extends Component {
           <Route path="/cart" exact component={CartView} />
           <Route path="/cart/checkout" component={Checkout} />
           <Route path="/cart/confirmation" component={Confirmation} />
+          <Route path="/orderconfirmation" component={OrderConfirmation} />
         </Switch>
         {isLoggedIn ? (
           <Switch>
