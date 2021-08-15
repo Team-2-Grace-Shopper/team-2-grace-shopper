@@ -16,3 +16,14 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/cartItems/:id', async (req, res, next) => {
+  try {
+      const cartItem = await Orderline.findByPk(req.params.id);
+      await cartItem.destroy();
+      res.sendStatus(202);
+  }
+  catch(err) {
+      next(err);
+  }
+});
