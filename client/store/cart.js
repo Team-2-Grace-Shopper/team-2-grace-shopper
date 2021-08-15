@@ -5,6 +5,7 @@ import store from './index';
  
 const GET_CART = 'GET_CART';
 const CREATE_CART = 'CREATE_CART';
+const DELETE_CART_ITEM = 'DELETE_CART_ITEM'
  
 //ACTION CREATORS
 
@@ -22,14 +23,20 @@ const _createCart = (cart) => {
     };
 };
 
+const _deleteCartItem = (cartItem) => {
+    return {
+      type: DELETE_CART_ITEM,
+      cartItem
+    };
+};
+
 //THUNK CREATORS
 
-
-// export const createOrder = (order, history) => {
+// needs refactoring for localStorage version
+// export const createCart = (order) => {
 //     return async (dispatch) => {
 //         const { data: created } = await axios.post('/api/orders', order);
-//         dispatch(_createOrder(created));
-//         history.push('/orders'); /* Wherever we want to redirect! */ 
+//         dispatch(_createCart(created));
 //     };
 // };
 
@@ -48,20 +55,14 @@ export const getCart = (userId) => {
     }
 }
 
-
-
-//REDUCER
-
-export const cartReducer = (state = [], action) => {
-    switch (action.type) {
-        case GET_CART:
-            return action.cart;
-        case CREATE_CART:
-            return [...state, action.cart];
-        default:
-            return state
-    };
+export const deleteCartItem = (cartItem) => {
+  return async (dispatch) => {
+      await axios.delete(`/api/cart/cartItems/${cartItem.id}`);
+      dispatch(_deleteCartItem(cartItem));
+  };
 };
+
+
 
 export const addToCart = async (userId, productId, quantity, price) => {
 
@@ -102,3 +103,20 @@ export const addToCart = async (userId, productId, quantity, price) => {
     }
 
 }
+
+
+//REDUCER
+
+export const cartReducer = (state = [], action) => {
+  console.log(state)
+  switch (action.type) {
+      case GET_CART:
+          return action.cart;
+      case CREATE_CART:
+          return [...state, action.cart];
+      case DELETE_CART_ITEM:
+          return state[0].orderlines.filter((orderline) => orderline.id !== action.cartItem.id);
+      default:
+          return state
+  };
+};
