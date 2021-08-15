@@ -8,17 +8,8 @@ import NumberFormat from 'react-number-format';
 
 const OrderList = (props) => {
   const { data, offset, pageCount, showDetails, handleDetailClick } = props;
-  // const handleDetailClick = (ev) => {
-  //   console.log('clicked', ev.target.dataset.i)
-  // }
-  //  const thisPage = ordersToDisplay.slice(offset, offset+pageCount)
 
   return (
-    // <div id="project-comments" className="commentList">
-    //   <li>
-    //     {thisPage.map((c,i) => <ul key={i}>Order #{i} - {c}</ul> )}
-    //   </li>
-    // </div>      
     <table id="orderstatustable">
       <thead>
         <tr>
@@ -26,7 +17,7 @@ const OrderList = (props) => {
           <th>Date</th>
           <th>Status</th>
           <th>Number of Items</th>
-          <th>Order Total</th>
+          <th>Product Total</th>
           <th></th>
         </tr>
       </thead>
@@ -67,8 +58,9 @@ const OrderDetail = (props) => {
 
   return (
     <div id="orderdetails">
-      <p>Order Number: {orderDetails.id}</p>
-      <br />Order Date: { dateFormat(orderDetails.orderDate, "ddd, mmm d, yyyy")}
+      <h1>Grace Coffee.</h1>
+      <h2>Order Details - Order #{orderDetails.id}</h2>
+      <h3>Order Date: { dateFormat(orderDetails.orderDate, "ddd, mmm d, yyyy")}</h3>
       <div id="orderaddresses">
         <ol><strong>Bill To:</strong>
           <li>{orderDetails.billToName}</li>
@@ -181,7 +173,6 @@ const OrderDetail = (props) => {
       </iframe>
 
     </div>
-
   )
 }
 

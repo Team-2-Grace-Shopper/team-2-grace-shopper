@@ -459,6 +459,9 @@ th {
   border: 1px solid black;
   overflow-x: auto;
 }
+#orderstatustable th{
+  background-color: #ededed;
+}
 .tblcenter {
   text-align: center;
 }
@@ -474,6 +477,7 @@ th {
 #orderdetails {
   border: 1px solid black;
   width:100%;
+  display: inline-block;
 }
 #orderstatusdetailtable {
   width: 90%;
@@ -482,12 +486,13 @@ th {
   margin-top: 0.1rem;
   margin-bottom: 0.75rem;
 }
-#orderstatustable tr:nth-child(even) {
+
+/* #orderstatustable tr:nth-child(even) {
   background-color: #ededed;
 }
 #orderstatusdetailtable tr:nth-child(even) {
   background-color: white;
-}
+} */
 
 .pagination {
   display: flex;
@@ -579,4 +584,46 @@ th {
   padding: 2em;
   text-align: center;
   letter-spacing: 0.03em;
+}
+#confirmationcontainer{
+  background-color: wheat;
+  border:1px solid black;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  border-radius: 3%;
+}
+#confirmationinnercontainer{
+  border-radius: 2%;
+  background-color: white;
+  border:1px solid black;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  padding: 20px;
+}
+#confirmationcontainer h3{
+  color:green;
+}
+#confirmimg{
+  height: 4rem;
+  width: auto;
+}
+#confirmcheck{
+  height: 2rem;
+  width: auto;
+}
+#confirmationcontainer a{
+  text-decoration: red;
+}
+#confirmtop{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+#confirmtop h3{
+  margin-left: 5rem;
 }
