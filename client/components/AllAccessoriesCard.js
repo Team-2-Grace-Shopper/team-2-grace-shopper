@@ -25,13 +25,16 @@ const AllAccessoriesCard = ({ accessory }) => {
                 </Link>
             </div>
             <div>
-                <ul>
-                    <button onClick={() => setCount(count - 1)}>-</button>
-                    <li>{count}</li>
-                    <button onClick={() => setCount(count + 1)}>+</button>
-                </ul>
-                <p>${accessory.price}</p>
-                <button>ADD TO CART</button>
+                <div>
+                    <ul>
+                        <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
+                        <li>{count}</li>
+                        <button onClick={() => setCount(count + 1)}>+</button>
+                    </ul>
+                    <p>${accessory.price}</p>
+                </div>
+                <button className={count > 0 ? 'cta' : 'ctadisabled'}
+                    onClick={() => addToCart(userId, coffee.id, count, coffee.price)}>ADD TO CART</button>
             </div>
         </div>
     )

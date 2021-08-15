@@ -89,6 +89,15 @@ class _EditProfile extends React.Component {
         <div className="full-width-list" id="profileright">
           <ul>
             <li>
+              <Link to="/profile">
+                <div>
+                  <h3>Personal info</h3>
+                  <span>Edit your information</span>
+                </div>
+              </Link>
+              <Icon icon="la:id-card" />
+            </li>
+            <li>
               <Link to="/">
                 <div>
                   <h3>Current order status</h3>
@@ -105,15 +114,6 @@ class _EditProfile extends React.Component {
                 </div>
               </Link>
               <Icon icon="ic:outline-receipt" />
-            </li>
-            <li>
-              <Link to="/profile">
-                <div>
-                  <h3>Personal info</h3>
-                  <span>Edit your information</span>
-                </div>
-              </Link>
-              <Icon icon="la:id-card" />
             </li>
             <li>
               <Link to="/">

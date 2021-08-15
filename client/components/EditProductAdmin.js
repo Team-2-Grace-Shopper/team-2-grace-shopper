@@ -7,7 +7,7 @@ class _EditProductAdmin extends React.Component {
     super(props);
     this.state = {
       loading: false,
-      message: "message area (if needed)",
+      message: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,46 +16,59 @@ class _EditProductAdmin extends React.Component {
   async componentDidMount() {
     this.setState({ loading: true });
     await this.props.getProducts();
-    const _product = await this.props.products.filter((product) => { return product.id === parseInt(this.props.match.params.id) })
-    const product = _product[0]
+    // const _product = this.props.products.filter((product) => { return product.id === parseInt(this.props.match.params.id) }) || {}
+    // const product = _product[0]
+    const product = await this.props.product
     this.setState({
       loading: false,
       featured: product.featured,
       type: product.type,
-      name: product.name
-      // username: user.username,
-      // name: user.name,
-      // address: user.address,
-      // city: user.city,
-      // state: user.state ? user.state : "0",
-      // zip: user.zip,
-      // id: user.id,
-      // enableSave: true,
-      // message: "",
-      // dispName: user.name,
+      name: product.name,
+      category: product.category,
+      description: product.description,
+      price: product.price,
+      weight: product.weight,
+      onSale: product.onSale,
+      inventory: product.inventory
     });
   }
 
   handleChange(ev) {
     let { name, value, type } = ev.target;
-    if (type === "select-one") {
-      name = "state";
-    }
+    console.log('TARGETTTT', ev.target.name)
     switch (name) {
-      case "username":
-        if (ev.target.value.length > 75) return;
-        break;
       case "name":
         if (ev.target.value.length > 75) return;
         break;
-      case "address":
+      // case "category":
+      //   if (ev.target.value.length > 75) return;
+      //   break;
+      // case "type":
+      //   if (ev.target.value.length > 75) return;
+      //   break;
+      case "origin":
         if (ev.target.value.length > 75) return;
         break;
-      case "city":
-        if (ev.target.value.length > 50) return;
+      case "inventory":
+        if (ev.target.value.length > 75) return;
         break;
-      case "zip":
-        if (ev.target.value.length > 15) return;
+      case "price":
+        if (ev.target.value.length > 75) return;
+        break;
+      case "weight":
+        if (ev.target.value.length > 75) return;
+        break;
+      case " description":
+        if (ev.target.value.length > 75) return;
+        break;
+      case "isFeatured":
+        if (ev.target.value.length > 75) return;
+        break;
+      case "onSale":
+        if (ev.target.value.length > 75) return;
+        break;
+      case "salePrice":
+        if (ev.target.value.length > 75) return;
         break;
     }
     this.setState(
@@ -77,35 +90,61 @@ class _EditProductAdmin extends React.Component {
   }
 
   render() {
-    console.log(this.props, '*******')
     if (this.state.loading) {
       return "Retrieving your information...";
     }
     return (
       <div id="profilecontainer">
         <div className="container" id="profileleft">
-          <h2 className="profilehdr">Update<br />{this.state.name}'s<br />profile</h2>
+          <h2 className="profilehdr">Update Product info</h2>
         </div>
-        {/* <div className="profilehdr">
-          
-        </div> */}
         <div className="container" id="profileright">
           <form onSubmit={this.handleSubmit} id="profileform">
             <span className="timedAlert">
-              {this.state.message && <h3> {this.state.message} </h3>}
+              {this.state.message && <h3> {this.state.message}</h3>}
             </span>
-            <h2>{this.state.name}</h2>
+            <h2>{this.props.product.name}</h2>
             <br />
-            <div className="formfield">
-              <input
-                type="text"
-                name="username"
-                disabled
-                value={this.state.username}
-                onChange={this.handleChange}
-              />
-              <label>Email</label>
+            <div>
+              <div className="formfield">
+                <select value={this.state.type} onChange={this.handleChange} name="type">
+                  <option disabled key="0" value="0">
+                    {" "}
+                  -- select a type --{" "}
+                  </option>
+                  <option value="coffee">Coffee</option>
+                  <option value="accessory">Accessory</option>
+                </select>
+                <label>Type</label>
+              </div>
+              {this.state.type === 'coffee' ?
+                <div className="formfield">
+                  <select value={this.state.category} onChange={this.handleChange} name="category">
+                    <option disabled key="0" value="0">
+                      {" "}
+                  -- select a category --{" "}
+                    </option>
+                    <option value="roast-light">Light roast</option>
+                    <option value="roast-dark">Dark roast</option>
+                  </select>
+                  <label>Category</label>
+                </div>
+                :
+                <div className="formfield">
+                  <select value={this.state.category} onChange={this.handleChange} name="category">
+                    <option disabled key="0" value="0">
+                      {" "}
+                  -- select a category --{" "}
+                    </option>
+                    <option value="grinder">Grinders</option>
+                    <option value="brewtool">Brewing tools</option>
+                  </select>
+                  <label>Category</label>
+                </div>
+              }
+
             </div>
+
             <div className="formfield">
               <input
                 type="text"
@@ -116,56 +155,38 @@ class _EditProductAdmin extends React.Component {
                 value={this.state.name}
                 onChange={this.handleChange}
               />
-              <label>Name (*)</label>
+              <label>Name</label>
             </div>
             <div className="formfield">
               <input
                 type="text"
-                name="address"
+                name="origin"
                 maxLength="75"
-                value={this.state.address}
+                value={this.state.country}
                 onChange={this.handleChange}
               />
-              <label>Address</label>
+              <label>origin</label>
             </div>
             <div className="formfield">
               <input
                 type="text"
-                name="city"
-                maxLength="50"
-                value={this.state.city}
+                name="inventory"
+                maxLength="4"
+                value={this.state.inventory}
                 onChange={this.handleChange}
               />
-              <label>City</label>
-            </div>
-            {/*}            <div className="formfield">
-              <label>State</label>
-              <input type="text" 
-                    name="state" 
-                    value={ this.state.state }
-                    onChange={this.handleChange} />
-            </div>
-    */}
-            <div className="formfield">
-              <select value={this.state.state} onChange={this.handleChange}>
-                <option disabled key="0" value="0">
-                  {" "}
-                  -- select a state --{" "}
-                </option>
-                <option value="AL">Alabama</option>
-              </select>
-              <label>State</label>
+              <label>Inventory</label>
             </div>
 
             <div className="formfield">
               <input
                 type="text"
-                name="zip"
+                name="price"
                 maxLength="15"
-                value={this.state.zip}
+                value={this.state.price}
                 onChange={this.handleChange}
               />
-              <label>Zip</label>
+              <label>Price</label>
             </div>
 
             <div className="formfield">
@@ -183,11 +204,13 @@ class _EditProductAdmin extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ products, auth }, { match }) => {
+  // console.log(products, 'STATE')
+  const _product = products.filter((product) => { return product.id === match.params.id }) || {}
+  const product = _product[0]
   return {
-    id: state.auth.id,
-    user: state.user,
-    users: state.users
+    id: auth.id,
+    product
   };
 };
 
