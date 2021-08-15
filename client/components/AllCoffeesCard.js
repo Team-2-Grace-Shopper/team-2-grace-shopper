@@ -40,7 +40,9 @@ const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
                 <p>${ coffee.price }</p>
             </div>
             <button className={count > 0 ? 'cta' : 'ctadisabled'}
-                    onClick={() => addToCart(userId, coffee.id, count, coffee.price)}
+                    onClick={() => {
+                      addToCart(userId, coffee.id, count, coffee.price, coffee)
+                    }}
                     >ADD TO CART</button>
            </div>
         </div>
@@ -59,8 +61,8 @@ const mapStateToProps = (state) => {
   }
   const mapDispatchToProps = (dispatch) => {
     return {
-      addToCart: (userId, productId, quantity, price ) => {
-        addToCart(userId, productId, quantity, price);
+      addToCart: (userId, productId, quantity, price, product ) => {
+        addToCart(userId, productId, quantity, price, product);
         notify();
       },
     }
