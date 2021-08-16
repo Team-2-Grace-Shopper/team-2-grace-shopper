@@ -58,117 +58,121 @@ const OrderDetail = (props) => {
 
   return (
     <div id="orderdetails">
-      <h1>Grace Coffee.</h1>
-      <h2>Order Details - Order #{orderDetails.id}</h2>
-      <h3>Order Date: { dateFormat(orderDetails.orderDate, "ddd, mmm d, yyyy")}</h3>
-      <div id="orderaddresses">
-        <ol><strong>Bill To:</strong>
-          <li>{orderDetails.billToName}</li>
-          <li>{orderDetails.billToAddress}</li>
-          <li>{orderDetails.billToCity + ', ' + orderDetails.billToState + ' ' + orderDetails.billToZip}</li>
-          <li>{orderDetails.email}</li>
-          <li>&nbsp; </li>
-          <li>Order shipped: {dateFormat(orderDetails.shipDate, "ddd, mmm d, yyyy")}</li>
-          <li>&nbsp; </li>
-          <li>UPS tracking number: <a href="https://track24.net/?code=EV938507560CN" target="_blank">{orderDetails.trackingNumber}</a></li>
-        </ol>
-        <ol><strong>Ship To:</strong>
-          <li>{orderDetails.shipToName}</li>
-          <li>{orderDetails.shipToAddress}</li>
-          <li>{orderDetails.shipToCity + ', ' + orderDetails.shipToState + ' ' + orderDetails.shipToZip}</li>
-        </ol>
+      <div>
+        <h1>Grace Coffee.</h1>
+        <h2>Order Details - Order #{orderDetails.id}</h2>
+        <br />
+        <div id="orderaddresses">
+          <ol><strong>Bill To:</strong>
+            <li>{orderDetails.billToName}</li>
+            <li>{orderDetails.billToAddress}</li>
+            <li>{orderDetails.billToCity + ', ' + orderDetails.billToState + ' ' + orderDetails.billToZip}</li>
+            <li>{orderDetails.email}</li>
+            <li>&nbsp; </li>
+            <li>Order date: {dateFormat(orderDetails.orderDate, "ddd, mmm d, yyyy")}</li>
+            <li>Order shipped: {dateFormat(orderDetails.shipDate, "ddd, mmm d, yyyy")}</li>
+            <li>&nbsp; </li>
+            <li>UPS tracking number: <a className="hyperlink" href="https://track24.net/?code=EV938507560CN" target="_blank">{orderDetails.trackingNumber}</a></li>
+          </ol>
+          <ol><strong>Ship To:</strong>
+            <li>{orderDetails.shipToName}</li>
+            <li>{orderDetails.shipToAddress}</li>
+            <li>{orderDetails.shipToCity + ', ' + orderDetails.shipToState + ' ' + orderDetails.shipToZip}</li>
+          </ol>
+        </div>
+        <table id="orderstatusdetailtable">
+          <thead>
+            <tr>
+              <th>Line #</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orderDetails.orderlines.map((line, i) => {
+              const nbrItemsFmt = <NumberFormat value={line.quantity}
+                thousandSeparator=','
+                displayType='text'
+              />
+              const orderPriceFmt = <NumberFormat value={line.price}
+                thousandSeparator=','
+                prefix='$'
+                fixedDecimalScale={true}
+                decimalScale={2}
+                displayType='text'
+              />
+              const orderTotFmt = <NumberFormat value={line.price * line.quantity}
+                thousandSeparator=','
+                prefix='$'
+                fixedDecimalScale={true}
+                decimalScale={2}
+                displayType='text'
+              />
+              productTotal += line.price * line.quantity;
+              return (
+                <tr key={line.lineNbr}>
+                  <td className="tblcenter">{line.lineNbr}</td>
+                  <td >{line.product.name}</td>
+                  <td className="tblcenter">{nbrItemsFmt}</td>
+                  <td className="tblright"> {orderPriceFmt}</td>
+                  <td className="tblright"> {orderTotFmt}</td>
+                </tr>
+              )
+            })}
+            <tr>
+              <td colSpan={4} className="tblright">Product total</td>
+              <td className="tblright"><NumberFormat value={productTotal}
+                thousandSeparator=','
+                prefix='$'
+                fixedDecimalScale={true}
+                decimalScale={2}
+                displayType='text'
+              />
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={4} className="tblright">Tax</td>
+              <td className="tblright"><NumberFormat value={productTotal * .1}
+                thousandSeparator=','
+                prefix='$'
+                fixedDecimalScale={true}
+                decimalScale={2}
+                displayType='text'
+              />
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={4} className="tblright">Shipping</td>
+              <td className="tblright"><NumberFormat value={1.95}
+                thousandSeparator=','
+                prefix='$'
+                fixedDecimalScale={true}
+                decimalScale={2}
+                displayType='text'
+              />
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={4} className="tblright">Order total</td>
+              <td className="tblright"><NumberFormat value={productTotal + (productTotal * .1) + 1.95}
+                thousandSeparator=','
+                prefix='$'
+                fixedDecimalScale={true}
+                decimalScale={2}
+                displayType='text'
+              />
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <table id="orderstatusdetailtable">
-        <thead>
-          <tr>
-            <th>Line #</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orderDetails.orderlines.map((line, i) => {
-            const nbrItemsFmt = <NumberFormat value={line.quantity}
-              thousandSeparator=','
-              displayType='text'
-            />
-            const orderPriceFmt = <NumberFormat value={line.price}
-              thousandSeparator=','
-              prefix='$'
-              fixedDecimalScale={true}
-              decimalScale={2}
-              displayType='text'
-            />
-            const orderTotFmt = <NumberFormat value={line.price * line.quantity}
-              thousandSeparator=','
-              prefix='$'
-              fixedDecimalScale={true}
-              decimalScale={2}
-              displayType='text'
-            />
-            productTotal += line.price * line.quantity;
-            return (
-              <tr key={line.lineNbr}>
-                <td className="tblcenter">{line.lineNbr}</td>
-                <td >{line.product.name}</td>
-                <td className="tblcenter">{nbrItemsFmt}</td>
-                <td className="tblright"> {orderPriceFmt}</td>
-                <td className="tblright"> {orderTotFmt}</td>
-              </tr>
-            )
-          })}
-          <tr>
-            <td colSpan={4} className="tblright">Product total</td>
-            <td className="tblright"><NumberFormat value={productTotal}
-              thousandSeparator=','
-              prefix='$'
-              fixedDecimalScale={true}
-              decimalScale={2}
-              displayType='text'
-            />
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={4} className="tblright">Tax</td>
-            <td className="tblright"><NumberFormat value={productTotal * .1}
-              thousandSeparator=','
-              prefix='$'
-              fixedDecimalScale={true}
-              decimalScale={2}
-              displayType='text'
-            />
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={4} className="tblright">Shipping</td>
-            <td className="tblright"><NumberFormat value={1.95}
-              thousandSeparator=','
-              prefix='$'
-              fixedDecimalScale={true}
-              decimalScale={2}
-              displayType='text'
-            />
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={4} className="tblright">Order total</td>
-            <td className="tblright"><NumberFormat value={productTotal + (productTotal * .1) + 1.95}
-              thousandSeparator=','
-              prefix='$'
-              fixedDecimalScale={true}
-              decimalScale={2}
-              displayType='text'
-            />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
       <iframe id="iframe"
         src="//track24.net/?code=EV938507560CN"
-        width="100%"
-        height="500"
+      // width="100%"
+      // height="500"
       >
       </iframe>
 
@@ -235,12 +239,12 @@ class _OrderHistory extends React.Component {
 
   render() {
 
-    if (!this.props.allOrders || this.props.allOrders.length === 0){
-      return <h2 style={{marginTop: 20, textAlign: 'center', marginBottom: 20}}>There are no orders in the system</h2>
+    if (!this.props.allOrders || this.props.allOrders.length === 0) {
+      return <h2 style={{ marginTop: 20, textAlign: 'center', marginBottom: 20 }}>There are no orders in the system</h2>
     }
     return (
       <div>
-        <div className="itemList-admin">
+        <div className="itemList-admin container">
           <h2>{this.props.name}, your order status</h2>
           <br />
           <div className="container">

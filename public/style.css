@@ -372,6 +372,9 @@ body > div{
   fill: #222;
   padding-right:2em;
 }
+#profileform {
+  width: 50%;
+}
 #profileleft {
   flex-basis: 25%;
   align-items: center;
@@ -482,28 +485,36 @@ th {
 #orderaddresses {
   display: flex;
 }
+#orderaddresses ol{
+  padding: 0;
+}
 #orderaddresses > ol > li {
   list-style: none;
 }
 #orderdetails {
-  border: 1px solid black;
-  width:100%;
-  display: inline-block;
+  border: 1px solid #dbdbdb;
+  width:calc(100% - 4em);
+  display: flex;
+  padding: 2em;
+  margin-top: 2em;
+}
+#orderdetails h1 {
+  font-size: 1em;
+  text-align:center;
+}
+#orderdetails iframe {
+  width: 40%;
+  height: 500px;
+  padding:0;
+  margin-top: 1em;
+  border: 1px solid #dbdbdb;
 }
 #orderstatusdetailtable {
-  width: 90%;
+  width: 100%;
   overflow-x: auto;
-  margin-left: 10%;
   margin-top: 0.1rem;
   margin-bottom: 0.75rem;
 }
-
-/* #orderstatustable tr:nth-child(even) {
-  background-color: #ededed;
-}
-#orderstatusdetailtable tr:nth-child(even) {
-  background-color: white;
-} */
 
 .pagination {
   display: flex;

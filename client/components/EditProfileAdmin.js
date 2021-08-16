@@ -18,8 +18,6 @@ class _EditProfileAdmin extends React.Component {
     await this.props.getUsers();
     const _user = await this.props.users.filter((user) => { return user.id === parseInt(this.props.match.params.id) })
     const user = _user[0]
-    console.log('USEERR', user)
-    console.log('PROPS', this.props)
     this.setState({
       loading: false,
       username: user.username,
