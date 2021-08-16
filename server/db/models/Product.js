@@ -26,7 +26,7 @@ const Product = db.define('product',{
     validate: { notEmpty: true },
   },
   category: {
-    type: ENUM("mug", "grinder", "roast-light", "roast-medium", "roast-dark", "decaf", "flavored"),
+    type: ENUM("mug", "grinder", "roast-light", "roast-medium", "roast-dark", "decaf", "flavored", "organic"),
     allowNull: false,
     required: true,
     unique: false,
