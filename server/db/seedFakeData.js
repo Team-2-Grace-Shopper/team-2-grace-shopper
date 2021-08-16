@@ -8,7 +8,7 @@ const Product = require('./models/Product')
 const { Order, Orderline } = require('./models/Order')
 const db = require('./db');
 
-const seedFakeData = async (nbrProducts = 50, nbrUsers = 50, nbrOrders = 100) => {
+const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) => {
   await db.sync({force: true});
 
   coffeeCountries.forEach(async (country, i) => {
@@ -29,17 +29,20 @@ const seedFakeData = async (nbrProducts = 50, nbrUsers = 50, nbrOrders = 100) =>
     } else {
       const rand = Math.random();
       switch (true){
-        case rand < .2:
+        case rand < .17:
           category = 'roast-light';
           break;
-        case rand < .4:
+        case rand < .34:
           category = 'roast-medium';
           break;
-        case rand < .6:
+        case rand < .51:
           category = 'roast-dark';
           break;
-        case rand < .8:
+        case rand < .68:
           category = 'decaf';
+          break;
+        case rand < .85:
+          category = 'organic';
           break;
         default:
           category = 'flavored';
@@ -55,7 +58,7 @@ const seedFakeData = async (nbrProducts = 50, nbrUsers = 50, nbrOrders = 100) =>
       weight: Math.round((Math.random()*128)),
       isFeatured: Math.random() < .2 ? true : false,
       onSale: Math.random() < .3 ? true : false,
-      rating: (Math.random()*5).toFixed(1),
+      rating: (Math.random()*2+3).toFixed(1),
       type: type,
       category: category,
 
