@@ -116,9 +116,9 @@ class _EditProfile extends React.Component {
               <Icon icon="la:id-card" />
             </li>
             <li>
-              <Link to="/">
+              <Link to="/contactus">
                 <div>
-                  <h3>Need a help?</h3>
+                  <h3>Need help?</h3>
                   <span>Contact us</span>
                 </div>
               </Link>

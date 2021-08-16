@@ -88,7 +88,18 @@ button {
   justify-content: space-between;
   align-items: center;
   z-index: 999;
+/* JP  fixed position nav bar*/
+  position: fixed;
+  top:0;
+  overflow: hidden;
+  width: 95%;
+  background-color: white;
 }
+body > div{
+  margin-top: 7rem;
+}
+/* JP end changes (dropdown needs to be on top if this is kept */
+
 .logo {
   font-family: "Special Elite", cursive;
   color: #222;
