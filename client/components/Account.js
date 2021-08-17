@@ -79,11 +79,12 @@ class _EditProfile extends React.Component {
       return "Retrieving your information...";
     }
     return (
-      <div id="profilecontainer">
-        <div className="container" id="profileleft">
-          <h2 className="profilehdr">Account</h2>
-        </div>
-        {/* <div className="profilehdr">
+      <div id="content-wrapper">
+        <div id="profilecontainer">
+          <div className="container" id="profileleft">
+            <h2 className="profilehdr">Account</h2>
+          </div>
+          {/* <div className="profilehdr">
           
         </div> */}
         <div className="full-width-list" id="profileright">

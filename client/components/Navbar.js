@@ -30,7 +30,9 @@ class Navbar extends Component {
     });
   }
 
+
   render() {
+    console.log(this.props, this.state)
     const { handleClick, isLoggedIn, name, isAdmin } = this.props;
     return (
       <div id="navbar">
@@ -38,9 +40,9 @@ class Navbar extends Component {
           <Link to="/home">
             <h1 className="logo">Grace Coffee.</h1>
             {/* MOVE BELOW TO OVER THE CART */}
-            <h1>{ this.props.nbrCartItems } items in cart</h1>
+            {/* <h1>{this.props.nbrCartItems} items in cart</h1> */}
             {/* MOVE ABOVE TO OVER THE CART */}
-            </Link>
+          </Link>
           <div>
             <Link to="/coffees">Coffee</Link>
             <Link to="/accessories">Accessories</Link>
@@ -57,6 +59,9 @@ class Navbar extends Component {
               <Link to="/cart">
                 <Icon icon="bx:bx-shopping-bag" width="20" />
               </Link>
+              <Link to="/cart" id="cartCountCircle">
+                {this.props.nbrCartItems}
+              </Link>
               <button onClick={this.showDropdown}><Icon icon="bx:bx-user-circle" width="20" /> {name}</button>
               {this.state.showDropdown ? <AccountDropdown /> : null}
             </div>
@@ -64,39 +69,22 @@ class Navbar extends Component {
               <div>
                 {/* The navbar will show these links before you log in */}
                 <a href="#">
-                  <img
-                    src="https://developer.apple.com/design/human-interface-guidelines/ios/images/icons/tab_bar_icons/TabBar_Search.png"
-                    width="15"
-                  />
+                  <Icon icon="bx:bx-search" width="20" />
                 </a>
                 <Link to="/cart">
-                  <img
-                    src="https://freeiconshop.com/wp-content/uploads/edd/shopping-bag-outline.png"
-                    width="18px"
-                  />
+                  <Icon icon="bx:bx-shopping-bag" width="20" />
+                </Link>
+                <Link to="/cart" id="cartCountCircle">
+                  {this.props.nbrCartItems}
                 </Link>
                 <button onClick={this.showDropdown}>
-                  <img
-                    src="https://developer.apple.com/design/human-interface-guidelines/ios/images/icons/tab_bar_icons/person-crop-circle.png"
-                    width="15px"
-                  />
+                  <Icon icon="bx:bx-user-circle" width="20" />
                 </button>
                 {this.state.showDropdown ? <AccountDropdown /> : null}
-                {/* <Link
-                to={{
-                  pathname: "/register",
-                  state: { mode: "new" },
-                }}
-              >
-                <img
-                  src="https://developer.apple.com/design/human-interface-guidelines/ios/images/icons/tab_bar_icons/person-crop-circle.png"
-                  width="15px"
-                />{" "}
-                Register
-              </Link> */}
               </div>
             )}
         </nav>
+
       </div>
     );
   }

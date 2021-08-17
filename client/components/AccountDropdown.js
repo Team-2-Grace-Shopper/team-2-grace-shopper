@@ -34,7 +34,7 @@ const AccountDropdown = ({ handleClick, isLoggedIn, name, isAdmin }) => (
         ) : (
             <ul>
               <li>
-                <Link to="/profile">My account</Link>
+                <Link to="/account">My account</Link>
               </li>
               <li>
                 <Link to="/orderhistory">My orders</Link>

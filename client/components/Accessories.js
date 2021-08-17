@@ -20,37 +20,39 @@ export class Accessories extends React.Component {
   render() {
     const accessories = this.props.accessories;
     return (
-      <div className="container filterList">
-        <div className="filter">
-          <div className="sortBy">
-            <span>Sort by</span>
-            <select>
-              <option>Featured</option>
-              <option>A - Z</option>
-              <option>Z - A</option>
-              <option>Price low to high</option>
-            </select>
-          </div>
-          <br /><br />
-          <span>Filter</span>
-          <hr />
-          <div className="Type">
-            <span><strong>Type</strong></span>
-            <div>
-              <input type="radio" id="mug" name="mug" value="mug"></input>
-              <label for="mug">Mug</label>
+      <div id="content-wrapper">
+        <div className="container filterList">
+          <div className="filter">
+            <div className="sortBy">
+              <span>Sort by</span>
+              <select>
+                <option>Featured</option>
+                <option>A - Z</option>
+                <option>Z - A</option>
+                <option>Price low to high</option>
+              </select>
             </div>
-            <div>
-              <input type="radio" id="brewingtool" name="brewingtool" value="brewingtool"></input>
-              <label for="brewingtool">Brewing tool</label>
+            <br /><br />
+            <span>Filter</span>
+            <hr />
+            <div className="Type">
+              <span><strong>Type</strong></span>
+              <div>
+                <input type="radio" id="mug" name="mug" value="mug"></input>
+                <label for="mug">Mug</label>
+              </div>
+              <div>
+                <input type="radio" id="brewingtool" name="brewingtool" value="brewingtool"></input>
+                <label for="brewingtool">Brewing tool</label>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="itemList col3">
-          <div>
-            {accessories.map((accessory) => (
-              <AllAccessoriesCard accessory={accessory} key={accessory.id} />
-            ))}
+          <div className="itemList col3">
+            <div>
+              {accessories.map((accessory) => (
+                <AllAccessoriesCard accessory={accessory} key={accessory.id} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

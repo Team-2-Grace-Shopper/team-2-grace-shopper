@@ -15,7 +15,7 @@ export class Home extends React.Component {
   render() {
     const products = this.props.products;
     return (
-      <div>
+      <div id="content-wrapper">
         <div className="hero">
           <img src="" />
         </div>

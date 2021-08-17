@@ -59,7 +59,7 @@ export class Coffees extends React.Component {
   }
 
   render() {
-    const coffees = this.state.coffees;
+  const coffees = this.state.coffees;
 
     return (
       <div className="container filterList">

@@ -8,6 +8,9 @@ body {
   margin: 0;
   padding: 0;
 }
+#content-wrapper {
+  padding-top: 80px;
+}
 h1 {
   font-family: "Special Elite", cursive;
 }
@@ -64,6 +67,11 @@ button {
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+.cta:hover {
+  background-color: #fff;
+  color:#222;
+  box-shadow: 0 0 0 2px #222;
+}
 .ctadisabled {
   background-color: #ddd;
   color: #fff;
@@ -82,23 +90,17 @@ button {
 /**************/
 /* Navigation */
 #navbar {
-  border-bottom: 1px solid #dbdbdb;
+  width: calc(100% - 4em);
   padding: 0 2em;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 999;
-/* JP  fixed position nav bar*/
   position: fixed;
-  top:0;
-  overflow: hidden;
-  width: 95%;
-  background-color: white;
+  top: 0;
+  background-color: #fff;
+  box-shadow: 0 0 3px 3px rgb(0 0 0 / 10%);
 }
-body > div{
-  margin-top: 7rem;
-}
-/* JP end changes (dropdown needs to be on top if this is kept */
 
 .logo {
   font-family: "Special Elite", cursive;
@@ -147,6 +149,22 @@ body > div{
   border-bottom: 10px solid #222;
   line-height: calc(3em - 20px);
 }
+#navbar #cartCountCircle {
+  position:relative;
+  background-color: #222;
+  color:#fff;
+  width: 18px;
+  height:18px;
+  font-size:12px;
+  line-height:18px;
+  padding:0;
+  right:22px;
+  top:0;
+  text-align:center;
+  border-radius:50%;
+  z-index: 9999;
+  margin-right:0!important;
+}
 .container {
   padding: 2em;
 }
@@ -163,7 +181,7 @@ body > div{
 #account-dropdown {
   background-color: #fff;
   position: absolute;
-  top: 5.1em;
+  top: 5em;
   right: 2em;
   text-align: center;
   border-bottom: 0.5em solid #222;
@@ -194,7 +212,8 @@ body > div{
   background-color: #f7f7f7;
 }
 #account-dropdown a {
-  padding: 0 1em;
+  padding: 0 2.5em;
+  margin: 0 auto;
 }
 #account-dropdown span:hover,
 #account-dropdown a:hover {
@@ -363,7 +382,6 @@ body > div{
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: flex-start;
 }
 #profilecontainer svg {
   width: 25px;
@@ -381,6 +399,10 @@ body > div{
   justify-content: center;
   /* flex-grow: 1; */
 }
+#profileleft h2 {
+  position: fixed;
+  top: 50%;
+}
 #profileright {
   flex-basis: 70%;
   /* flex-grow: 1; */
@@ -391,7 +413,6 @@ body > div{
   align-items: center;
   background-color: #f7f7f7;
   min-height: calc(100vh - 9em);
-  height: max-content;
 }
 #profileright {
   display: flex;
@@ -549,6 +570,7 @@ th {
 /* Product List - ADMIN */
 .itemList-admin {
   padding-top: 2em;
+  width: 100%;
 }
 .itemList-admin h2 {
   text-align: center;
@@ -586,8 +608,36 @@ th {
 }
 
 /**************/
-/* LOGIN */
-
+/* CART */
+.cartview .itemList-admin{
+  width: 80%;
+}
+.cartview .cart-checkout {
+  text-align:right;
+  padding: 0 2em;
+  margin-bottom: 5em;
+}
+.cartview .cart-checkout h2{
+  padding-bottom: 0.5em;
+  text-align:right;
+}
+.cartview img{
+  width: 6em;
+}
+.cartview .delete{
+  padding: 0.5em;
+}
+.cartview svg {
+  padding: 0!important;
+  width:20px!important;
+}
+.cartItem {
+  border:1px solid #dbdbdb!important;
+  border-radius: 15px;
+  padding:1em 0!important;
+  margin-bottom: 0.5em!important;
+  align-items:center;
+}
 
 
 
