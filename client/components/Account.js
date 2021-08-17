@@ -79,52 +79,54 @@ class _EditProfile extends React.Component {
       return "Retrieving your information...";
     }
     return (
-      <div id="profilecontainer">
-        <div className="container" id="profileleft">
-          <h2 className="profilehdr">Account</h2>
-        </div>
-        {/* <div className="profilehdr">
+      <div id="content-wrapper">
+        <div id="profilecontainer">
+          <div className="container" id="profileleft">
+            <h2 className="profilehdr">Account</h2>
+          </div>
+          {/* <div className="profilehdr">
           
         </div> */}
-        <div className="full-width-list" id="profileright">
-          <ul>
-            <li>
-              <Link to="/profile">
-                <div>
-                  <h3>Personal info</h3>
-                  <span>Edit your information</span>
-                </div>
-              </Link>
-              <Icon icon="la:id-card" />
-            </li>
-            <li>
-              <Link to="/">
-                <div>
-                  <h3>Current order status</h3>
-                  <span>Track your order</span>
-                </div>
-              </Link>
-              <Icon icon="la:shipping-fast" />
-            </li>
-            <li>
-              <Link to="/orderhistory">
-                <div>
-                  <h3>Order history</h3>
-                  <span>View your past purchases</span>
-                </div>
-              </Link>
-              <Icon icon="ic:outline-receipt" />
-            </li>
-            <li>
-              <Link to="/">
-                <div>
-                  <h3>Need a help?</h3>
-                  <span>Contact us</span>
-                </div>
-              </Link>
-              <Icon icon="ic:baseline-help-outline" />
-            </li>
-          </ul>
+          <div className="full-width-list" id="profileright">
+            <ul>
+              <li>
+                <Link to="/profile">
+                  <div>
+                    <h3>Personal info</h3>
+                    <span>Edit your information</span>
+                  </div>
+                </Link>
+                <Icon icon="la:id-card" />
+              </li>
+              <li>
+                <Link to="/">
+                  <div>
+                    <h3>Current order status</h3>
+                    <span>Track your order</span>
+                  </div>
+                </Link>
+                <Icon icon="la:shipping-fast" />
+              </li>
+              <li>
+                <Link to="/orderhistory">
+                  <div>
+                    <h3>Order history</h3>
+                    <span>View your past purchases</span>
+                  </div>
+                </Link>
+                <Icon icon="ic:outline-receipt" />
+              </li>
+              <li>
+                <Link to="/">
+                  <div>
+                    <h3>Need a help?</h3>
+                    <span>Contact us</span>
+                  </div>
+                </Link>
+                <Icon icon="ic:baseline-help-outline" />
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     );
