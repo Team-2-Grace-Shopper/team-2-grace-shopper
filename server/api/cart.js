@@ -2,7 +2,6 @@ const router = require('express').Router()
 module.exports = router
 const { models: { Order, User, Orderline, Product }} = require('../db')
 
-
 router.get('/', async (req, res, next) => {
   try {
     const { userId } = req.query;
@@ -39,21 +38,18 @@ router.post("/", async (req, res, next) => {
 
 router.post("/line", async (req, res, next) => {
   try {
-    const cart = await Orderline.create(req.body, { returning: true });
-    res.json(cart);
+    const line = await Orderline.findOne({where: {orderId: req.body.orderId*1, productId:req.body.productId}})
+    if (line){
+      line.quantity += req.body.quantity;
+      await line.save();
+      res.send(line);
+    }
+    else {
+      const cart = await Orderline.create(req.body, { returning: true });
+      res.json(cart);
+    }
 
   } catch (err) {
     next(err);
   }
 });
-
-// router.put('/', async (req, res, next) => {
-//   try {
-
-//     res.send(cart)
-//   } 
-//   catch (err) {
-//     next(err)
-//   }
-// })
-

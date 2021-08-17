@@ -47,9 +47,9 @@ const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
             }
             }>+</button>
           </ul>
-          <p>{coffee.onSale ? 
-            <span><del>${coffee.price}</del> - sale: </span>  : ''} 
-            ${coffee.salePrice}</p>
+          <p>{coffee.onSale && <span><del>${coffee.price}</del> - sale:  ${coffee.salePrice}</span>}
+          {!coffee.onSale && <span>${coffee.price}</span>}
+          </p>
           
         </div>
         <button className={count > 0 ? 'cta' : 'ctadisabled'}
