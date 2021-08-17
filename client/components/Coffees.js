@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
 import { getProducts } from "../store/products";
 import AllCoffeesCard from "./AllCoffeesCard";
+import { Toaster } from 'react-hot-toast';
 
 export class Coffees extends React.Component {
   constructor(props) {
@@ -59,10 +60,12 @@ export class Coffees extends React.Component {
   }
 
   render() {
-  const coffees = this.state.coffees;
+    const coffees = this.state.coffees;
 
     return (
       <div id='content-wrapper'>
+      <Toaster /> 
+
       <div className="container filterList">
         <div className="filter">
           <div className="sortBy">
