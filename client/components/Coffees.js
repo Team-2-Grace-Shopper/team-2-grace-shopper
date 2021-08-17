@@ -62,6 +62,7 @@ export class Coffees extends React.Component {
   const coffees = this.state.coffees;
 
     return (
+      <div id='content-wrapper'>
       <div className="container filterList">
         <div className="filter">
           <div className="sortBy">
@@ -139,6 +140,7 @@ export class Coffees extends React.Component {
               </div>
             </div>
         }
+      </div>
       </div>
     );
   }
