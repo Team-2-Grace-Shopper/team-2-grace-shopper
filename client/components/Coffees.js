@@ -13,12 +13,14 @@ export class Coffees extends React.Component {
       filteredCategory: '',
       featuredSelected: false,
       saleSelected: false,
+      loading: true,
     }
   }
 
   async componentDidMount() {
     await this.props.getProducts();
-    this.setState({ coffees: this.props.coffees })
+    this.setState({ coffees: this.props.coffees });
+    this.setState({loading: false});
   }
 
   handleSort = (ev) => {
@@ -85,19 +87,13 @@ export class Coffees extends React.Component {
 
   resetFilter = () => {
     location.reload();
-//    window.location.reload(false);
-
-    // let newList = [...this.props.coffees];
-    // this.setState({...this.state,
-    //   coffees: newList,
-    //   filteredRegion: '',
-    //   filteredCategory: '',
-    //   featuredSelected: false,
-    //   saleSelected: false,
-    // })
   }
 
   render() {
+    if (this.state.loading){
+      return <h2 style={{marginTop: 150, marginBottom: 200, textAlign: 'center'}}>Please wait while we load your favorite beverages!</h2>
+    }
+
     const coffees = this.state.coffees;
 
     return (
