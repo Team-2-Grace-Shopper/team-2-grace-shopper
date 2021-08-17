@@ -83,10 +83,8 @@ class _EditProfile extends React.Component {
         <div id="profilecontainer">
           <div className="container" id="profileleft">
             <h2 className="profilehdr">Account</h2>
-          </div>
-          {/* <div className="profilehdr">
-          
-        </div> */}
+          </div> 
+        </div>
         <div className="full-width-list" id="profileright">
           <ul>
             <li>

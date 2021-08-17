@@ -20,7 +20,7 @@ const ChosenAccessoryCard = ({ chosenAccessory }) => {
                             starSpacing="0px"
                         />
                     </span>
-                    <img src={chosenAccessory.imageUrl} />
+                    <img src={chosenAccessory.imageUrl1} />
                     <h1>{ chosenAccessory.name }</h1>
                     <p>{ chosenAccessory.description }</p>
                     <p>{ chosenAccessory.weight }oz</p>

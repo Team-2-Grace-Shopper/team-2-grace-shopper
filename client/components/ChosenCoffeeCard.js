@@ -20,7 +20,7 @@ const ChosenCoffeeCard = ({ chosenCoffee }) => {
                             starSpacing="0px"
                         />
                     </span>
-                    <img src={chosenCoffee.imageUrl} />
+                    <img src={chosenCoffee.imageUrl1} />
                     <h1>{ chosenCoffee.name }</h1>
                     <p>{ chosenCoffee.description }</p>
                     <p>{ chosenCoffee.weight }oz</p>
