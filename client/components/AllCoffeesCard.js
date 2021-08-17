@@ -40,7 +40,10 @@ const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
             <li>{count}</li>
             <button onClick={() => setCount(count + 1)}>+</button>
           </ul>
-          <p>${coffee.price}</p>
+          <p>{coffee.onSale ? 
+            <span><del>${coffee.price}</del> - sale: </span>  : ''} 
+            ${coffee.salePrice}</p>
+          
         </div>
         <button className={count > 0 ? 'cta' : 'ctadisabled'}
                 onClick={ () => addToShopCart(userId, coffee.id, count, coffee.price, coffee) }
