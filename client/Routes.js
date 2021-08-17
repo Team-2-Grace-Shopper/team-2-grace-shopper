@@ -19,6 +19,7 @@ import EditProfileAdmin from "./components/EditProfileAdmin";
 import Account from "./components/Account";
 import { me } from "./store";
 import EditProductAdmin from "./components/EditProductAdmin";
+import ContactUs from "./components/ContactUs";
 
 
 /**
@@ -47,6 +48,7 @@ class Routes extends Component {
           <Route path="/cart/checkout" component={Checkout} />
           <Route path="/cart/confirmation" component={Confirmation} />
           <Route path="/orderconfirmation" component={OrderConfirmation} />
+          <Route path="/contactus" component={ ContactUs } />
         </Switch>
         {isLoggedIn ? (
           <Switch>
