@@ -12,47 +12,53 @@ const AuthForm = props => {
   const { name, displayName, handleSubmit, error } = props
   console.log(name)
   return (
-    <div id="profilecontainer">
-      <div className="container" id="profileleft">
-        <h2 className="profilehdr">{displayName}</h2>
-      </div>
+    <div id="content-wrapper">
+      <div id="profilecontainer">
+        <div className="container" id="profileleft">
+          <h2 className="profilehdr">{displayName}</h2>
+        </div>
 
-      <div className="container" id="profileright">
-        {name === 'login' ?
-          <form onSubmit={handleSubmit} name={name} id="profileform">
-            <div className="formfield">
-              <input name="username" type="text" />
-              <label htmlFor="username">Username</label>
-            </div>
-            <div className="formfield">
-              <input name="password" type="password" />
-              <label htmlFor="password">Password</label>
-            </div>
-            <div>
-              <button type="submit" className="cta">{displayName}</button>
-            </div>
-            {error && error.response && <div> {error.response.data} </div>}
-          </form>
-          :
-          <form onSubmit={handleSubmit} name={name} id="profileform">
-            <div className="formfield">
-              <input name="username" type="text" />
-              <label htmlFor="username">Email address</label>
-            </div>
-            <div className="formfield">
-              <input name="password" type="password" />
-              <label htmlFor="password">Password</label>
-            </div>
-            <div className="formfield">
-              <input name="confirmpassword" type="password" />
-              <label htmlFor="confirmpassword">Confirm password</label>
-            </div>
-            <div>
-              <button type="submit" className="cta">{displayName}</button>
-            </div>
-            {error && error.response && <div> {error.response.data} </div>}
-          </form>
-        }
+        <div className="container" id="profileright">
+          {name === 'login' ?
+            <form onSubmit={handleSubmit} name={name} id="profileform">
+              <div className="formfield">
+                <input name="username" type="text" />
+                <label htmlFor="username">Username</label>
+              </div>
+              <div className="formfield">
+                <input name="password" type="password" />
+                <label htmlFor="password">Password</label>
+              </div>
+              <div>
+                <button type="submit" className="cta">{displayName}</button>
+              </div>
+              {error && error.response && <div> {error.response.data} </div>}
+            </form>
+            :
+            <form onSubmit={handleSubmit} name={name} id="profileform">
+              <div className="formfield">
+                <input name="username" type="text" />
+                <label htmlFor="username">Email address</label>
+              </div>
+              <div className="formfield">
+                <input name="name" type="text" />
+                <label htmlFor="name">Full name</label>
+              </div>
+              <div className="formfield">
+                <input name="password" type="password" />
+                <label htmlFor="password">Password</label>
+              </div>
+              <div className="formfield">
+                <input name="confirmpassword" type="password" />
+                <label htmlFor="confirmpassword">Confirm password</label>
+              </div>
+              <div>
+                <button type="submit" className="cta">{displayName}</button>
+              </div>
+              {error && error.response && <div> {error.response.data} </div>}
+            </form>
+          }
+        </div>
       </div>
     </div>
   )
