@@ -4,21 +4,14 @@ import store from './index';
 //ACTION TYPES
  
 const GET_CART = 'GET_CART';
-const CREATE_CART = 'CREATE_CART';
-const DELETE_CART_ITEM = 'DELETE_CART_ITEM'
+const DELETE_CART_ITEM = 'DELETE_CART_ITEM';
+const UPDATE_CART_INFO = 'UPDATE_CART_INFO';
  
 //ACTION CREATORS
 
 const _getCart = (cart) => {
     return {
         type: GET_CART, 
-        cart
-    };
-};
-
-const _createCart = (cart) => {
-    return {
-        type: CREATE_CART, 
         cart
     };
 };
@@ -30,15 +23,14 @@ const _deleteCartItem = (cartItem) => {
     };
 };
 
-//THUNK CREATORS
+const _updateCartInfo = (info) => {
+    return {
+      type: UPDATE_CART_INFO,
+      info
+    };
+};
 
-// needs refactoring for localStorage version
-// export const createCart = (order) => {
-//     return async (dispatch) => {
-//         const { data: created } = await axios.post('/api/orders', order);
-//         dispatch(_createCart(created));
-//     };
-// };
+//THUNK CREATORS
 
 export const getCart = (userId) => {
     if (!userId){
@@ -54,6 +46,13 @@ export const getCart = (userId) => {
         dispatch(_getCart(cart));
     }
 }
+
+export const updateCartInfo = (info) => {
+    return async(dispatch) => {
+        const { data: updated } = await axios.put('api/cart', info);
+        dispatch(_updateCartInfo(updated));
+    };
+};
 
 export const deleteCartItem = (cartItem) => {
   return async (dispatch) => {
@@ -110,14 +109,18 @@ export const addToCart = async (userId, productId, quantity, price, product) => 
 //REDUCER
 
 export const cartReducer = (state = [], action) => {
-  switch (action.type) {
-      case GET_CART:
-          return action.cart;
-      case CREATE_CART:
-          return [...state, action.cart];
-      case DELETE_CART_ITEM:
-          return state[0].orderlines.filter((orderline) => orderline.id !== action.cartItem.id);
-      default:
-          return state
+    
+    switch (action.type) {
+        case GET_CART:
+            return action.cart;
+        case DELETE_CART_ITEM:
+            const newState = [...state];
+            const newLines = newState[0].orderlines.filter((orderline) => orderline.id !== action.cartItem.id);
+            newState[0].orderlines = newLines;
+            return newState;
+        case UPDATE_CART_INFO:
+            return state.map(cart => cart) 
+        default:
+            return state
   };
 };

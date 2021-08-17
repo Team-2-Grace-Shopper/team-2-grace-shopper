@@ -9,17 +9,27 @@ class CartView extends React.Component {
         super();
     }
 
-    async componentDidMount() {
-        await this.props.getCart(this.props.userId);
+    componentDidMount() { 
+        const { userId } = this.props;
+        if (userId) {
+            this.props.getCart(userId);
+        }
+        
+    }
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.userId !== this.props.userId) {
+            this.props.getCart(this.props.userId);
+        }
     }
 
     render () {
-        if (!this.props.userCart) {
+        if (!this.props.cart[0]) {
             return <h3>You have no items in your cart.</h3>
         }
         
         
-        const { orderlines } = this.props.userCart;
+        const { orderlines } = this.props.cart[0];
 
         const total = orderlines.reduce((acc, orderline) => {
             acc.value += (orderline.price * orderline.quantity);
@@ -40,7 +50,7 @@ class CartView extends React.Component {
                             displayType='text'
                             />
 
-        console.log('This is props', this.props)
+        // console.log('This is props', this.props)
         // console.log('This is local Storage', window.localStorage)
 
         return (
@@ -51,7 +61,6 @@ class CartView extends React.Component {
                         { 
                         orderlines.map( orderline => 
                             <div className= 'cartItem' key={orderline.id}>
-                                {/* <h3>{orderline.lineNbr}</h3> */}
                                 <div>                                   
                                     {
                                     //would like to dry this out
@@ -63,7 +72,8 @@ class CartView extends React.Component {
                                         ):( 
                                         <Link to= {`/accessories/${orderline.product.id}`}>
                                             <img src= {orderline.product.imageUrl1} />
-                                            <h3>{orderline.product.name}</h3>                                            </Link>
+                                            <h3>{orderline.product.name}</h3>
+                                        </Link>
                                         )
                                     }
                                 </div>
@@ -74,8 +84,7 @@ class CartView extends React.Component {
                                         prefix=' $' 
                                         fixedDecimalScale={ true }
                                         decimalScale={ 2 }
-                                        displayType='text'
-                                    />
+                                        displayType='text'/>
                                 </p>
                                 <p>Delete Item: </p>
                                 <button className= 'delete' onClick= {()=>this.props.deleteCartItem(orderline)}>
@@ -90,9 +99,8 @@ class CartView extends React.Component {
                     <div>
                         <button 
                             className={orderlines.length > 0 ? 'cta' : 'ctadisabled'}
-                            // onClick={() => checkout()}
                         >
-                            CHECKOUT
+                            <Link to = '/cart/checkout/information'>CHECKOUT</Link>
                         </button>
                     </div>  
                 </div>
@@ -104,11 +112,11 @@ class CartView extends React.Component {
 }
 
 const mapStateToProps = ({ auth, cart }) => {
-   const userId = auth.id;
-   const userCart = cart[0];
+    const userId = auth.id;
     return({
+        auth,
         userId,
-        userCart
+        cart
     })
 }
 
