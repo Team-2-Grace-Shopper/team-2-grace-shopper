@@ -171,7 +171,7 @@ export class Coffees extends React.Component {
 
 const mapState = (state) => {
   return {
-    coffees: state.products.filter((product) => product.type === "coffee"),
+    coffees: state.products.filter((product) => product.type === "coffee").sort((a,b) => a.name.localeCompare(b.name)),
   };
 };
 
