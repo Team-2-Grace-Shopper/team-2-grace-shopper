@@ -83,8 +83,8 @@ class _EditProfile extends React.Component {
         <div id="profilecontainer">
           <div className="container" id="profileleft">
             <h2 className="profilehdr">Account</h2>
-          </div> 
-        </div>
+          </div>
+        
         <div className="full-width-list" id="profileright">
           <ul>
             <li>
@@ -125,6 +125,7 @@ class _EditProfile extends React.Component {
             </li>
           </ul>
         </div>
+        </div>
       </div>
     );
   }
@@ -138,10 +139,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
+  return ({
     updateUser: (user) => dispatch(updateUser(user)),
     getUser: (id) => dispatch(getUser(id)),
-  };
+  });
 };
 
 const EditProfile = connect(mapStateToProps, mapDispatchToProps)(_EditProfile);

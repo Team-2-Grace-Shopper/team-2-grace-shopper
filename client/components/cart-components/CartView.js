@@ -106,9 +106,13 @@ class CartView extends React.Component {
                             <br />
                             <div className="cart-checkout">
                                 <h2><span>Subtotal {quanTotal} :</span> {subTotal}</h2>
-                                <button className={orderlines.length > 0 ? 'cta' : 'ctadisabled'}>
-                                  <Link to = '/cart/checkout/information'>CHECKOUT</Link>
-                                CHECKOUT</button>
+                                
+                                <Link to = '/cart/checkout/information'>
+                                    <button className={orderlines.length > 0 ? 'cta' : 'ctadisabled'}>
+                                        CHECKOUT
+                                    </button>
+                                </Link>
+                                
                             </div>
 
                         </div>
