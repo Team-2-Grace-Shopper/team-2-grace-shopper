@@ -10,7 +10,6 @@ import GoogleLogin from 'react-google-login';
 
 const AuthForm = props => {
   const { name, displayName, handleSubmit, error } = props
-  console.log(name)
   return (
     <div id="content-wrapper">
       <div id="profilecontainer">
@@ -22,11 +21,12 @@ const AuthForm = props => {
           {name === 'login' ?
             <form onSubmit={handleSubmit} name={name} id="profileform">
               <div className="formfield">
-                <input name="username" type="text" />
+                <input name="username" type="email" autoFocus required maxLength={75}
+                />
                 <label htmlFor="username">Username</label>
               </div>
               <div className="formfield">
-                <input name="password" type="password" />
+                <input name="password" type="password" required maxLength={75}/>
                 <label htmlFor="password">Password</label>
               </div>
               <div>
@@ -37,25 +37,25 @@ const AuthForm = props => {
             :
             <form onSubmit={handleSubmit} name={name} id="profileform">
               <div className="formfield">
-                <input name="username" type="text" />
+                <input name="username" type="email" autoFocus required maxLength={75}/>
                 <label htmlFor="username">Email address</label>
               </div>
               <div className="formfield">
-                <input name="name" type="text" />
-                <label htmlFor="name">Full name</label>
+                <input name="realname" type="text" required maxLength={75}/>
+                <label htmlFor="realname">Full name</label>
               </div>
               <div className="formfield">
-                <input name="password" type="password" />
+                <input name="password" type="password" required maxLength={75}/>
                 <label htmlFor="password">Password</label>
               </div>
               <div className="formfield">
-                <input name="confirmpassword" type="password" />
+                <input name="confirmpassword" type="password" required maxLength={75}/>
                 <label htmlFor="confirmpassword">Confirm password</label>
               </div>
               <div>
                 <button type="submit" className="cta">{displayName}</button>
               </div>
-              {error && error.response && <div> {error.response.data} </div>}
+              {error && error.response &&  <div><br /> {error.response.data} - please use a different email</div>}
             </form>
           }
         </div>
@@ -91,11 +91,19 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
-      console.log('LOGIN PROP', evt.target.username.value)
-      const formName = evt.target.name
-      const username = evt.target.username.value
-      const password = evt.target.password.value
-      dispatch(authenticate(username, password, formName))
+      if (evt.target.name === 'login' || evt.target.password.value === evt.target.confirmpassword.value){
+        const formName = evt.target.name
+        const username = evt.target.username.value
+        const password = evt.target.password.value
+        const realname = evt.target.realname ? evt.target.realname.value : 'NONAME'
+        dispatch(authenticate(username, password, formName, realname))
+      } 
+      else {
+        alert ('Passwords do not match - please correct and submit again')
+        evt.target.password.value = '';
+        evt.target.confirmpassword.value = '';
+        evt.target.password.focus();
+      }
     }
   }
 }
