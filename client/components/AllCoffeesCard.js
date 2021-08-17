@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import toast from 'react-hot-toast';
 
 const notify = () => toast.success('Added to cart!', { duration: 3000, position: 'top-center' });
+const notify2 = () => toast.error('This will exceed our inventory!',  { duration: 3000, position: 'top-center' })
 
 const addToShopCart = (userId, id, count, price, coffee) =>{
   addToCart(userId, id, count, price, coffee);
@@ -38,7 +39,13 @@ const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
           <ul>
             <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
             <li>{count}</li>
-            <button onClick={() => setCount(count + 1)}>+</button>
+            <button onClick={() => {
+              count < coffee.inventory ?
+                setCount(count + 1)
+                :                
+                notify2();
+            }
+            }>+</button>
           </ul>
           <p>{coffee.onSale ? 
             <span><del>${coffee.price}</del> - sale: </span>  : ''} 
