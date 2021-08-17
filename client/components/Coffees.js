@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-// import { Link } from "react-router-dom";
 import { getProducts } from "../store/products";
 import AllCoffeesCard from "./AllCoffeesCard";
 import { Toaster } from 'react-hot-toast';
@@ -10,8 +9,9 @@ export class Coffees extends React.Component {
     super(props);
     this.state = {
       coffees: [],
-      filteredRegions: [],
-      filteredCategories: []
+      filteredRegion: '',
+      filteredCategory: '',
+      featuredSelected: false
     }
   }
 
@@ -41,20 +41,34 @@ export class Coffees extends React.Component {
   }
 
   handleClick = (ev) => {
-    let newRegions = [];
-    let newCategories = [];
+    let newRegion = this.state.filteredRegion;
+    let newCategory = this.state.filteredCategory;
+    let newFeaturedSelected = this.state.featuredSelected;
     switch(ev.target.name){
       case 'region':
-        newRegions = this.state.filteredRegions.concat(ev.target.value)
+        newRegion = ev.target.value;
+        this.setState({filteredRegion: newRegion});
         break;
       case 'category':
-        newCategories = this.state.filteredCategories.concat(ev.target.value)
+        newCategory = ev.target.value;
+        this.setState({filteredCategory: newCategory});
+        break;
+      case 'special':
+        newFeaturedSelected = true;
+        this.setState({ featuredSelected: true });
         break;
       }
 
-    const newList = this.props.coffees.filter(c => {
-      return newCategories.includes(c.category.toLowerCase()) || newRegions.includes(c.country.region.toLowerCase())
-    })
+    let newList = [...this.state.coffees];
+    if (newRegion){
+      newList = newList.filter(c => c.country.region.toLowerCase() === newRegion);
+    }
+    if (newCategory){
+      newList = newList.filter(c => c.category.toLowerCase() === newCategory);
+    }
+    if (newFeaturedSelected){
+      newList = newList.filter(c => c.isFeatured);
+    }
 
     this.setState({ coffees: newList })
   }
@@ -71,7 +85,6 @@ export class Coffees extends React.Component {
           <div className="sortBy">
             <span>Sort by</span>
             <select name="sort" onChange={ this.handleSort }>
-              <option value="featured">Featured</option>
               <option value="a-z">A - Z</option>
               <option value="z-a">Z - A</option>
               <option value="lowtohigh">Price low to high</option>
@@ -81,6 +94,13 @@ export class Coffees extends React.Component {
           <br /><br />
           <span>Filter</span>
           <hr />
+          <span><strong>Special</strong></span>
+          <div className="Featured">
+            <div>
+              <input type="radio" id="featured" name="special" value="featured" onClick={ this.handleClick }></input>
+              <label htmlFor="featured">Featured</label>
+            </div>
+          </div>
           <span><strong>Origin</strong></span>
           <div className="Region">
             <div>
