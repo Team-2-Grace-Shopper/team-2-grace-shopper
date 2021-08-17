@@ -9,12 +9,13 @@ import ChosenCoffee from "./components/ChosenCoffee";
 import Accessories from "./components/Accessories";
 import ChosenAccessory from "./components/ChosenAccessory";
 import CartView from "./components/cart-components/CartView";
-import Checkout from "./components/cart-components/Checkout";
-import Confirmation from "./components/cart-components/Confirmation";
+import CheckoutInfo from "./components/cart-components/CheckoutInfo";
+import CheckoutShipping from "./components/cart-components/CheckoutShipping";
+import CheckoutBilling from "./components/cart-components/CheckoutBilling";
 import ProductsAdmin from "./components/ProductsAdmin";
 import UsersAdmin from "./components/UsersAdmin";
 import OrderHistory from "./components/OrderHistory";
-import OrderConfirmation from "./components/OrderConfirmation";
+import OrderConfirmation from "./components/cart-components/OrderConfirmation";
 import EditProfileAdmin from "./components/EditProfileAdmin";
 import Account from "./components/Account";
 import { me } from "./store";
@@ -45,8 +46,9 @@ class Routes extends Component {
           <Route path="/coffees" component={Coffees} />
           <Route path="/accessories" component={Accessories} />
           <Route path="/cart" exact component={CartView} />
-          <Route path="/cart/checkout" component={Checkout} />
-          <Route path="/cart/confirmation" component={Confirmation} />
+          <Route path="/cart/checkout/information" component={CheckoutInfo} />
+          <Route path="/cart/checkout/shipping" component={CheckoutShipping} />
+          <Route path="/cart/checkout/billing" component={CheckoutBilling} />
           <Route path="/orderconfirmation" component={OrderConfirmation} />
           <Route path="/contactus" component={ ContactUs } />
         </Switch>

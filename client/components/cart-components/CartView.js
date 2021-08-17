@@ -10,17 +10,28 @@ class CartView extends React.Component {
         super();
     }
 
-    async componentDidMount() {
-        await this.props.getCart(this.props.userId);
+    componentDidMount() { 
+        const { userId } = this.props;
+        if (userId) {
+            this.props.getCart(userId);
+        }
+        
     }
 
-    render() {
-        if (!this.props.userCart) {
+    componentDidUpdate(prevProps) {
+        if(prevProps.userId !== this.props.userId) {
+            this.props.getCart(this.props.userId);
+        }
+    }
+
+
+    render () {
+        if (!this.props.cart[0]) {
             return <h3>You have no items in your cart.</h3>
         }
-
-
-        const { orderlines } = this.props.userCart;
+        
+        
+        const { orderlines } = this.props.cart[0];
 
         const total = orderlines.reduce((acc, orderline) => {
             acc.value += (orderline.price * orderline.quantity);
@@ -41,7 +52,7 @@ class CartView extends React.Component {
             displayType='text'
         />
 
-        console.log('This is props', this.props)
+        // console.log('This is props', this.props)
         // console.log('This is local Storage', window.localStorage)
 
         return (
@@ -49,6 +60,7 @@ class CartView extends React.Component {
                 <div id="profilecontainer" className="cartview">
                     <div className="container" id="profileleft">
                         <h2 className="profilehdr">Cart</h2>
+
                     </div>
 
                     <div className="container" id="profileright">
@@ -95,12 +107,13 @@ class CartView extends React.Component {
                             <div className="cart-checkout">
                                 <h2><span>Subtotal {quanTotal} :</span> {subTotal}</h2>
                                 <button className={orderlines.length > 0 ? 'cta' : 'ctadisabled'}
-                                // onClick={() => checkout()}
+                                  <Link to = '/cart/checkout/information'>CHECKOUT</Link>
                                 >CHECKOUT</button>
                             </div>
 
                         </div>
                     </div>
+
                 </div>
             </div>
         )
@@ -109,10 +122,9 @@ class CartView extends React.Component {
 
 const mapStateToProps = ({ auth, cart }) => {
     const userId = auth.id;
-    const userCart = cart[0];
     return ({
         userId,
-        userCart
+        cart
     })
 }
 
