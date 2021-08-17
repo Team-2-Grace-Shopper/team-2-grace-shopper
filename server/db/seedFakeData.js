@@ -23,6 +23,7 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
   for (let i = 0; i < nbrProducts; i++){
     const listPrice = (Math.random()*20).toFixed(2);
     const type = Math.random() < .35 ? 'accessory' : 'coffee';
+    const inventory = Math.random() < .1 ? 0 : Math.round((Math.random()*100));
     let category;
     if (type === 'accessory'){
       category = Math.random() < .5 ? 'mug' : 'grinder'
@@ -53,11 +54,11 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
       description: faker.lorem.paragraph(1),
       price: listPrice,
       salePrice: (listPrice*(Math.random())).toFixed(2),
-      inventory: Math.round((Math.random()*1000)),
+      inventory: inventory,
       countryId: Math.ceil(Math.random()*coffeeCountries.length),
       weight: Math.round((Math.random()*128)),
-      isFeatured: Math.random() < .2 ? true : false,
-      onSale: Math.random() < .3 ? true : false,
+      isFeatured: Math.random() < .1 ? true : false,
+      onSale: Math.random() < .25 ? true : false,
       rating: (Math.random()*2+3).toFixed(1),
       type: type,
       category: category,
