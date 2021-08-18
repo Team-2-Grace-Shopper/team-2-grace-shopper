@@ -293,6 +293,15 @@ button {
 .filter > div > div {
   margin-bottom: 0.5em;
 }
+@media only screen and (max-width: 1020px){
+  .filterList {
+    display: block;
+    width:100%;
+  }
+  .filter > div {
+    display: flex;
+  }
+}
 
 /* each item card decoration on item list */
 .col3 .itemcard {
@@ -310,6 +319,7 @@ button {
   justify-content: space-between;
   border-radius: 10px;
   overflow:hidden;
+  position: relative;
 }
 .itemcard:hover {
   box-shadow: 2px 2px 4px #ddd;
@@ -318,6 +328,15 @@ button {
 .itemcard:hover img{
   transform: scale(1.01);
   overflow:hidden;
+}
+.itemcard .label {
+  background-color:#ededed;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  padding: 0 0.5em;
+  border-radius: 100px;
+  font-size:0.7em;
 }
 
 /* Filter radio button style */
