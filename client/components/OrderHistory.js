@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import { Icon } from '@iconify/react';
 import { getOrdersForPage } from '../store/orders';
+import { Link } from "react-router-dom";
 import dateFormat from 'dateformat';
 import NumberFormat from 'react-number-format';
 
@@ -42,7 +43,7 @@ const OrderList = (props) => {
               <td className="tblcenter">{order.status}</td>
               <td className="tblcenter">{nbrItemsFmt}</td>
               <td className="tblright"> {orderTotFmt}</td>
-              <td className="tblcenter"><a data-i={i} onClick={() => handleDetailClick(i)}>Details <Icon icon="akar-icons:circle-chevron-down" width="15" /></a></td>
+              <td className="tblcenter"><a data-i={i} className="cta" onClick={() => handleDetailClick(i)}>Details <Icon icon="akar-icons:circle-chevron-down" width="15" /></a></td>
             </tr>
           )
         })}
@@ -171,8 +172,6 @@ const OrderDetail = (props) => {
 
       <iframe id="iframe"
         src="//track24.net/?code=EV938507560CN"
-      // width="100%"
-      // height="500"
       >
       </iframe>
 
@@ -238,15 +237,20 @@ class _OrderHistory extends React.Component {
   };
 
   render() {
+    const _allpurchase = this.props.allOrders.map(order => [...order.orderlines.map(purchase => purchase.product)]);
+    const allpurchase = _allpurchase.reduce((acc, curr) => {
+      return acc.concat(curr)
+    }, [])
 
+    // const allpurchase = _allpurchase.map(productinfo => productinfo[0].product.name)
+    console.log('EVEEE ORDER', allpurchase)
     if (!this.props.allOrders || this.props.allOrders.length === 0) {
       return <h2 style={{ marginTop: 20, textAlign: 'center', marginBottom: 20 }}>There are no orders in the system</h2>
     }
     return (
-      <div>
+      <div id="content-wrapper">
         <div className="itemList-admin container">
           <h2>{this.props.name}, your order status</h2>
-          <br />
           <div className="container">
             <OrderList data={this.props.allOrders} handleDetailClick={this.handleDetailClick} offset={this.state.offset} pageCount={this.state.pageCount} />
             {this.state.totalOrders > this.state.pageCount &&
@@ -271,45 +275,36 @@ class _OrderHistory extends React.Component {
             }
           </div>
         </div>
+        <div className="container">
+          {/* section headline with line format start */}
+          <hr /><h2 className="hrtxt">Purchase again</h2>
+          <br /><br />
+          {/* section headline with line format end */}
+          <div className="itemList col4">
+            <div>
+              {allpurchase.map((product, idx) => {
+                return idx < 4 ? (
+                  <div className="itemcard" key={product.name}>
+                    <Link
+                      to={
+                        product.type === "coffee"
+                          ? `coffees/${product.id}`
+                          : `accessories/${product.id}`
+                      }
+                    >
+                      <img src={product.imageUrl1} />
+                      <br />
+                      <h3>{product.name}</h3>
+                      <button className="hyperlink">View detail</button>
+                    </Link>
+                  </div>
+                ) : null;
+              })}
+            </div>
+          </div>
+        </div>
       </div>
-      //original code backup
-      // <div id="profilecontainer" className="flex-v-remover">
-      //   <div id="profileleft" className="container">
-      //     <div>
-      //       <h2 className="profilehdr">Order Status</h2>
-      //       <div className="profilehdr">
-      //       </div>
-      //     </div>
-      //   </div>
-      //   <div id="profileright" className="container">
-      //     <div>
-      //       <h2>{this.props.name}</h2>
-      //       <br />
-      //       <OrderList data={this.props.allOrders} handleDetailClick={this.handleDetailClick} offset={this.state.offset} pageCount={this.state.pageCount} />
 
-      //       {this.state.totalOrders > this.state.pageCount &&
-      //         <ReactPaginate
-      //           previousLabel={'previous'}
-      //           nextLabel={'next'}
-      //           breakLabel={'...'}
-      //           breakClassName={'break-me'}
-      //           pageCount={this.state.pageCount}
-      //           marginPagesDisplayed={2}
-      //           pageRangeDisplayed={5}
-      //           onPageChange={this.handlePageClick}
-      //           containerClassName={'pagination'}
-      //           previousLinkClassName={"pagination__link"}
-      //           nextLinkClassName={"pagination__link"}
-      //           disabledClassName={"pagination__link--disabled"}
-      //           activeClassName={"pagination__link--active"}
-      //         />
-      //       }
-      //       {this.state.showDetails !== null &&
-      //         <OrderDetail orderDetails={this.props.allOrders[this.state.showDetails]} />
-      //       }
-      //     </div>
-      //   </div>
-      // </div>
     );
   }
 }

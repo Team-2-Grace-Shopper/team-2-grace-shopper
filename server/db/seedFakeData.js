@@ -8,7 +8,27 @@ const Product = require('./models/Product')
 const { Order, Orderline } = require('./models/Order')
 const db = require('./db');
 
+const { resolve } = require('path');
+const { readdir } = require('fs').promises;
+
+const getImages = async (dir) => {
+  const dirents = await readdir(dir, { withFileTypes: true });
+  const files = await Promise.all(dirents.map((dirent) => {
+    const res = dirent.name;
+//    const res = resolve(dir, dirent.name); // to get directory path plus name
+    return dirent.isDirectory() ? getImages(res) : res;
+    }));
+  return Array.prototype.concat(...files);
+  }
+  
+//const productImages = getImages('./public/images/products/coffee').then((res,err) => console.log(res))
+//const accyImages = getImages('./public/images/products/accessories').then((res,err) => console.log(res))
+//getImages('.').then((res,err) => console.log(res))
+
+
 const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) => {
+  const productImages = await getImages('./public/images/products/coffee');
+  const accyImages = await getImages('./public/images/products/accessories');
   await db.sync({force: true});
 
   coffeeCountries.forEach(async (country, i) => {
@@ -25,9 +45,19 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
     const type = Math.random() < .35 ? 'accessory' : 'coffee';
     const inventory = Math.random() < .1 ? 0 : Math.round((Math.random()*100));
     let category;
+    let url1;
+    let url2;
+    let url3;
     if (type === 'accessory'){
-      category = Math.random() < .5 ? 'mug' : 'grinder'
+      category = Math.random() < .5 ? 'mug' : 'grinder';
+      url1 = '/images/products/accessories/' + accyImages[Math.floor(Math.random() * accyImages.length)];
+      url2 = '/images/products/accessories/' + accyImages[Math.floor(Math.random() * accyImages.length)];
+      url3 = '/images/products/accessories/' + accyImages[Math.floor(Math.random() * accyImages.length)];
+
     } else {
+      url1 = '/images/products/coffee/' + productImages[Math.floor(Math.random() * productImages.length)];
+      url2 = '/images/products/coffee/' + productImages[Math.floor(Math.random() * productImages.length)];
+      url3 = '/images/products/coffee/' + productImages[Math.floor(Math.random() * productImages.length)];
       const rand = Math.random();
       switch (true){
         case rand < .17:
@@ -62,7 +92,9 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
       rating: (Math.random()*2+3).toFixed(1),
       type: type,
       category: category,
-
+      imageUrl1: url1,
+      imageUrl2: url2,
+      imageUrl3: url3,
     })
     products.push(x.id)
   }

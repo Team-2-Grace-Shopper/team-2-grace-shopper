@@ -54,11 +54,23 @@ export const updateCartInfo = (info) => {
     };
 };
 
-export const deleteCartItem = (cartItem) => {
-  return async (dispatch) => {
-      await axios.delete(`/api/cart/cartItems/${cartItem.id}`);
-      dispatch(_deleteCartItem(cartItem));
-  };
+export const deleteCartItem = (cartItem, userId) => {
+    console.log(cartItem);
+    console.log(userId);
+    if (!userId || userId === 0) {
+        let cart = JSON.parse(window.localStorage.getItem('cart'));
+        const newLines = cart.orderlines.filter((orderline) => orderline.productId !== cartItem.productId);
+        cart.orderlines = newLines;
+        
+        window.localStorage.setItem('cart', JSON.stringify(cart));
+        return (dispatch) => {
+            dispatch(_deleteCartItem(cartItem));
+        }        
+     }
+    return async (dispatch) => {
+        await axios.delete(`/api/cart/cartItems/${cartItem.id}`);
+        dispatch(_deleteCartItem(cartItem));
+    };
 };
 
 
@@ -115,7 +127,7 @@ export const cartReducer = (state = [], action) => {
             return action.cart;
         case DELETE_CART_ITEM:
             const newState = [...state];
-            const newLines = newState[0].orderlines.filter((orderline) => orderline.id !== action.cartItem.id);
+            const newLines = newState[0].orderlines.filter((orderline) => orderline.productId !== action.cartItem.productId);
             newState[0].orderlines = newLines;
             return newState;
         case UPDATE_CART_INFO:

@@ -19,7 +19,8 @@ const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
     <div key={coffee.id} className="itemcard">
       <div>
         <Link to={`/coffees/${coffee.id}`}>
-          <img src={coffee.imageUrl1} />
+          <img src={coffee.imageUrl1} alt={coffee.name} />
+          {coffee.onSale ? <span class="label">ON SALE</span> : null}
         </Link>
         <span><StarRatings
           rating={coffee.rating * 1}
