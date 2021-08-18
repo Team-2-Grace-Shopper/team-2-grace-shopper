@@ -13,21 +13,22 @@ body {
 
 #testrun {
   padding-top: 100px
-}
+} 
 
 .slides {
   position: relative;
   height: 100vh;
-  display: felx;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .image {
-  width: 500px;
+  width: 1000px;
   height: 600px;
   border-radius: 10px;
 }
+
 .right-arrow {
   position: absolute;
   top: 50%;
@@ -42,13 +43,19 @@ body {
 .left-arrow {
   position: absolute;
   top: 50%;
-  right: 32px;
+  left: 32px;
   font-size: 3rem;
   color:#222;
   z-index: 10;
   cursor: pointer;
   user-select: none;
 }
+
+.imageActive {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
+} 
 
 h1 {
   font-size: 4em;

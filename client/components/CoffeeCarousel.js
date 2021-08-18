@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 
 
-const Carousel = ({ chosenCoffee }) => {
-    const images = [chosenCoffee.imageUrl2, chosenCoffee.imageUrl1, chosenCoffee.imageUrl3];
+const CoffeeCarousel = ({ chosenCoffee }) => {
+    const images = [chosenCoffee.imageUrl1, chosenCoffee.imageUrl2, chosenCoffee.imageUrl3];
     const [current, setCurrent] = useState(0);
     const length = images.length;
 
     const nextImage = () => {
         setCurrent(current === length - 1 ? 0 : current + 1)
-        console.log('HELLO', images[current])
+        //console.log('HELLO', images[current])
     }
 
     const previousImage = () => {
@@ -22,13 +22,13 @@ const Carousel = ({ chosenCoffee }) => {
 
     return (
         <section className='slides'>
-            <FaArrowAltCircleLeft className='left-arrow' onClick= {previousImage}/>
-            <FaArrowAltCircleRight className='right-arrow' onClick= {nextImage}/>
+            <FaArrowAltCircleLeft className='left-arrow' onClick= {previousImage} />
+            <FaArrowAltCircleRight className='right-arrow' onClick= {nextImage} />
             
             {images.map((image, index) => {
                 return (
-                    <div className={index === current ? 'image active' : 'image'} key= {index}>
-                        {index === current && (<img src={image} alt="travel image" className='image'/>)}
+                    <div className={index === current ? 'imageActive' : 'image'} key= {index}>
+                        {index === current && (<img src={image} alt="coffee image" className='image' />)}
                     </div>
                 )
             })}
@@ -36,4 +36,4 @@ const Carousel = ({ chosenCoffee }) => {
     )
 }
 
-export default Carousel;
+export default CoffeeCarousel;

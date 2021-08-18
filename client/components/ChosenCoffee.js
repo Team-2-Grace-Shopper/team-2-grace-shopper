@@ -15,15 +15,14 @@ class ChosenCoffee extends React.Component {
   }
 
   render() {
-    console.log("PROPS:", this.props);
+    // console.log("PROPS:", this.props);
     const chosenCoffee = this.props.products.filter(
       (product) => product.id === this.props.match.params.id
     )[0];
-    console.log("CHOSEN COFFEE:" + chosenCoffee);
-    console.log("PRODUCTS:" + this.props.products);
+    // console.log("CHOSEN COFFEE:" + chosenCoffee);
+    // console.log("PRODUCTS:" + this.props.products);
 
     if (!chosenCoffee) {
-      //const NewProductsArray = getProducts()
       getProducts();
       return <h1>Item Not Found</h1>;
     }
@@ -37,7 +36,7 @@ class ChosenCoffee extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("Is it executing?", state.products);
+  //console.log("Is it executing?", state.products);
   return {
     products: state.products,
   };

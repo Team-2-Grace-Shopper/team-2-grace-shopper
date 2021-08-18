@@ -20,9 +20,10 @@ const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
       <div>
         <Link to={`/coffees/${coffee.id}`}>
           <img src={coffee.imageUrl1} alt={coffee.name} />
-          {coffee.onSale ? <span class="label">ON SALE</span> : null}
+          {coffee.onSale ? <span className="label">ON SALE</span> : null}
         </Link>
-        <span><StarRatings
+        <span>
+          <StarRatings
           rating={coffee.rating * 1}
           starRatedColor="gold"
           numberOfStars={5}
@@ -51,7 +52,6 @@ const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
           <p>{coffee.onSale && <span><del>${coffee.price}</del> - sale:  ${coffee.salePrice}</span>}
           {!coffee.onSale && <span>${coffee.price}</span>}
           </p>
-          
         </div>
         <button className={count > 0 ? 'cta' : 'ctadisabled'}
                 onClick={ () => addToShopCart(userId, coffee.id, count, coffee.price, coffee) }
@@ -66,9 +66,11 @@ const mapStateToProps = (state) => {
     userId: state.auth.id,
   }
 }
+
 const mapDispatchToProps = (dispatch) => {
   return {
   }
 }
+
 const AllCoffeesCard = connect(mapStateToProps, mapDispatchToProps)(_AllCoffeesCard)
 export default AllCoffeesCard;
