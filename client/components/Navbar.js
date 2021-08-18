@@ -32,7 +32,7 @@ class Navbar extends Component {
 
 
   render() {
-    console.log(this.props, this.state)
+  
     const { handleClick, isLoggedIn, name, isAdmin } = this.props;
     return (
       <div id="navbar">

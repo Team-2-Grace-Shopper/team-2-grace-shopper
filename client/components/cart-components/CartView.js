@@ -30,7 +30,6 @@ class CartView extends React.Component {
             return <h3>You have no items in your cart.</h3>
         }
         
-        
         const { orderlines } = this.props.cart[0];
 
         const total = orderlines.reduce((acc, orderline) => {
@@ -67,7 +66,7 @@ class CartView extends React.Component {
                         <div className="itemList-admin">
                             <div>
                                 {orderlines.map(orderline =>
-                                    <div className='cartItem' key={orderline.id}>
+                                    <div className='cartItem' key={orderline.productId}>
                                         <div>
                                             {orderline.product.type === 'coffee' ?
                                                 (<Link to={`/coffees/${orderline.product.id}`}>
@@ -97,7 +96,7 @@ class CartView extends React.Component {
                                                 displayType='text'
                                             />
                                         </p>
-                                        <button className='delete' onClick={() => this.props.deleteCartItem(orderline)}>
+                                        <button className='delete' onClick={() => this.props.deleteCartItem(orderline, this.props.userId)}>
                                             <Icon icon="fe:trash" width="10" />
                                         </button>
                                     </div>
@@ -107,7 +106,7 @@ class CartView extends React.Component {
                             <div className="cart-checkout">
                                 <h2><span>Subtotal {quanTotal} :</span> {subTotal}</h2>
                                 
-                                <Link to = '/cart/checkout/information'>
+                                <Link to = '/cart/checkout/shipping'>
                                     <button className={orderlines.length > 0 ? 'cta' : 'ctadisabled'}>
                                         CHECKOUT
                                     </button>
@@ -134,7 +133,7 @@ const mapStateToProps = ({ auth, cart }) => {
 
 const mapDispatchToProps = (dispatch) => ({
     getCart: (userId) => dispatch(getCart(userId)),
-    deleteCartItem: (cartItem) => dispatch(deleteCartItem(cartItem))
+    deleteCartItem: (cartItem, userId) => dispatch(deleteCartItem(cartItem, userId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartView);
