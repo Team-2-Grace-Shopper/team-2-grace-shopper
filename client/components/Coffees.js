@@ -1,22 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
-// import { Link } from "react-router-dom";
 import { getProducts } from "../store/products";
 import AllCoffeesCard from "./AllCoffeesCard";
+import { Toaster } from 'react-hot-toast';
 
 export class Coffees extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       coffees: [],
-      filteredRegions: [],
-      filteredCategories: []
+      filteredRegion: '',
+      filteredCategory: '',
+      featuredSelected: false,
+      saleSelected: false,
+      loading: true,
     }
   }
 
   async componentDidMount() {
     await this.props.getProducts();
-    this.setState({ coffees: this.props.coffees })
+    this.setState({ coffees: this.props.coffees });
+    this.setState({loading: false});
   }
 
   handleSort = (ev) => {
@@ -40,35 +44,67 @@ export class Coffees extends React.Component {
   }
 
   handleClick = (ev) => {
-    let newRegions = [];
-    let newCategories = [];
+    let newRegion = this.state.filteredRegion;
+    let newCategory = this.state.filteredCategory;
+    let newFeaturedSelected = this.state.featuredSelected;
+    let newSaleSelected = this.state.saleSelected;
+
     switch(ev.target.name){
       case 'region':
-        newRegions = this.state.filteredRegions.concat(ev.target.value)
+        newRegion = ev.target.value;
+        this.setState({filteredRegion: newRegion});
         break;
       case 'category':
-        newCategories = this.state.filteredCategories.concat(ev.target.value)
+        newCategory = ev.target.value;
+        this.setState({filteredCategory: newCategory});
+        break;
+      case 'featured':
+        newFeaturedSelected = true;
+        this.setState({ featuredSelected: true });
+        break;
+      case 'sale':
+        newSaleSelected = true;
+        this.setState({ saleSelected: true });
         break;
       }
 
-    const newList = this.props.coffees.filter(c => {
-      return newCategories.includes(c.category.toLowerCase()) || newRegions.includes(c.country.region.toLowerCase())
-    })
+    let newList = [...this.state.coffees];
+    if (newRegion){
+      newList = newList.filter(c => c.country.region.toLowerCase() === newRegion);
+    }
+    if (newCategory){
+      newList = newList.filter(c => c.category.toLowerCase() === newCategory);
+    }
+    if (newFeaturedSelected){
+      newList = newList.filter(c => c.isFeatured);
+    }
+    if (newSaleSelected){
+      newList = newList.filter(c => c.onSale);
+    }
 
     this.setState({ coffees: newList })
   }
 
+  resetFilter = () => {
+    location.reload();
+  }
+
   render() {
-  const coffees = this.state.coffees;
+    if (this.state.loading){
+      return <h2 style={{marginTop: 150, marginBottom: 200, textAlign: 'center'}}>Please wait while we load your favorite beverages!</h2>
+    }
+
+    const coffees = this.state.coffees;
 
     return (
       <div id='content-wrapper'>
+      <Toaster /> 
+
       <div className="container filterList">
         <div className="filter">
           <div className="sortBy">
             <span>Sort by</span>
             <select name="sort" onChange={ this.handleSort }>
-              <option value="featured">Featured</option>
               <option value="a-z">A - Z</option>
               <option value="z-a">Z - A</option>
               <option value="lowtohigh">Price low to high</option>
@@ -76,8 +112,22 @@ export class Coffees extends React.Component {
             </select>
           </div>
           <br /><br />
-          <span>Filter</span>
+          <span>Filter <button onClick={this.resetFilter}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(reset filter)</button></span>
           <hr />
+          <span><strong>Special</strong></span>
+          <div className="Featured">
+            <div>
+              <input type="radio" id="featured" name="featured" value="featured" onClick={ this.handleClick }></input>
+              <label htmlFor="featured">Featured</label>
+            </div>
+          </div>
+          <span><strong></strong></span>
+          <div className="Sale">
+            <div>
+              <input type="radio" id="sale" name="sale" value="sale" onClick={ this.handleClick }></input>
+              <label htmlFor="sale">On sale</label>
+            </div>
+          </div>
           <span><strong>Origin</strong></span>
           <div className="Region">
             <div>
@@ -148,7 +198,7 @@ export class Coffees extends React.Component {
 
 const mapState = (state) => {
   return {
-    coffees: state.products.filter((product) => product.type === "coffee"),
+    coffees: state.products.filter((product) => product.type === "coffee").sort((a,b) => a.name.localeCompare(b.name)),
   };
 };
 
