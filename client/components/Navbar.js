@@ -38,7 +38,7 @@ class Navbar extends Component {
       <div id="navbar">
         <div>
           <Link to="/home">
-            <h1 className="logo">Grace Coffee.</h1>
+            <h1 className="logo">Grace Coffee .</h1>
             {/* MOVE BELOW TO OVER THE CART */}
             {/* <h1>{this.props.nbrCartItems} items in cart</h1> */}
             {/* MOVE ABOVE TO OVER THE CART */}
