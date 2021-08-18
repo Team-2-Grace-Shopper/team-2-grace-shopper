@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
 
 body {
@@ -12,7 +11,8 @@ body {
   padding-top: 80px;
 }
 h1 {
-  font-family: "Special Elite", cursive;
+  font-size: 4em;
+  line-height: 1;
 }
 h1,
 h2,
@@ -80,6 +80,19 @@ button {
   letter-spacing: 0.05em;
   cursor: default;
 }
+.brandblock {
+  width:80px;
+  height: 5px;
+  margin: 20px 5px;
+  background-color:#b7926a;
+}
+.hrtxt {
+  margin: -1.2em auto;
+  padding: 0 2em 2em 2em;
+  background-color:#fff;
+  display: block;
+  width: fit-content;
+}
 
 
 /* form div {
@@ -103,9 +116,11 @@ button {
 }
 
 .logo {
-  font-family: "Special Elite", cursive;
+  font-size:2em;
   color: #222;
   margin: 0;
+  letter-spacing: -0.1em;
+  text-transform: uppercase;
 }
 
 #navbar > div > div {
@@ -146,12 +161,12 @@ button {
 }
 #navbar > div:first-child > div > a:hover,
 #navbar p:hover {
-  border-bottom: 10px solid #222;
+  border-bottom: 10px solid #b7926a;
   line-height: calc(3em - 20px);
 }
 #navbar #cartCountCircle {
   position:relative;
-  background-color: #222;
+  background-color: #b7926a;
   color:#fff;
   width: 18px;
   height:18px;
@@ -223,12 +238,55 @@ button {
 /**************/
 /* Home */
 .hero {
-  height: 500px;
-  background-image: url("https://cdn.shopify.com/s/files/1/0056/4562/files/Project_Flywheel_Vanilla_Hero_1_1500x.jpg?v=1627657803");
+  height: calc(100vh - 80px);
+  background-image: url('./images/products/promotional/hero-1.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   background-position: center right;
   margin-bottom: 2em;
+  display: flex;
+  align-items: center;
+}
+.hero-text {
+  padding-left:10%;
+}
+.hero-text h1, .hero-text p{
+  padding-bottom:20px;
+  width:50%;
+}
+#home .itemList {
+  padding-bottom: 10em!important;
+}
+.hpcontent {
+  padding-bottom: 10em;
+}
+#home .itemList p{
+  padding: 0 20px 1em 20px!important;
+}
+.hpsection-1 {
+  display: flex;
+  align-items: center;
+}
+.hpsection-1 > div{
+  width: 50%;
+  height: 80vh;
+}
+.hpsection-1 .hpsection-1-imgA{
+  background-image: url('./images/products/promotional/coffee_beans_on_ground_coffee.jpeg');
+  background-position: center;
+}
+.hpsection-1 .hpsection-1-imgB{
+  background-image: url('./images/products/promotional/coffeefrom.jpg');
+  background-position: top center;
+}
+.hpsection-1 .hpsection-1-txt {
+  width: calc(50% - 8em);
+  padding: 0 4em;
+  background-color: #fff;
+}
+.hpsection-1 p {
+  padding: 1em 0;
 }
 
 /**************/
@@ -422,15 +480,12 @@ button {
   position: fixed;
   top: 50%;
 }
-#profileright {
-  flex-basis: 70%;
-  /* flex-grow: 1; */
-}
 #profileleft {
   display: flex;
   flex-basis: calc(40% - 4em);
   align-items: center;
-  background-color: #f7f7f7;
+  background-color: #b7926a;
+  color: #fff;
   min-height: calc(100vh - 9em);
 }
 #profileright {
@@ -456,6 +511,13 @@ button {
   height: calc(100vh / 4.5);
   min-height: 60px;
   padding: 0 2em;
+}
+#profileright.full-width-list a {
+  transition: 0.2s ease-in-out;
+}
+#profileright.full-width-list a:hover {
+  padding-bottom: 10px;
+  transition: 0.2s ease-in-out;
 }
 .full-width-list li div:first-child {
   padding-left: 2em;
@@ -514,12 +576,17 @@ th {
   overflow-x: auto;
 }
 #orderstatustable th{
-  background-color: #ededed;
+  background-color: #efe1ca;
+  padding: 0.5em 0;
+}
+#orderstatustable td {
+  padding: 1.5em 0;
 }
 .tblcenter {
   text-align: center;
 }
 .tblright {
+  padding: 0 20px!important;
   text-align: right;
 }
 #orderaddresses {
@@ -555,6 +622,9 @@ th {
   margin-top: 0.1rem;
   margin-bottom: 0.75rem;
 }
+#orderstatusdetailtable *{
+  padding: 0.5em!important;
+}
 
 .pagination {
   display: flex;
@@ -589,7 +659,7 @@ th {
 /* Product List - ADMIN */
 .itemList-admin {
   padding-top: 2em;
-  width: 100%;
+  width: calc(100% - 4em);
 }
 .itemList-admin h2 {
   text-align: center;
@@ -658,24 +728,36 @@ th {
   align-items:center;
 }
 
-
-
-
-
-
 /**************/
-/* Footer */
-#footer {
-  width: 100%;
-  background-color: #222;
-  color: #ededed;
+/* CHECKOUT */
+#orderstatusdetailtable {
+  font-size: 0.8em;
+  width: 90%;
 }
-#footer div {
-  width: calc(100% - 4em);
-  padding: 2em;
-  text-align: center;
-  letter-spacing: 0.03em;
+
+#checkoutleft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #efe1ca;
+  color: #222;
+  width: calc(50% - 4em);
+  min-height: calc(100vh - 9em);
 }
+#checkoutright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(50% - 4em);
+  min-height: calc(100vh - 9em);
+}
+#checkoutform {
+  width: 70%;
+}
+
+
+
 #confirmationcontainer{
   background-color: wheat;
   border:1px solid black;
@@ -717,4 +799,20 @@ th {
 }
 #confirmtop h3{
   margin-left: 5rem;
+}
+
+
+
+/**************/
+/* Footer */
+#footer {
+  width: 100%;
+  background-color: #b7926a;
+  color: #ededed;
+}
+#footer div {
+  width: calc(100% - 4em);
+  padding: 2em;
+  text-align: center;
+  letter-spacing: 0.03em;
 }
