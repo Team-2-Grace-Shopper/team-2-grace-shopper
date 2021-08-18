@@ -32,7 +32,6 @@ class Navbar extends Component {
 
 
   render() {
-    console.log(this.props, this.state)
     const { handleClick, isLoggedIn, name, isAdmin } = this.props;
     return (
       <div id="navbar">
@@ -46,7 +45,6 @@ class Navbar extends Component {
           <div>
             <Link to="/coffees">Coffee</Link>
             <Link to="/accessories">Accessories</Link>
-            <Link to="/sale">Sale</Link>
           </div>
         </div>
         <nav>
