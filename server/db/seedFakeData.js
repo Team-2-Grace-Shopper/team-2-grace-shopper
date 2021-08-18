@@ -23,6 +23,7 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
   for (let i = 0; i < nbrProducts; i++){
     const listPrice = (Math.random()*20).toFixed(2);
     const type = Math.random() < .35 ? 'accessory' : 'coffee';
+    const inventory = Math.random() < .1 ? 0 : Math.round((Math.random()*100));
     let category;
     if (type === 'accessory'){
       category = Math.random() < .5 ? 'mug' : 'grinder'
@@ -53,11 +54,11 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
       description: faker.lorem.paragraph(1),
       price: listPrice,
       salePrice: (listPrice*(Math.random())).toFixed(2),
-      inventory: Math.round((Math.random()*1000)),
+      inventory: inventory,
       countryId: Math.ceil(Math.random()*coffeeCountries.length),
       weight: Math.round((Math.random()*128)),
-      isFeatured: Math.random() < .2 ? true : false,
-      onSale: Math.random() < .3 ? true : false,
+      isFeatured: Math.random() < .1 ? true : false,
+      onSale: Math.random() < .25 ? true : false,
       rating: (Math.random()*2+3).toFixed(1),
       type: type,
       category: category,
@@ -89,20 +90,21 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
       orderDate: new Date() - (Math.random() * 10000000000),
       status: status,
       type: 'order',
-      ...(status === 'closed' && { billToName: faker.name.firstName() + ' ' + faker.name.lastName(), 
-                                   billToAddress: faker.address.streetAddress(),
-                                   billToCity: faker.address.city(),
-                                   billToState: faker.address.stateAbbr(),
-                                   billToZip: faker.address.zipCode(),
-                                   shipToName: faker.name.firstName() + ' ' + faker.name.lastName(), 
-                                   shipToAddress: faker.address.streetAddress(),
-                                   shipToCity: faker.address.city(),
-                                   shipToState: faker.address.stateAbbr(),
-                                   shipToZip: faker.address.zipCode(),
-                                   email: faker.internet.email(),
-                                   trackingNumber: 'EV938507560CN',
-                                   shipDate: new Date() - (Math.random() * 10000000000)
-                                  }),
+      billToName: faker.name.firstName() + ' ' + faker.name.lastName(), 
+      billToAddress: faker.address.streetAddress(),
+      billToCity: faker.address.city(),
+      billToState: faker.address.stateAbbr(),
+      billToZip: faker.address.zipCode(),
+      shipToName: faker.name.firstName() + ' ' + faker.name.lastName(), 
+      shipToAddress: faker.address.streetAddress(),
+      shipToCity: faker.address.city(),
+      shipToState: faker.address.stateAbbr(),
+      shipToZip: faker.address.zipCode(),
+      email: faker.internet.email(),
+      trackingNumber: 'EV938507560CN',
+      shipDate: new Date() - (Math.random() * 10000000000),
+      shipMethod: 'Standard',
+      paymentMethod: 'Credit card',
       userId: Math.ceil(Math.random()*nbrUsers),
     })
     const nbrLines = Math.ceil(Math.random() * 3)

@@ -11,13 +11,16 @@ export class Coffees extends React.Component {
       coffees: [],
       filteredRegion: '',
       filteredCategory: '',
-      featuredSelected: false
+      featuredSelected: false,
+      saleSelected: false,
+      loading: true,
     }
   }
 
   async componentDidMount() {
     await this.props.getProducts();
-    this.setState({ coffees: this.props.coffees })
+    this.setState({ coffees: this.props.coffees });
+    this.setState({loading: false});
   }
 
   handleSort = (ev) => {
@@ -44,6 +47,8 @@ export class Coffees extends React.Component {
     let newRegion = this.state.filteredRegion;
     let newCategory = this.state.filteredCategory;
     let newFeaturedSelected = this.state.featuredSelected;
+    let newSaleSelected = this.state.saleSelected;
+
     switch(ev.target.name){
       case 'region':
         newRegion = ev.target.value;
@@ -53,9 +58,13 @@ export class Coffees extends React.Component {
         newCategory = ev.target.value;
         this.setState({filteredCategory: newCategory});
         break;
-      case 'special':
+      case 'featured':
         newFeaturedSelected = true;
         this.setState({ featuredSelected: true });
+        break;
+      case 'sale':
+        newSaleSelected = true;
+        this.setState({ saleSelected: true });
         break;
       }
 
@@ -69,11 +78,22 @@ export class Coffees extends React.Component {
     if (newFeaturedSelected){
       newList = newList.filter(c => c.isFeatured);
     }
+    if (newSaleSelected){
+      newList = newList.filter(c => c.onSale);
+    }
 
     this.setState({ coffees: newList })
   }
 
+  resetFilter = () => {
+    location.reload();
+  }
+
   render() {
+    if (this.state.loading){
+      return <h2 style={{marginTop: 150, marginBottom: 200, textAlign: 'center'}}>Please wait while we load your favorite beverages!</h2>
+    }
+
     const coffees = this.state.coffees;
 
     return (
@@ -92,13 +112,20 @@ export class Coffees extends React.Component {
             </select>
           </div>
           <br /><br />
-          <span>Filter</span>
+          <span>Filter <button onClick={this.resetFilter}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(reset filter)</button></span>
           <hr />
           <span><strong>Special</strong></span>
           <div className="Featured">
             <div>
-              <input type="radio" id="featured" name="special" value="featured" onClick={ this.handleClick }></input>
+              <input type="radio" id="featured" name="featured" value="featured" onClick={ this.handleClick }></input>
               <label htmlFor="featured">Featured</label>
+            </div>
+          </div>
+          <span><strong></strong></span>
+          <div className="Sale">
+            <div>
+              <input type="radio" id="sale" name="sale" value="sale" onClick={ this.handleClick }></input>
+              <label htmlFor="sale">On sale</label>
             </div>
           </div>
           <span><strong>Origin</strong></span>
