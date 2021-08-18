@@ -1,15 +1,38 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import StarRatings from "react-star-ratings";
+import Carousel from './Carousel';
 
 //useState-> function, pass in arg as a default value. Will use default value to create state for this compondent and will return an array with 2 times. 1st- value, 2nd setState function exclusively for that value
 
 const ChosenCoffeeCard = ({ chosenCoffee }) => {
     const [count, setCount] = useState(1);
+    //functions to make buttons work
+    // let currPhotoNum = 1 //default
+
+    // function currPhoto (num) {
+    //     carousel(currPhotoNum = num)
+    // }
+
+    // function nextSlide(num) {
+    //     carousel(slidePosition += num)
+    // }
+
+
+    // function carousel(num) {
+    //     let photos = [chosenCoffee.imageUrl1, chosenCoffee.imageUrl2, chosenCoffee.imageUrl3]
+    //     if (num > photos.length) {
+    //         currPhotoNum = 1
+    //     }
+    //     else if (num < 1) {
+    //         currPhotoNum = photos.length
+    //     }
+    // }
+
     return (
         <div key= { chosenCoffee.id }>
             <div className= 'singleItem'>
-                <div className= 'chosenCoffee' key={chosenCoffee.id}>
+                <div className= 'chosenCoffeeInfo' key={chosenCoffee.id}>
                     <span>
                         <StarRatings
                             rating={chosenCoffee.rating * 1}
@@ -20,11 +43,13 @@ const ChosenCoffeeCard = ({ chosenCoffee }) => {
                             starSpacing="0px"
                         />
                     </span>
-                    <img src={chosenCoffee.imageUrl1} />
+                    <Carousel chosenCoffee={chosenCoffee} key={chosenCoffee.id}/>
+                    {/* <img src={chosenCoffee.imageUrl1} /> */}
                     <h1>{ chosenCoffee.name }</h1>
                     <p>{ chosenCoffee.description }</p>
                     <p>{ chosenCoffee.weight }oz</p>
                 </div>
+                
                 <div>
                     <p>${ chosenCoffee.price }</p>
                     <button>ADD TO CART</button>
@@ -48,9 +73,37 @@ export default ChosenCoffeeCard
 //to do the add to cart you'll have to connect it
 
 /*
-<Link to={`/coffees/${coffee.id}`}>
-                <img src= { coffee.imageUrl1} />
-                <h3>{ coffee.name }</h3>
-                <span>Rating: { coffee.rating }</span>
-            </Link>
+
+<div id='photoCarousel'>
+                    <div className='photoContainer'>
+                        <div className='imageNum'>
+                            <p> 1/3 </p>
+                        </div>
+                        <img src={chosenCoffee.imageUrl1}/>
+                    </div>
+
+                    <div className='photoContainer'>
+                        <div className='imageNum'>
+                            <p> 2/3 </p>
+                        </div>
+                        <img src={chosenCoffee.imageUrl2}/>
+                    </div>
+
+                    <div className='photoContainer'>
+                        <div className='imageNum'>
+                            <p> 3/3 </p>
+                        </div>
+                        <img src={chosenCoffee.imageUrl3}/>
+                    </div>
+
+                    {/* <a className="Back" onClick={plusSlides(-1)}>&#10094;</a>
+                    <a className="forward" onClick={plusSlides(1)}>&#10095;</a>
+                     *///}
+                     /*
+                </div>
+                <div>
+                    <span className="dots" onClick={currPhoto(1)}></span>
+                    <span className="dots" onClick={currPhoto(2)}></span>
+                    <span className="dots" onClick={currPhoto(3)}></span>
+                </div> 
 */
