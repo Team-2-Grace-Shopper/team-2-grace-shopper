@@ -4,6 +4,9 @@ import { getCart, deleteCartItem } from '../../store/cart'
 import { Link } from 'react-router-dom';
 import NumberFormat from 'react-number-format';
 import { Icon } from '@iconify/react';
+import toast, { Toaster } from 'react-hot-toast';
+
+const notify = () => toast.success('Item removed from cart', { duration: 4000, position: 'top-center' });
 
 class CartView extends React.Component {
     constructor() {
@@ -57,6 +60,7 @@ class CartView extends React.Component {
         return (
             <div id="content-wrapper">
                 <div id="profilecontainer" className="cartview">
+                    <Toaster />
                     <div className="container" id="profileleft">
                         <h2 className="profilehdr">Cart</h2>
 
@@ -133,7 +137,10 @@ const mapStateToProps = ({ auth, cart }) => {
 
 const mapDispatchToProps = (dispatch) => ({
     getCart: (userId) => dispatch(getCart(userId)),
-    deleteCartItem: (cartItem, userId) => dispatch(deleteCartItem(cartItem, userId))
+    deleteCartItem: (cartItem, userId) => {
+        dispatch(deleteCartItem(cartItem, userId));
+        notify();
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartView);
