@@ -7,26 +7,22 @@ import { Link } from 'react-router-dom';
 import emailjs, { init } from 'emailjs-com';
 
 
-class _OrderConfirmation extends React.Component {
-  constructor() {
-    super();
+class OrderConfirmation extends React.Component {
+  constructor(props) {
+    super(props);
   }
 
   async componentDidMount() {
-    // await this.props.getOrdersForPage(this.state.offset, this.state.pageCount, this.props.userId);
-    // this.setState(Object.assign({},
-    //   this.state,
-    //   {
-    //     ordersToDisplay: this.state.allOrders,
-    //     showDetails: null
-    //   }
-    // ))
-    this.sendEmail();
-
+    this.sendEmail(this.props.location.state);
   }
 
-  sendEmail = async () => {
-    init("user_HuaybJLdnOoIDOZ3t63oD");
+  sendEmail = async (order) => {
+    init("user_HuaybJLdnOoIDOZ3t63oD"); // this would be secure in a production app
+    const orderTot = order.orderlines.reduce((tot, c) => c.quantity * c.price, 0);
+    const orderLines = order.orderlines.map( (c,i) => `
+      <tr><td class="center">${i+1}</td><td>${c.product.name}</td><td class="center">${c.quantity}</td><td class="right">${c.price}</td></tr>
+      `
+      )
     let message = `<html><head></head>
     <body>
     <style>
@@ -42,20 +38,19 @@ class _OrderConfirmation extends React.Component {
     }
     </style>
     <h1>Grace Coffee. - Order Confirmation<h1>
-    <h3>Hello John</h3>
+    <h3>Hello ${order.name}</h3>
     <h3>Thank you for shopping with us. We'll send a confirmation when your item(s) ship.</h3>
     <h2>Order Details</h2>
     <hr>
-    <h3>Order #1234</h3>
-    <h3>Arriving Monday, August 16</h3>
-    <h4>Ship to: John Pirog</h4>
-    <h4>Order total: $17.58</h4>
+    <h3>Order #${Math.floor(5000 + Math.random()*10000)}</h3>
+    <h3>Arriving ${dateFormat(order.shipDate, "ddd, mmm d, yyyy")}</h3>
+    <h4>Ship to: ${order.name}</h4>
+    <h4>Order total: $${orderTot} (shipping and tax are separate)</h4>
     <hr>
     <h3>Items</h3>
     <table>
     <tr><th>Line #</th><th>Description</th><th>Quantity</th><th>Price</th></tr>
-    <tr><td class="center">1</td><td>Coffee Cup</td><td class="center">4</td><td class="right">10.99</td></tr>
-    <tr><td class="center">2</td><td>Ethiopian Beans</td><td class="center">2</td><td class="right">18.99</td></tr>
+    ${orderLines}
     </table>
     <p>&nbsp;</p>
     <h3>We hope to see you again soon,</h3>
@@ -64,52 +59,53 @@ class _OrderConfirmation extends React.Component {
     </body>
 
       `;
-    const templateParams = {
-      orderNbr: '1234',
-      toEmail: 'jpirog@hotmail.com',
-      toName: 'John Pirog',
-      title: 'Order confirmation',
-      sub: 'sub heading',
-      message: message,
+    const templateParams = {orderNbr: '1234', 
+                            toEmail: 'jpirog@hotmail.com', // use mine in case the faker address is real
+                            toName: '${order.name}', 
+                            title:'Order confirmation',
+                            sub:'sub heading',
+                            message: message,
+
     };
     await emailjs.send('default_service', 'template_ny5i12o', templateParams);
   }
 
   render() {
-    const order = { shipToName: 'shiptoname', shipToAddress: 'ship addr', shipToCity: 'shipcity', shipToState: 'IL', shipToZip: '60066', orderDate: '2021-10-01', orderlines: [{ imageUrl1: 'zzzzz' }] }
     return (
-      <div id="content-wrapper">
-        <div id="confirmationcontainer">
-          <div id="confirmtop">
-            <h2>
-              <Icon icon="akar-icons:shipping-box-02" width="25" height="25" />
-              <Icon icon="ic:outline-local-shipping" width="25" height="25" />
-              <Icon icon="grommet-icons:coffee" width="25" height="25" />
-              <Icon icon="gg:coffee" width="25" height="25" />
-              <br />Order placed, thanks!
-            </h2>
-            <p>Confirmation will be sent to your email</p><br />
-            <p><Link to="/orderhistory" className="cta">Review your recent orders</Link></p>
-            <br /><br />
-          </div>
-          <div className="col2">
-            <p><h2>Shipping to</h2>Shipping to<br />
-              {order.shipToName},<br />
-              {order.shipToAddress},&nbsp;
-              {order.shipToCity},<br />
-              {order.shipToState},&nbsp;{order.shipToZip}
-            </p>
-            <p><h2>Delivery:</h2>
-              {dateFormat(order.orderDate, "ddd, mmm d, yyyy")}<br />
-              <span>Note: You can add to this delivery throughout today</span>
-            </p>
-          </div>
-          <div className="inlineContent">
-            <img src="https://coda.newjobs.com/api/imagesproxy/ms/niche/images/articles/Liz/volunteering.jpg" alt="Grace coffee's donation" />
-            <div><h2>GRACE COFFEE.</h2> We make a donation to the Dave Thomas Foundation for Adoption for your purchase.<br /><br /><span className="hyperlink">Learn More</span></div>
-          </div>
+      const order = this.props.location.state;
+      order.shipDate = new Date().setDate(new Date().getDate() + 1);
 
-          {/*}        <img src={ order.orderlines[0].imageUrl1 }></img> */}
+      return (
+        <div id="content-wrapper">
+          <div id="confirmationcontainer">
+            <div id="confirmtop">
+              <h2>
+                <Icon icon="akar-icons:shipping-box-02" width="25" height="25" />
+                <Icon icon="ic:outline-local-shipping" width="25" height="25" />
+                <Icon icon="grommet-icons:coffee" width="25" height="25" />
+                <Icon icon="gg:coffee" width="25" height="25" />
+                <br />Order placed, thanks!
+              </h2>
+              <p>Confirmation will be sent to your email</p><br />
+              <p><Link to="/orderhistory" className="cta">Review your recent orders</Link></p>
+              <br /><br />
+            </div>
+            <div className="col2">
+              <p><h2>Shipping to</h2>Shipping to<br />
+                {order.name},<br />
+                {order.address},&nbsp;
+                {order.city},<br />
+                {order.state},&nbsp;{order.zip}
+              </p>
+              <p><h2>Delivery:</h2>
+                {dateFormat(order.shipDate, "ddd, mmm d, yyyy")}<br />
+                <span>Note: You can add to this delivery throughout today</span>
+              </p>
+            </div>
+            <div className="inlineContent">
+              <img src="https://coda.newjobs.com/api/imagesproxy/ms/niche/images/articles/Liz/volunteering.jpg" alt="Grace coffee's donation" />
+              <div><h2>GRACE COFFEE.</h2> We make a donation to the Dave Thomas Foundation for Adoption for your purchase.<br /><br /><span className="hyperlink">Learn More</span></div>
+            </div>
 
         </div>
       </div>
@@ -117,16 +113,17 @@ class _OrderConfirmation extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    order: ownProps.order,
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-    sendConfirmationEmail: (order) => dispatch(sendConfirmationEmail(order)),
-  }
-}
-const OrderConfirmation = connect(mapStateToProps, mapDispatchToProps)(_OrderConfirmation)
+// const mapStateToProps = (state, ownProps) => {
+//   return {
+//     //order: ownProps.order,
+// //    state: location.state,
+//   }
+// }
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     sendConfirmationEmail: (order) => dispatch(sendConfirmationEmail(order)),
+//   }
+// }
+//const OrderConfirmation = connect(mapStateToProps, mapDispatchToProps)(_OrderConfirmation)
 
 export default OrderConfirmation;

@@ -6,7 +6,13 @@ class CheckoutBilling extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false
+      loading: false,
+      name: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: '',
+      payment: '',
     };
     this.handleChange = this.handleChange.bind(this);
   }

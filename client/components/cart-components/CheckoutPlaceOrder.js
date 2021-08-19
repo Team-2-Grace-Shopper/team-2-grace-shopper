@@ -145,11 +145,11 @@ class CheckoutPlaceOrder extends React.Component {
               <li>{state.payment}</li>
             </ol>
           </div>
-          <Link to='/orderconfirmation' className="placeorder">
-            <button className='cta'>
-              Place Order
+            <Link to = {{pathname: '/orderconfirmation', state: Object.assign({}, state, {orderlines: orderlines})}}> 
+                <button className='cta'>
+                  Place Order
                 </button>
-          </Link>
+            </Link>  
         </div>
       </div>
     )
