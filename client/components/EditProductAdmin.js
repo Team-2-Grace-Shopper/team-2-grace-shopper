@@ -210,7 +210,6 @@ class _EditProductAdmin extends React.Component {
 }
 
 const mapStateToProps = ({ products, auth }, { match }) => {
-  // console.log(products, 'STATE')
   const _product = products.filter((product) => { return product.id === match.params.id }) || {}
   const product = _product[0]
   console.log(product, 'EDIT PRODUCT')

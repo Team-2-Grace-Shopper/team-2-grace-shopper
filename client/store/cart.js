@@ -55,8 +55,6 @@ export const updateCartInfo = (info) => {
 };
 
 export const deleteCartItem = (cartItem, userId) => {
-    console.log(cartItem);
-    console.log(userId);
     if (!userId || userId === 0) {
         let cart = JSON.parse(window.localStorage.getItem('cart'));
         const newLines = cart.orderlines.filter((orderline) => orderline.productId !== cartItem.productId);
@@ -72,10 +70,6 @@ export const deleteCartItem = (cartItem, userId) => {
         dispatch(_deleteCartItem(cartItem));
     };
 };
-
-
-
-// below function is not a thunk and not called with dispatch (does not update state)
 
 export const addToCart = async (userId, productId, quantity, price, product) => {
 
@@ -111,12 +105,15 @@ export const addToCart = async (userId, productId, quantity, price, product) => 
             id = cart[0].id;  // use the ID of the existing order(cart)
             lineNbr = cart[0].orderlines.length + 1;
         }
-        const newLine = await axios.post('/api/cart/line', { lineNbr: lineNbr, orderId: id, productId: productId, quantity: quantity, price: price })
+        const newLine = await axios.post('/api/cart/line', { lineNbr: lineNbr, orderId: id, productId: productId, quantity: quantity, price: price });
+
+        cart[0].orderlines.push(newLine)
+        myCart = cart;
         break;
     }
-    getCart(userId); // this is done to update state with the cart so Nav can show the cart items
-}
 
+    store.dispatch(_getCart(myCart));    
+}
 
 //REDUCER
 
