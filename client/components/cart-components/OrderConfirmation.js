@@ -71,11 +71,10 @@ class OrderConfirmation extends React.Component {
   }
 
   render() {
+    const order = this.props.location.state;
+    order.shipDate = new Date().setDate(new Date().getDate() + 1);
+    console.log('===',order);
     return (
-      const order = this.props.location.state;
-      order.shipDate = new Date().setDate(new Date().getDate() + 1);
-
-      return (
         <div id="content-wrapper">
           <div id="confirmationcontainer">
             <div id="confirmtop">
@@ -91,7 +90,7 @@ class OrderConfirmation extends React.Component {
               <br /><br />
             </div>
             <div className="col2">
-              <p><h2>Shipping to</h2>Shipping to<br />
+              <p><h2>Shipping to</h2>Shipping to:<br />
                 {order.name},<br />
                 {order.address},&nbsp;
                 {order.city},<br />
@@ -103,8 +102,9 @@ class OrderConfirmation extends React.Component {
               </p>
             </div>
             <div className="inlineContent">
-              <img src="https://coda.newjobs.com/api/imagesproxy/ms/niche/images/articles/Liz/volunteering.jpg" alt="Grace coffee's donation" />
-              <div><h2>GRACE COFFEE.</h2> We make a donation to the Dave Thomas Foundation for Adoption for your purchase.<br /><br /><span className="hyperlink">Learn More</span></div>
+              <img src="https://coda.newjobs.com/api/imagesproxy/ms/niche/images/articles/Liz/volunteering.jpg" alt="Grace Coffee's donation" />
+              <div><h2>GRACE COFFEE.</h2> We make a donation to the Dave Thomas Foundation for Adoption with your purchase.<br /><br />
+              <span className="hyperlink"><a target="_blank" href="https://www.davethomasfoundation.org/">Learn More</a></span></div>
             </div>
 
         </div>
