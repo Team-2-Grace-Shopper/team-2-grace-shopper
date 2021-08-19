@@ -31,6 +31,9 @@ a {
   text-decoration: none;
   color: inherit;
 }
+svg {
+  color: #b7926a;
+}
 span,
 label {
   font-size: 0.85em;
@@ -155,6 +158,7 @@ button {
 }
 #navbar svg {
   margin-bottom: -4px;
+  color: #222!important;
 }
 #navbar > div > a:first-child {
   margin: 0 2em 0 0;
@@ -275,10 +279,14 @@ button {
 .hpsection-1 .hpsection-1-imgA{
   background-image: url('./images/products/promotional/coffee_beans_on_ground_coffee.jpeg');
   background-position: center;
+  background-repeat: none;
+  background-size: cover;
 }
 .hpsection-1 .hpsection-1-imgB{
   background-image: url('./images/products/promotional/coffeefrom.jpg');
   background-position: top center;
+  background-repeat: none;
+  background-size: cover;
 }
 .hpsection-1 .hpsection-1-txt {
   width: calc(50% - 8em);
@@ -388,13 +396,15 @@ button {
   overflow:hidden;
 }
 .itemcard .label {
-  background-color:#ededed;
+  background-color:#b7926a;
   position: absolute;
   top: 5px;
   left: 5px;
-  padding: 0 0.5em;
+  padding: 0.2em 0.7em;
   border-radius: 100px;
-  font-size:0.7em;
+  border: 1px solid #fff;
+  color: #fff;
+  font-size:0.8em;
 }
 
 /* Filter radio button style */
@@ -422,7 +432,7 @@ button {
   display: block;
   width: 1.4em;
   height: 1.4em;
-  border: 1px solid #999;
+  border: 1px solid #b7962a;
   border-radius: .25em;
   z-index: -1;
   display: inline-block
@@ -430,17 +440,23 @@ button {
 .filter input[type="radio"] + label::before {
   border-radius: 1em;
 }
+.filter button.hyperlink {
+  float:right;
+  font-size: 0.8em;
+  padding-top: 5px;
+}
 /* Checked */
 .filter input[type="radio"]:checked + label {
   padding-left: 1em;
   font-weight:bold;
+  color: #fff;
 }
 .filter input[type="radio"]:checked + label:before {
   top: 0;
   width: 100%;
   height: 2em;
-  background: #ededed;
-  border: 1px solid #999;
+  background: #b7962a;
+  border: 1px solid #b7962a;
 }
 
 /* Transition */
@@ -494,6 +510,7 @@ button {
   align-items: center;
   flex-basis: calc(60% - 4em);
   min-height: calc(100vh - 9em);
+  padding-bottom: 5em;
 }
 
 .full-width-list ul{
@@ -575,7 +592,7 @@ th {
   border: 1px solid black;
   overflow-x: auto;
 }
-#orderstatustable th{
+#orderstatustable th, #orderstatusdetailtable th{
   background-color: #efe1ca;
   padding: 0.5em 0;
 }
@@ -591,9 +608,18 @@ th {
 }
 #orderaddresses {
   display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 3em;
 }
 #orderaddresses ol{
-  padding: 0;
+  padding: 20px;
+  width: calc(25% - 40px);
+  border-right: 1px solid #dbdbdb;
+}
+#orderaddresses ol:last-child {
+  border: 0;
 }
 #orderaddresses > ol > li {
   list-style: none;
@@ -624,6 +650,11 @@ th {
 }
 #orderstatusdetailtable *{
   padding: 0.5em!important;
+}
+.placeorder {
+  padding-bottom: 5em;
+  text-align: center;
+  display: block;
 }
 
 .pagination {
@@ -661,7 +692,7 @@ th {
   padding-top: 2em;
   width: calc(100% - 4em);
 }
-.itemList-admin h2 {
+.itemList-admin h2 { 
   text-align: center;
 }
 .itemList-admin > div > div {
@@ -733,6 +764,7 @@ th {
 #orderstatusdetailtable {
   font-size: 0.8em;
   width: 90%;
+  margin: 0 auto;
 }
 
 #checkoutleft {
@@ -759,26 +791,11 @@ th {
 
 
 #confirmationcontainer{
-  background-color: wheat;
-  border:1px solid black;
+  border:1px solid #b7926a;
   margin-left: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
   margin-right: 20px;
-  border-radius: 3%;
-}
-#confirmationinnercontainer{
-  border-radius: 2%;
-  background-color: white;
-  border:1px solid black;
-  margin-left: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-right: 20px;
-  padding: 20px;
-}
-#confirmationcontainer h3{
-  color:green;
 }
 #confirmimg{
   height: 4rem;
@@ -788,26 +805,50 @@ th {
   height: 2rem;
   width: auto;
 }
-#confirmationcontainer a{
-  text-decoration: red;
-}
 #confirmtop{
-  display:flex;
-  flex-direction: row;
-  align-items: center;
+  padding: 2em;
+}
+#confirmtop h2 {
+  padding-top: 15px;
+}
+#confirmtop svg {
+  padding: 0 10px;
+}
+#confirmtop h2, #confirmtop p{
+  width:100%;
+  text-align:center;
+}
+.col2 {
+  display: flex;
   justify-content: space-between;
+  border-top: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
 }
-#confirmtop h3{
-  margin-left: 5rem;
+.col2 p {
+  width:100%;
+  padding: 2em;
 }
-
+.col2 p:first-child {
+  border-right: 1px solid #dbdbdb;
+}
+.inlineContent {
+  background-color: #eae6de
+}
+.inlineContent > * {
+  display: inline-block;
+  vertical-align:top;
+  padding: 2em;
+}
+.inlineContent img {
+  width: 30%;
+}
 
 
 /**************/
 /* Footer */
 #footer {
   width: 100%;
-  background-color: #b7926a;
+  background-color: #222222;
   color: #ededed;
 }
 #footer div {
