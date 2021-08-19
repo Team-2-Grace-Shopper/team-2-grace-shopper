@@ -8,7 +8,14 @@ class CheckoutShipping extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false
+      loading: false,
+      email: '',
+      name: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: '',
+      shipping: '',
     };
     this.handleChange = this.handleChange.bind(this);
   }
