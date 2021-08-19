@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getProducts } from "../store/products";
+import { getProducts, updateProduct } from "../store/products";
 
 class _EditProductAdmin extends React.Component {
   constructor(props) {
@@ -20,6 +20,7 @@ class _EditProductAdmin extends React.Component {
     // const product = _product[0]
     const product = await this.props.product
     this.setState({
+      id: product.id,
       loading: false,
       featured: product.featured,
       type: product.type,
@@ -29,13 +30,13 @@ class _EditProductAdmin extends React.Component {
       price: product.price,
       weight: product.weight,
       onSale: product.onSale,
-      inventory: product.inventory
+      inventory: product.inventory,
+      dispName: product.name
     });
   }
 
   handleChange(ev) {
     let { name, value, type } = ev.target;
-    console.log('TARGETTTT', ev.target.name)
     switch (name) {
       case "name":
         if (ev.target.value.length > 75) return;
@@ -78,7 +79,7 @@ class _EditProductAdmin extends React.Component {
 
   handleSubmit(ev) {
     ev.preventDefault();
-    this.props.updateUser(this.state);
+    this.props.updateProduct(this.state);
     this.setState(
       Object.assign({}, this.state, {
         dispName: this.state.name,
@@ -90,6 +91,7 @@ class _EditProductAdmin extends React.Component {
   }
 
   render() {
+    console.log('THIS PROPS', this.props)
     if (this.state.loading) {
       return "Retrieving your information...";
     }
@@ -104,7 +106,7 @@ class _EditProductAdmin extends React.Component {
               <span className="timedAlert">
                 {this.state.message && <h3> {this.state.message}</h3>}
               </span>
-              <h2>{this.props.product.name}</h2>
+              <h2>{this.state.dispName}</h2>
               <br />
               <div>
                 <div className="formfield">
@@ -158,16 +160,17 @@ class _EditProductAdmin extends React.Component {
                 />
                 <label>Name</label>
               </div>
-              <div className="formfield">
-                <input
-                  type="text"
-                  name="origin"
-                  maxLength="75"
-                  value={this.state.country}
-                  onChange={this.handleChange}
-                />
+              {/* <div className="formfield">
+                <select value={this.state.country} onChange={this.handleChange} name="origin">
+                  <option disabled key="0" value="0">
+                    {" "}
+                  -- select a country --{" "}
+                  </option>
+                  <option value="country1">Country1</option>
+                  <option value="country2">Country2</option>
+                </select>
                 <label>origin</label>
-              </div>
+              </div> */}
               <div className="formfield">
                 <input
                   type="text"
@@ -187,7 +190,7 @@ class _EditProductAdmin extends React.Component {
                   value={this.state.price}
                   onChange={this.handleChange}
                 />
-                <label>Price</label>
+                <label>Price / lbs</label>
               </div>
 
               <div className="formfield">
@@ -210,6 +213,7 @@ const mapStateToProps = ({ products, auth }, { match }) => {
   // console.log(products, 'STATE')
   const _product = products.filter((product) => { return product.id === match.params.id }) || {}
   const product = _product[0]
+  console.log(product, 'EDIT PRODUCT')
   return {
     id: auth.id,
     product
@@ -218,7 +222,7 @@ const mapStateToProps = ({ products, auth }, { match }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateUser: (user) => dispatch(updateUser(user)),
+    updateProduct: (product) => dispatch(updateProduct(product)),
     getUser: (id) => dispatch(getUser(id)),
     getProducts: () => dispatch(getProducts())
   };

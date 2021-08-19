@@ -8,25 +8,29 @@ the auth store file imports it so I'm dropping it here for now
 
 
 //ACTION TYPES
- 
+
 const GET_PRODUCTS = 'GET_PRODUCTS';
 const CREATE_PRODUCT = 'CREATE_PRODUCT';
- 
+
 //ACTION CREATORS
 
 const _getProducts = (products) => {
     return {
-        type: GET_PRODUCTS, 
+        type: GET_PRODUCTS,
         products
     };
 };
 
 const _createProduct = (product) => {
     return {
-        type: CREATE_PRODUCT, 
+        type: CREATE_PRODUCT,
         product
     };
 };
+
+
+
+
 
 //THUNK CREATORS
 
@@ -41,10 +45,17 @@ export const createProduct = (product, history) => {
     return async (dispatch) => {
         const { data: created } = await axios.post('/api/products', product);
         dispatch(_createProduct(created));
-        history.push('/products'); /* Wherever we want to redirect! */ 
+        history.push('/products'); /* Wherever we want to redirect! */
     };
 };
 
+export const updateProduct = (product) => {
+    console.log(product, 'THIS IS STORE PROD')
+    const id = product.id;
+    return async (dispatch) => {
+        const { data: updated } = await axios.post(`/api/products/${product.type === 'coffee' ? 'coffee' : 'accessory'}/${id}`, product);
+    };
+};
 
 //REDUCER
 

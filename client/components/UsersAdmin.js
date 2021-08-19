@@ -42,7 +42,7 @@ export class UsersAdmin extends React.Component {
                   {user.orders && user.orders.length} orders
                   <br />
                   <br />
-                  <span>View order list</span>
+                  <span className="hyperlink">View order list</span>
                 </p>
                 <p>
                   <Link to={`/users-admin/${user.id}`} className="cta">
