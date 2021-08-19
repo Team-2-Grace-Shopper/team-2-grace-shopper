@@ -30,7 +30,9 @@ class ChosenAccessory extends React.Component {
     }
 
     return (
+      <div id='testrun'>
       <ChosenAccessoryCard chosenAccessory={chosenAccessory} />
+      </div>
     );
   }
 }

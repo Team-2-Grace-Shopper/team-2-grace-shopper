@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 import dateFormat from 'dateformat';
 import NumberFormat from 'react-number-format';
 import { Link } from 'react-router-dom';
-import emailjs, { init  } from 'emailjs-com';
+import emailjs, { init } from 'emailjs-com';
 
 
 class OrderConfirmation extends React.Component {
@@ -65,44 +65,50 @@ class OrderConfirmation extends React.Component {
                             title:'Order confirmation',
                             sub:'sub heading',
                             message: message,
+
     };
-    await emailjs.send('default_service','template_ny5i12o' , templateParams);
+    await emailjs.send('default_service', 'template_ny5i12o', templateParams);
   }
 
   render() {
-    const order = this.props.location.state;
-    order.shipDate = new Date().setDate(new Date().getDate() + 1);
-
     return (
-      <div id="content-wrapper">
-      <div id="confirmationcontainer">
-      <div id="confirmationinnercontainer">
-      <div id="confirmtop">
-        <img id="confirmcheck" src="/images/green-check-mark-in-circle.png" />
-        <h3 className="green">
-          Order placed, thanks!
-        </h3>
-        <img id="confirmimg" src={"/images/sample_image.webp"} />
+      const order = this.props.location.state;
+      order.shipDate = new Date().setDate(new Date().getDate() + 1);
+
+      return (
+        <div id="content-wrapper">
+          <div id="confirmationcontainer">
+            <div id="confirmtop">
+              <h2>
+                <Icon icon="akar-icons:shipping-box-02" width="25" height="25" />
+                <Icon icon="ic:outline-local-shipping" width="25" height="25" />
+                <Icon icon="grommet-icons:coffee" width="25" height="25" />
+                <Icon icon="gg:coffee" width="25" height="25" />
+                <br />Order placed, thanks!
+              </h2>
+              <p>Confirmation will be sent to your email</p><br />
+              <p><Link to="/orderhistory" className="cta">Review your recent orders</Link></p>
+              <br /><br />
+            </div>
+            <div className="col2">
+              <p><h2>Shipping to</h2>Shipping to<br />
+                {order.name},<br />
+                {order.address},&nbsp;
+                {order.city},<br />
+                {order.state},&nbsp;{order.zip}
+              </p>
+              <p><h2>Delivery:</h2>
+                {dateFormat(order.shipDate, "ddd, mmm d, yyyy")}<br />
+                <span>Note: You can add to this delivery throughout today</span>
+              </p>
+            </div>
+            <div className="inlineContent">
+              <img src="https://coda.newjobs.com/api/imagesproxy/ms/niche/images/articles/Liz/volunteering.jpg" alt="Grace coffee's donation" />
+              <div><h2>GRACE COFFEE.</h2> We make a donation to the Dave Thomas Foundation for Adoption for your purchase.<br /><br /><span className="hyperlink">Learn More</span></div>
+            </div>
+
         </div>
-        <h5>An order confirmation will be sent to your email</h5>
-        <p><strong>Shipping to { order.name },</strong>&nbsp;
-                                { order.address},&nbsp; 
-                                { order.city },&nbsp;
-                                { order.state },&nbsp;
-                                { order.zip }
-        </p>
-        <hr />
-        <p className="green"><strong>Delivery:</strong> { dateFormat(order.shipDate, "ddd, mmm d, yyyy") }</p> 
-        <p>&nbsp;</p>
-        <p>Note: You can add to this delivery throughout today</p>
-        <p>&nbsp;</p>
-        <p>Grace Coffee. will make a donation to the Dave Thomas Foundation for Adoption for your purchase. <span className="hyperlink"><a href="https://www.davethomasfoundation.org/">Learn more</a></span></p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p><Link to="/orderhistory"><span className="hyperlink">Review your recent orders</span></Link></p>
-        </div>
-        </div>
-        </div>
+      </div>
     )
   }
 }
