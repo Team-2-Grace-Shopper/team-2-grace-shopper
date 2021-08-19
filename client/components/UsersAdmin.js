@@ -46,7 +46,7 @@ export class UsersAdmin extends React.Component {
                 </p>
                 <p>
                   <Link to={`/users-admin/${user.id}`} className="cta">
-                    Edit Users
+                    Edit User
                   </Link>
                 </p>
               </div>
