@@ -31,7 +31,7 @@ export class Home extends React.Component {
             <div className="brandblock"></div>
             <h1>Fresh Espresso,<br />Never Instant</h1>
             <p>A lot has changed, but our philosophy never has. We're passionate about delivering the best handcrafted products and take pride in the journey from seed to cup</p>
-            <button className="cta">Shop now</button>
+            <Link to="/coffees"><button className="cta">Shop now</button></Link>
           </div>
         </div>
         <Toaster />
@@ -70,7 +70,8 @@ export class Home extends React.Component {
               <div className="brandblock"></div>
               <h1>About Locally Roasted</h1>
               <p>Our Locally Roasted Program hosts unique blends from our roasters across the country. Each blend is aptly named for neighborhoods near our facilities: Fishtown, in Philadelphia, Bucktown in Chicago, and Frogtown in Los Angeles.</p>
-              <button className="cta">Learn more</button>
+              <form action="https://www.honeybeecoffeeco.com/blog/2020/4/2/6-benefits-of-buying-locally-roasted-coffee">
+              <button className="cta">Learn more</button></form>
             </div>
           </div>
           <div className="hpcontent itemList col3">
@@ -114,7 +115,8 @@ export class Home extends React.Component {
               <div className="brandblock"></div>
               <h1>For you and for the planet</h1>
               <p>The pursuit of excellence is linked to the protection of the environment: to obtain a quality product, we must first take care of Mother Nature. We are committed to spreading a culture of respect for the ecosystem.</p>
-              <button className="cta">Learn more</button>
+              <form action="https://youmatter.world/en/definition/ecosystem-definition-example/">
+              <button className="cta">Learn more</button></form>
             </div>
             <div className="hpsection-1-imgB">
             </div>

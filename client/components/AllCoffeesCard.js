@@ -15,9 +15,12 @@ const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
       <Toaster />
       <div>
         <Link to={`/coffees/${coffee.id}`}>
-          <img src={coffee.imageUrl1} />
+          <img src={coffee.imageUrl1} alt={coffee.name} />
+          {coffee.onSale ? <span className="label">ON SALE</span> : null}
+
         </Link>
-        <span><StarRatings
+        <span>
+          <StarRatings
           rating={coffee.rating * 1}
           starRatedColor="gold"
           numberOfStars={5}
@@ -37,7 +40,9 @@ const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
             <li>{count}</li>
             <button onClick={() => setCount(count + 1)}>+</button>
           </ul>
-          <p>${coffee.price}</p>
+          <p>{coffee.onSale && <span><del>${coffee.price}</del> - sale:  ${coffee.salePrice}</span>}
+          {!coffee.onSale && <span>${coffee.price}</span>}
+          </p>
         </div>
         <button className={count > 0 ? 'cta' : 'ctadisabled'}
           onClick={() => {
@@ -59,6 +64,7 @@ const mapStateToProps = (state) => {
     userId: state.auth.id,
   }
 }
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (userId, productId, quantity, price, product) => {
@@ -67,6 +73,7 @@ const mapDispatchToProps = (dispatch) => {
     },
   }
 }
-const AllCoffeesCard = connect(mapStateToProps, mapDispatchToProps)(_AllCoffeesCard)
-export default AllCoffeesCard;
 
+const AllCoffeesCard = connect(mapStateToProps, mapDispatchToProps)(_AllCoffeesCard)
+
+export default AllCoffeesCard;

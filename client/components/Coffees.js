@@ -68,8 +68,10 @@ export class Coffees extends React.Component {
         break;
     }
 
-    let newList = [...this.state.coffees];
-    if (newRegion) {
+
+    let newList = [...this.props.coffees];
+    if (newRegion){
+
       newList = newList.filter(c => c.country.region.toLowerCase() === newRegion);
     }
     if (newCategory) {
