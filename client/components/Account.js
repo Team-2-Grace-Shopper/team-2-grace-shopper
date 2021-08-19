@@ -96,7 +96,7 @@ class _EditProfile extends React.Component {
               </Link>
               <Icon icon="la:id-card" />
             </li>
-            <li>
+{/*}            <li>
               <Link to="/">
                 <div>
                   <h3>Current order status</h3>
@@ -105,11 +105,12 @@ class _EditProfile extends React.Component {
               </Link>
               <Icon icon="la:shipping-fast" />
             </li>
+    {*/}
             <li>
               <Link to="/orderhistory">
                 <div>
-                  <h3>Order history</h3>
-                  <span>View your past purchases</span>
+                  <h3>Orders</h3>
+                  <span>View your orders</span>
                 </div>
               </Link>
               <Icon icon="ic:outline-receipt" />
