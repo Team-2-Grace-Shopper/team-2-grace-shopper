@@ -73,7 +73,6 @@ class OrderConfirmation extends React.Component {
   render() {
     const order = this.props.location.state;
     order.shipDate = new Date().setDate(new Date().getDate() + 1);
-    console.log('===',order);
     return (
         <div id="content-wrapper">
           <div id="confirmationcontainer">

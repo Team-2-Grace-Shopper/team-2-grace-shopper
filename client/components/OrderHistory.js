@@ -245,8 +245,7 @@ class _OrderHistory extends React.Component {
     }, [])
 
     // const allpurchase = _allpurchase.map(productinfo => productinfo[0].product.name)
-    console.log('ORDERs', this.props.allOrders.length)
-    if (this.props.allOrders.length === 0) {
+    if (this.props.allOrders && this.props.allOrders.length === 0) {
       return <h2 id="content-wrapper" style={{ marginTop: 50, textAlign: 'center', marginBottom: 50 }}>There are no orders in the system</h2>
     }
     return (

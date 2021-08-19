@@ -12,7 +12,6 @@ const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
   const [count, setCount] = useState(1);
   return (
     <div key={coffee.id} className="itemcard">
-      <Toaster />
       <div>
         <Link to={`/coffees/${coffee.id}`}>
           <img src={coffee.imageUrl1} alt={coffee.name} />

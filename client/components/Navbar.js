@@ -5,7 +5,7 @@ import { logout } from "../store";
 import { Icon } from '@iconify/react';
 import AccountDropdown from "./AccountDropdown";
 //import { cartReducer } from "../store/cart";
-//import { getCart } from "../store/cart";
+import { getCart } from "../store/cart";
 
 class Navbar extends Component {
   constructor(props) {
@@ -16,6 +16,19 @@ class Navbar extends Component {
     };
     this.showDropdown = this.showDropdown.bind(this);
     this.closeDropdown = this.closeDropdown.bind(this);
+  }
+
+  async componentDidMount(){
+    if (this.props.userId){
+      await this.props.getCart(this.props.userId);
+    }
+  }
+
+  async componentDidUpdate(prevProps){
+    if (this.props.userId != prevProps.userId){
+//    if (this.props.nbrCartItems != prevProps.nbrCartItems){
+      await this.props.getCart(this.props.userId);
+    }
   }
 
   showDropdown(ev) {
@@ -93,16 +106,28 @@ class Navbar extends Component {
  * CONTAINER
  */
 const mapState = (state) => {
+  let cartItems = 0;
+  if (window.localStorage.getItem('cart')) {
+    cartItems = JSON.parse(window.localStorage.getItem('cart')).orderlines.length;
+  }
+  else {
+    cartItems = state.cart && state.cart.length > 0 ? state.cart[0].orderlines.length : 99;
+  // else if (state.auth && state.cart && state.cart.length > 0 && state.cart[0].orderlines){
+  //   cartItems = state.cart[0].orderlines.length;
+  }
+
   return {
     name: state.auth.name,
     isAdmin: state.auth.isAdmin,
     isLoggedIn: !!state.auth.id,
-    nbrCartItems: state.cart.length > 0 ? state.cart[0].orderlines.length : 0,
+    userId: state.auth.id,
+    nbrCartItems: cartItems,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
+    getCart: (userId) => dispatch(getCart(userId)),
     handleClick() {
       dispatch(logout());
     },
