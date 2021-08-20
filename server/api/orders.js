@@ -31,16 +31,20 @@ router.get('/page', async (req, res, next) => {
   }
 })
 
-// router.get('/cart', async (req, res, next) => {
-//   try {
-//     const { userId } = req.query;
-//     const orders = await Order.findAll({
-//       include: [{ model: User}, 
-//                 { model: Orderline, include: Product }],
-//       where: {type: 'cart', userId: userId}
-//     })
-//     res.json(orders)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+router.post("/", async (req, res, next) => {
+  try {
+    const order = await Order.upsert(req.body, {returning: true} );
+    res.send(order[0].dataValues);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/line", async (req, res, next) => {
+  try {
+    const orderline = await Orderline.create(req.body, {returning: true} );
+    res.send(orderline);
+  } catch (err) {
+    next(err);
+  }
+});

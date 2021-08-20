@@ -106,12 +106,12 @@ const Order = db.define('order',{
     unique: false,
   },
   shipMethod: {
-    type: ENUM("Standard", "2 day", "Overnight"),
+    type: STRING,
     required: false,
     unique: false,
   },
   paymentMethod: {
-    type: ENUM("Credit card", "Paypal", "Venmo"),
+    type: STRING,
     required: false,
     unique: false,
   },

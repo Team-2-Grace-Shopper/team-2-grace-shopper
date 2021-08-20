@@ -37,16 +37,15 @@ export const getCart = (userId) => {
     console.log('id', userId)
     if (!userId){
         if (window.localStorage.getItem('cart')) {
-            console.log('CART IN LOCAL', [JSON.parse(window.localStorage.getItem('cart'))])
             store.dispatch(_getCart([JSON.parse(window.localStorage.getItem('cart'))])) ;
         } else {
-            store.dispatch(_getCart([{ userId: 0, orderlines: [], type: 'cart' }])); 
+            store.dispatch(_getCart([])); 
         }
         return;
     }
-    console.log('SHOULD NOT SEE THIS if anonymous')
     return async (dispatch) => {
         const { data: cart } = await axios.get('/api/cart', {params: {userId} })
+        console.log('THIS IS IN GET CART LOGGED IN', cart)
         dispatch(_getCart(cart));
     }
 }
@@ -103,9 +102,12 @@ export const addToCart = async (userId, productId, quantity, price, product) => 
         if (cart.length === 0){
             // no cart so create one
             const {data: cart2 } = await axios.post('/api/cart', {userId: userId, status: 'open', type: 'cart', shipToName: 'BILLL'})
+            console.log('this is cart2 --------->', cart2)
             id = cart2.id;    // use the ID of the new order(cart)
             lineNbr = 1;
-            cart = cart2;
+            cart = new Array();
+            cart.push(cart2);
+            cart[0].orderlines = [];
         } else {
             id = cart[0].id;  // use the ID of the existing order(cart)
             lineNbr = cart[0].orderlines.length + 1;
@@ -136,3 +138,5 @@ export const cartReducer = (state = [], action) => {
             return state
   };
 };
+
+//{ userId: 0, orderlines: [], type: 'cart' }

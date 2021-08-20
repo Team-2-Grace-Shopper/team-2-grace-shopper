@@ -14,7 +14,7 @@ class CartView extends React.Component {
     }
 
     componentDidMount() { 
-        console.log('CDM props', this.props)
+
         let { userId } = this.props;
         if (userId) {
             console.log('ABOUT TO CALL getCart')
@@ -33,8 +33,7 @@ class CartView extends React.Component {
 
 
     render () {
-        console.log('props', this.props)
-        console.log('*****', typeof this.props.cart, Array.isArray(this.props.cart))
+
         if (!this.props.cart.length) {
             return (<div id="content-wrapper">
                         <h3>You have no items in your cart.</h3>
