@@ -74,7 +74,7 @@ class _EditProfile extends React.Component {
 
   render() {
     if (this.state.loading) {
-      return "Retrieving your information...";
+      return <h2 id="content-wrapper">"Retrieving your information..."</h2>;
     }
     return (
       <div id="content-wrapper">

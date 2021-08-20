@@ -41,6 +41,7 @@ class CheckoutShipping extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.user !== this.props.user) {
       const { user } = this.props;
+
       this.setState({
         loading: false,
         email: user.username,

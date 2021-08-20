@@ -1,4 +1,3 @@
-//const Sequelize = require('sequelize');
 const faker = require('faker');
 const coffeeCountries=['Brazil','Vietnam','Colombia','Indonesia','Ethopia','Honduras','India','Mexico','Peru']
 const coffeeRegions=['South America','Asia','South America','Asia','Africa','Central America','Asia','Central America','Central America']
@@ -96,7 +95,8 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
 
   const userUsernames = [];
   // seed user "0" to be used for guest orders
-  await User.create({id: 0, name: "Account for guest user's orders", username: 'GUEST', password:'Not!a$valid#account++', isAdmin: false})
+  const user = await User.create({id: 0, name: "Account for guest user's orders", username: 'GUEST', password:'Not!a$valid#account++', isAdmin: false})
+  db.query("update users set id=0");
 
   for (let i = 0; i < nbrUsers; i++){
     const username = faker.internet.email();
@@ -135,7 +135,7 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
       shipDate: new Date() - (Math.random() * 10000000000),
       shipMethod: 'Standard',
       paymentMethod: 'Credit card',
-      userId: Math.ceil(Math.random()*nbrUsers),
+      userId: Math.ceil(Math.random()*(nbrUsers-2) + 2),
     })
     const nbrLines = Math.ceil(Math.random() * 3)
     for (let j = 0; j < nbrLines; j++){
@@ -150,7 +150,7 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
   }
 
   //    create a cart for half the users
-  for (let i = 0; i < (nbrUsers / 2); i++){
+  for (let i = 1; i < (nbrUsers / 2); i++){
     const x = await Order.create({
       orderDate: new Date() - (Math.random() * 10000000000),
       status: 'open',
