@@ -18,7 +18,7 @@ class _EditProductAdmin extends React.Component {
     await this.props.getProducts();
     // const _product = this.props.products.filter((product) => { return product.id === parseInt(this.props.match.params.id) }) || {}
     // const product = _product[0]
-    const product = await this.props.product
+    const product = this.props.product
     this.setState({
       id: product.id,
       loading: false,
@@ -41,12 +41,6 @@ class _EditProductAdmin extends React.Component {
       case "name":
         if (ev.target.value.length > 75) return;
         break;
-      // case "category":
-      //   if (ev.target.value.length > 75) return;
-      //   break;
-      // case "type":
-      //   if (ev.target.value.length > 75) return;
-      //   break;
       case "origin":
         if (ev.target.value.length > 75) return;
         break;
@@ -91,7 +85,6 @@ class _EditProductAdmin extends React.Component {
   }
 
   render() {
-    console.log('THIS PROPS', this.props)
     if (this.state.loading) {
       return "Retrieving your information...";
     }
@@ -128,7 +121,11 @@ class _EditProductAdmin extends React.Component {
                   -- select a category --{" "}
                       </option>
                       <option value="roast-light">Light roast</option>
+                      <option value="roast-medium">Medium roast</option>
                       <option value="roast-dark">Dark roast</option>
+                      <option value="decaf">Decaf</option>
+                      <option value="flavored">Flavored</option>
+                      <option value="organic">Organic</option>
                     </select>
                     <label>Category</label>
                   </div>
@@ -140,7 +137,7 @@ class _EditProductAdmin extends React.Component {
                   -- select a category --{" "}
                       </option>
                       <option value="grinder">Grinders</option>
-                      <option value="brewtool">Brewing tools</option>
+                      <option value="mug">Mugs</option>
                     </select>
                     <label>Category</label>
                   </div>
@@ -198,7 +195,7 @@ class _EditProductAdmin extends React.Component {
                 <button className="cta" disabled={this.state.enableSave}>
                   Save
               </button>
-                <a href="/users-admin" className="hyperlink"><span>Back to user list</span></a>
+                <a href="/products-admin" className="hyperlink"><span>Back to product list</span></a>
               </div>
 
             </form>
@@ -212,7 +209,6 @@ class _EditProductAdmin extends React.Component {
 const mapStateToProps = ({ products, auth }, { match }) => {
   const _product = products.filter((product) => { return product.id === match.params.id }) || {}
   const product = _product[0]
-  console.log(product, 'EDIT PRODUCT')
   return {
     id: auth.id,
     product

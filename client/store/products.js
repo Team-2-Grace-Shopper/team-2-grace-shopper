@@ -1,12 +1,5 @@
 import axios from 'axios';
 
-// import history from '../history';
-/* 
-not sure if we need to import this -- didn't think we needed it but
-the auth store file imports it so I'm dropping it here for now 
-*/
-
-
 //ACTION TYPES
 
 const GET_PRODUCTS = 'GET_PRODUCTS';
@@ -28,10 +21,6 @@ const _createProduct = (product) => {
     };
 };
 
-
-
-
-
 //THUNK CREATORS
 
 export const getProducts = () => {
@@ -50,10 +39,9 @@ export const createProduct = (product, history) => {
 };
 
 export const updateProduct = (product) => {
-    console.log(product, 'THIS IS STORE PROD')
     const id = product.id;
     return async (dispatch) => {
-        const { data: updated } = await axios.post(`/api/products/${product.type === 'coffee' ? 'coffee' : 'accessory'}/${id}`, product);
+        const { data: updated } = await axios.post(`/api/products/${id}`, product);
     };
 };
 

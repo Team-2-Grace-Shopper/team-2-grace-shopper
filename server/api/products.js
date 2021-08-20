@@ -24,10 +24,9 @@ router.get('/coffee/:id', async (req, res, next) => {
   }
 })
 router.post('/:id', async (req, res, next) => {
-  const id = req.body.id * 1;
   try {
-    const product = await Product.update(req.body, { where: { id: id } });
-    res.json(product);
+    const product = await Product.update(req.body, { where: { id: req.body.id } });
+    res.send(product);
   } catch (err) {
     next(err);
   }

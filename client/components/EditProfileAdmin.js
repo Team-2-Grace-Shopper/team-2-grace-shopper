@@ -82,7 +82,7 @@ class _EditProfileAdmin extends React.Component {
       <div id="content-wrapper">
         <div id="profilecontainer">
           <div className="container" id="profileleft">
-            <h2 className="profilehdr">Update a User Info</h2>
+            <h2 className="profilehdr">Update User Information</h2>
           </div>
           {/* <div className="profilehdr">
           
