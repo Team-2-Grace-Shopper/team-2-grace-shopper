@@ -80,7 +80,7 @@ class CheckoutBilling extends React.Component {
     if (this.state.loading) {
       return "Retrieving your information...";
     }
-    console.log('RENDER ----->', this.state)
+    
     return (
       <div id="profilecontainer">
         <div className="container" id="profileleft">
@@ -207,6 +207,24 @@ class CheckoutBilling extends React.Component {
                 <option value="In Kind">In Kind Goods or Services</option>
               </select>
               <label>Payment Method</label>
+            </div>
+            <div className="formfield">
+              <input
+                type="text"
+                name="cardNumber"
+                minLength= "16"
+                maxLength="16"
+              />
+              <label>Card Number</label>
+            </div>
+            <div className="formfield">
+              <input
+                type="text"
+                name="Exp Date"
+                minLength= "4"
+                maxLength="4"
+              />
+              <label>Exp Date</label>
             </div>
 
             <div className="formfield">

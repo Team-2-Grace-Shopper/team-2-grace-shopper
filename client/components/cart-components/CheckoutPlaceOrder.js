@@ -28,7 +28,7 @@ class CheckoutPlaceOrder extends React.Component {
       return "Retrieving your information...";
     }
     const { orderlines } = this.props.cart[0];
-    const { state } = this.props;
+    const { state, cart } = this.props;
     let productTotal = 0;
     let number = 1;
     return (
@@ -143,11 +143,12 @@ class CheckoutPlaceOrder extends React.Component {
             </ol>
             <ol><strong>Payment Method:</strong>
               <li>{state.payment}</li>
+              <li>**** **** **** ****</li>
             </ol>
           </div>
-            <Link to = {{pathname: '/orderconfirmation', state: Object.assign({}, state, {orderlines: orderlines})}}> 
+            <Link to = {{pathname: '/cart/checkout/dbupdate', state: Object.assign({}, state, {cart: cart[0]} )}}> 
                 <button className='cta'>
-                  Place Order
+                  Pay
                 </button>
             </Link>  
         </div>
@@ -173,3 +174,12 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPlaceOrder);
+
+
+
+
+{/* <Link to = {{pathname: '/orderconfirmation', state: Object.assign({}, state, {orderlines: orderlines})}}> 
+<button className='cta'>
+  Place Order
+</button>
+</Link>   */}

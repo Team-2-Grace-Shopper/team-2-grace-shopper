@@ -10,6 +10,7 @@ import Accessories from "./components/Accessories";
 import ChosenAccessory from "./components/ChosenAccessory";
 import CartView from "./components/cart-components/CartView";
 import CheckoutPlaceOrder from "./components/cart-components/CheckoutPlaceOrder";
+import CheckoutDbUpdate from "./components/cart-components/CheckoutDbUpdate";
 import CheckoutShipping from "./components/cart-components/CheckoutShipping";
 import CheckoutBilling from "./components/cart-components/CheckoutBilling";
 import ProductsAdmin from "./components/ProductsAdmin";
@@ -49,6 +50,7 @@ class Routes extends Component {
           <Route path="/cart/checkout/shipping" component={CheckoutShipping} />
           <Route path="/cart/checkout/billing" component={CheckoutBilling} />
           <Route path="/cart/checkout/revieworder" component={CheckoutPlaceOrder} />
+          <Route path="/cart/checkout/dbupdate" component={CheckoutDbUpdate} />
           <Route path="/orderconfirmation" component={OrderConfirmation} />
           <Route path="/contactus" component={ ContactUs } />
         </Switch>

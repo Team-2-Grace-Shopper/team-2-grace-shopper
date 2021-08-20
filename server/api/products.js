@@ -32,3 +32,15 @@ router.post('/:id', async (req, res, next) => {
     next(err);
   }
 })
+
+router.put('/:id', async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const product = await Product.update(req.body, { where: { id: id }});
+    res.sendStatus(201);
+  }
+  catch (err){
+    next(err);
+  }
+
+})
