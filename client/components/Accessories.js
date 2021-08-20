@@ -39,11 +39,11 @@ export class Accessories extends React.Component {
               <span><strong>Type</strong></span>
               <div>
                 <input type="radio" id="mug" name="mug" value="mug"></input>
-                <label for="mug">Mug</label>
+                <label htmlFor="mug">Mug</label>
               </div>
               <div>
                 <input type="radio" id="brewingtool" name="brewingtool" value="brewingtool"></input>
-                <label for="brewingtool">Brewing tool</label>
+                <label htmlFor="brewingtool">Brewing tool</label>
               </div>
             </div>
           </div>

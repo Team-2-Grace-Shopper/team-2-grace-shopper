@@ -195,7 +195,6 @@ class _OrderHistory extends React.Component {
     this.handleDetailClick = this.handleDetailClick.bind(this);
   }
   handleDetailClick = (idx) => {
-    console.log('setting state to ', idx)
     // const newArr = this.state.showDetails.map((c,i) => i === idx ? !c : c)
     this.setState(Object.assign({}, this.state, { showDetails: idx }))
   }
@@ -227,7 +226,6 @@ class _OrderHistory extends React.Component {
     const { selected } = data;
     const start = selected * this.state.pageCount;
     const res = this.state.allData.slice(start, start + this.state.pageCount)
-    console.log('new data', res)
     this.setState(Object.assign({}, this.state, { data: res }))
 
     // read those rows from the server instead of an array

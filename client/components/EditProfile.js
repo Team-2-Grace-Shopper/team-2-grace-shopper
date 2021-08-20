@@ -73,7 +73,6 @@ class _EditProfile extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     if (this.state.loading) {
       return "Retrieving your information...";
     }
