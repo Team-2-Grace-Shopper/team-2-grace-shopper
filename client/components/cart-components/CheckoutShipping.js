@@ -40,6 +40,8 @@ class CheckoutShipping extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.user !== this.props.user) {
+      const { user } = this.props;
+      console.log('IN CDU', user)
       this.setState({
         loading: false,
         email: user.username,

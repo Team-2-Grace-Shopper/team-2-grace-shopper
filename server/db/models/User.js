@@ -7,7 +7,6 @@ const {
   UUIDV4,
   BOOLEAN
 } = require('sequelize');
-//const Sequelize = require('sequelize')
 const db = require('../db')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
@@ -18,7 +17,7 @@ const SALT_ROUNDS = 5;
 const User = db.define('user',{
   username: {
     type: STRING,
-    // primaryKey: true,
+//    primaryKey: true,
     required: true,
     allowNull: false,
     unique: true,
