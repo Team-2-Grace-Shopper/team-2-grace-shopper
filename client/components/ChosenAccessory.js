@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProducts } from "../store/products";
 import ChosenAccessoryCard from "./ChosenAccessoryCard";
-
-//need to create addCart button
+import { Toaster } from 'react-hot-toast';
 
 class ChosenAccessory extends React.Component {
   constructor(props) {
@@ -31,7 +30,8 @@ class ChosenAccessory extends React.Component {
 
     return (
       <div id='content-wrapper'>
-      <ChosenAccessoryCard chosenAccessory={chosenAccessory} />
+        <Toaster />
+        <ChosenAccessoryCard chosenAccessory={chosenAccessory} />
       </div>
     );
   }
