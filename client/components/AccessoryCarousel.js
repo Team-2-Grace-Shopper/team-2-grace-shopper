@@ -27,7 +27,7 @@ const AccessoryCarousel = ({ chosenAccessory }) => {
             
             {images.map((image, index) => {
                 return (
-                    <div className={index === current ? 'imageActive' : 'image'} key= {index}>
+                    <div className={index === current ? 'imageActive' : 'imageNotActive'} key= {index}>
                         {index === current && (<img src={image} alt="coffee image" className='image' />)}
                     </div>
                 )

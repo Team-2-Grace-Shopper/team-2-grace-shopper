@@ -16,12 +16,12 @@ class ChosenAccessory extends React.Component {
   }
 
   render() {
-    console.log("PROPS:", this.props);
+    //console.log("PROPS:", this.props);
     const chosenAccessory = this.props.products.filter(
       (product) => product.id === this.props.match.params.id
     )[0];
-    console.log("CHOSEN Accessory:" + chosenAccessory);
-    console.log("PRODUCTS:" + this.props.products);
+    //console.log("CHOSEN Accessory:" + chosenAccessory);
+    //console.log("PRODUCTS:" + this.props.products);
 
     if (!chosenAccessory) {
       //const NewProductsArray = getProducts()
@@ -30,7 +30,7 @@ class ChosenAccessory extends React.Component {
     }
 
     return (
-      <div id='testrun'>
+      <div id='content-wrapper'>
       <ChosenAccessoryCard chosenAccessory={chosenAccessory} />
       </div>
     );
@@ -38,7 +38,7 @@ class ChosenAccessory extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("Is it executing?", state.products);
+  //console.log("Is it executing?", state.products);
   return {
     products: state.products,
   };

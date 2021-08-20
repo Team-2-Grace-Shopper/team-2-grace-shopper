@@ -707,13 +707,13 @@ th {
 #orderaddresses {
   display: flex;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   padding-bottom: 3em;
 }
 #orderaddresses ol{
   padding: 20px;
-  width: calc(25% - 40px);
+  width: calc(50% - 40px);
   border-right: 1px solid #dbdbdb;
 }
 #orderaddresses ol:last-child {
