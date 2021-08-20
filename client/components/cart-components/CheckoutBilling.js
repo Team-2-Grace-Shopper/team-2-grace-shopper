@@ -13,6 +13,8 @@ class CheckoutBilling extends React.Component {
       state: '',
       zip: '',
       payment: '',
+      cardNumber: '',
+      ExpDate: ''
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -37,6 +39,8 @@ class CheckoutBilling extends React.Component {
       billState: state.state,
       billZip: state.zip,
       payment: '0',
+      cardNumber: '',
+      ExpDate: '',
       enableContinue: false,
     });
   }
@@ -214,7 +218,7 @@ class CheckoutBilling extends React.Component {
                 name="cardNumber"
                 minLength= "16"
                 maxLength="16"
-                value = ''
+                value = {this.state.cardNumber}
                 onChange={this.handleChange}
               />
               <label>Card Number</label>
@@ -222,10 +226,10 @@ class CheckoutBilling extends React.Component {
             <div className="formfield">
               <input
                 type="text"
-                name="Exp Date"
+                name="ExpDate"
                 minLength= "4"
                 maxLength="4"
-                value = ''
+                value = {this.state.ExpDate}
                 onChange={this.handleChange}
               />
               <label>Exp Date</label>
