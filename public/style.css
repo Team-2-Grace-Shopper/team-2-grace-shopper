@@ -9,10 +9,6 @@ body {
 }
 #content-wrapper {
   padding-top: 80px;
-}
-
-#testrun {
-  padding-top: 100px
 }  
 
 h1 {
@@ -400,7 +396,7 @@ button {
   transform: scale(1.01);
   overflow:hidden;
 }
-.itemcard .label {
+.label {
   background-color:#b7926a;
   position: absolute;
   top: 5px;
@@ -410,6 +406,7 @@ button {
   border: 1px solid #fff;
   color: #fff;
   font-size:0.8em;
+  z-index: 9;
 }
 
 /* Filter radio button style */
@@ -487,12 +484,42 @@ button {
 }
 
 .photoCarousel {
-  width: 60%
+  width: 60%;
+  position:relative;
 }
 
 .productInfo {
   width: calc(40% - 2em);
   padding: 2em;
+}
+
+.productInfo ul {
+  list-style: none;
+  display: flex;
+  margin: 0 35px 0 0;
+  padding: 0;
+}
+
+.productInfo ul > * {
+  width: 38.5px;
+  line-height: 35px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.productInfo ul > button {
+  border-radius: 100px;
+  border: 1px solid #b7926a;
+}
+
+.productInfo ul > button:hover {
+  background-color: #b7926a;
+  color: #fff
+}
+
+.quantityButton {
+  display: flex;
+  padding: 20px 0;
 }
 
 .slides {
@@ -513,7 +540,7 @@ button {
   top: 50%;
   right: 32px;
   font-size: 3rem;
-  color:#222;
+  color:rgba(0, 0, 0, 0.5);
   z-index: 10;
   cursor: pointer;
   user-select: none;
@@ -524,16 +551,20 @@ button {
   top: 50%;
   left: 32px;
   font-size: 3rem;
-  color:#222;
+  color: rgba(0, 0, 0, 0.5);
   z-index: 10;
   cursor: pointer;
   user-select: none;
 }
 
+.right-arrow:hover, .left-arrow:hover {
+  color:#b7926a
+}
+
 .imageActive {
   opacity: 1;
-  transition-duration: 1s;
-  transform: scale(1.08);
+  /* transition-duration: 1s; */
+  /* transition: .3s ease-in-out */
 }
 
 /* JP */

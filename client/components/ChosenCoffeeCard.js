@@ -22,12 +22,12 @@ const _ChosenCoffeeCard = ({ chosenCoffee, userId, addToCart }) => {
     return (
         <div key= { chosenCoffee.id }>
             <div className= 'singleItem'>
-                <div className= 'chosenCoffeeInfo' key={chosenCoffee.id}>
-                    {chosenCoffee.onSale ? <span className="label">ON SALE</span> : null}
+                <div className= 'chosenCoffeeInfo container' key={chosenCoffee.id}>
                     <div className='photoCarousel'>
+                        {chosenCoffee.onSale ? <span className="label">ON SALE</span> : null}
                         <CoffeeCarousel chosenCoffee={chosenCoffee} key={chosenCoffee.id}/>
                     </div>
-
+                    
                     <div className='productInfo'>
                         <span>
                             <StarRatings
@@ -42,8 +42,15 @@ const _ChosenCoffeeCard = ({ chosenCoffee, userId, addToCart }) => {
                         <h1>{ chosenCoffee.name }</h1>
                         <p>{ chosenCoffee.description }</p>
                         <p>{ chosenCoffee.weight }oz</p>
+                        <br />
+                        <br />
 
                         <div>
+                        <h3>{chosenCoffee.onSale && <h3><del>${chosenCoffee.price}</del> - sale:  ${chosenCoffee.salePrice}</h3>}
+                        {!chosenCoffee.onSale && <h3>${chosenCoffee.price}</h3>}
+                        </h3>
+                    </div>
+                    <div className='quantityButton'>
                         <ul>
                             <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
                             <li>{count}</li>
@@ -55,13 +62,14 @@ const _ChosenCoffeeCard = ({ chosenCoffee, userId, addToCart }) => {
                             }
                             }>+</button>
                         </ul>
-                        <p>{chosenCoffee.onSale && <span><del>${chosenCoffee.price}</del> - sale:  ${chosenCoffee.salePrice}</span>}
-                        {!chosenCoffee.onSale && <span>${chosenCoffee.price}</span>}
-                        </p>
+
+                        <button className={count > 0 ? 'cta' : 'ctadisabled'}
+                            onClick={() => addToShopCart(userId, chosenCoffee.id, count, chosenCoffee.price, chosenCoffee)}
+                            >ADD TO CART</button>
                     </div>
-                    <button className={count > 0 ? 'cta' : 'ctadisabled'}
+                    {/* <button className={count > 0 ? 'cta' : 'ctadisabled'}
                         onClick={() => addToShopCart(userId, chosenCoffee.id, count, chosenCoffee.price, chosenCoffee)}
-                        >ADD TO CART</button>
+                        >ADD TO CART</button> */}
                     </div>
                 </div>
             </div>
