@@ -10,6 +10,7 @@ const UPDATE_CART_INFO = 'UPDATE_CART_INFO';
 //ACTION CREATORS
 
 const _getCart = (cart) => {
+    console.log('IN _getCart', cart)
     return {
         type: GET_CART, 
         cart
@@ -33,14 +34,17 @@ const _updateCartInfo = (info) => {
 //THUNK CREATORS
 
 export const getCart = (userId) => {
+    console.log('id', userId)
     if (!userId){
         if (window.localStorage.getItem('cart')) {
+            console.log('CART IN LOCAL', [JSON.parse(window.localStorage.getItem('cart'))])
             store.dispatch(_getCart([JSON.parse(window.localStorage.getItem('cart'))])) ;
         } else {
-            store.dispatch(_getCart([{ userId: 0, orderlines: [] }])); 
+            store.dispatch(_getCart([{ userId: 0, orderlines: [], type: 'cart' }])); 
         }
         return;
     }
+    console.log('SHOULD NOT SEE THIS if anonymous')
     return async (dispatch) => {
         const { data: cart } = await axios.get('/api/cart', {params: {userId} })
         dispatch(_getCart(cart));
@@ -55,8 +59,6 @@ export const updateCartInfo = (info) => {
 };
 
 export const deleteCartItem = (cartItem, userId) => {
-    console.log(cartItem);
-    console.log(userId);
     if (!userId || userId === 0) {
         let cart = JSON.parse(window.localStorage.getItem('cart'));
         const newLines = cart.orderlines.filter((orderline) => orderline.productId !== cartItem.productId);
@@ -73,10 +75,6 @@ export const deleteCartItem = (cartItem, userId) => {
     };
 };
 
-
-
-// below function is not a thunk and not called with dispatch (does not update state)
-
 export const addToCart = async (userId, productId, quantity, price, product) => {
 
   let myCart;
@@ -87,19 +85,19 @@ export const addToCart = async (userId, productId, quantity, price, product) => 
       if (window.localStorage.getItem('cart')) {
         myCart = JSON.parse(window.localStorage.getItem('cart'));
       } else {
-        myCart = { userId: 0, orderlines: [] }; 
+        myCart = [{ userId: 0, orderlines: [] }]; 
       }
-      const productIdx = myCart.orderlines.findIndex(c => c.productId === productId)
+      const productIdx = myCart[0].orderlines.findIndex(c => c.productId === productId)
       if (productIdx === -1){
-        myCart.orderlines.push({ productId, quantity, price, product });
+        myCart[0].orderlines.push({ productId, quantity, price, product });
       } else {
-        myCart.orderlines[productIdx].quantity += quantity;
+        myCart[0].orderlines[productIdx].quantity += quantity;
       }
       window.localStorage.setItem('cart', JSON.stringify(myCart))
       break;
 
     default:  // registered user - see if there is an existing cart
-        const { data: cart } = await axios.get('/api/cart', { params: { userId } })
+        let { data: cart } = await axios.get('/api/cart', { params: { userId } })
         let id;
         let lineNbr;
         if (cart.length === 0){
@@ -107,16 +105,18 @@ export const addToCart = async (userId, productId, quantity, price, product) => 
             const {data: cart2 } = await axios.post('/api/cart', {userId: userId, status: 'open', type: 'cart', shipToName: 'BILLL'})
             id = cart2.id;    // use the ID of the new order(cart)
             lineNbr = 1;
+            cart = cart2;
         } else {
             id = cart[0].id;  // use the ID of the existing order(cart)
             lineNbr = cart[0].orderlines.length + 1;
         }
-        const newLine = await axios.post('/api/cart/line', { lineNbr: lineNbr, orderId: id, productId: productId, quantity: quantity, price: price })
+        const newLine = await axios.post('/api/cart/line', { lineNbr: lineNbr, orderId: id, productId: productId, quantity: quantity, price: price });
+        cart[0].orderlines.push(newLine.data)
+        myCart = cart;
         break;
     }
-    getCart(userId); // this is done to update state with the cart so Nav can show the cart items
+    store.dispatch(_getCart(myCart));    
 }
-
 
 //REDUCER
 

@@ -25,6 +25,8 @@ const OrderList = (props) => {
       <tbody>
         {data.map((order, i) => {
           const dateFmt = dateFormat(order.orderDate, "ddd, mmm d, yyyy");
+          const arriveDate = dateFormat(new Date().setDate(new Date().getDate() + Math.floor(1 + Math.random()*3)),'ddd, mmm d');
+
           const nbrItemsFmt = <NumberFormat value={order.orderlines.length}
             thousandSeparator=','
             displayType='text'
@@ -40,7 +42,7 @@ const OrderList = (props) => {
             <tr key={order.id}>
               <td className="tblcenter">{order.id}</td>
               <td className="tblcenter">{dateFmt}</td>
-              <td className="tblcenter">{order.status}</td>
+              <td className="tblcenter">{order.status === 'closed' ? 'Delivered' : 'Arriving '.concat(arriveDate)}</td>
               <td className="tblcenter">{nbrItemsFmt}</td>
               <td className="tblright"> {orderTotFmt}</td>
               <td className="tblcenter"><a data-i={i} className="cta" onClick={() => handleDetailClick(i)}>Details <Icon icon="akar-icons:circle-chevron-down" width="15" /></a></td>
@@ -243,9 +245,8 @@ class _OrderHistory extends React.Component {
     }, [])
 
     // const allpurchase = _allpurchase.map(productinfo => productinfo[0].product.name)
-    console.log('EVEEE ORDER', allpurchase)
-    if (!this.props.allOrders || this.props.allOrders.length === 0) {
-      return <h2 style={{ marginTop: 20, textAlign: 'center', marginBottom: 20 }}>There are no orders in the system</h2>
+    if (this.props.allOrders && this.props.allOrders.length === 0) {
+      return <h2 id="content-wrapper" style={{ marginTop: 50, textAlign: 'center', marginBottom: 50 }}>There are no orders in the system</h2>
     }
     return (
       <div id="content-wrapper">

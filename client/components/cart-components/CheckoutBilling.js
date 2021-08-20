@@ -6,7 +6,13 @@ class CheckoutBilling extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false
+      loading: false,
+      name: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: '',
+      payment: '',
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -89,7 +95,7 @@ class CheckoutBilling extends React.Component {
                 name="billName"
                 required
                 maxLength="75"
-                value={this.state.name}
+                value={this.state.billName}
                 onChange={this.handleChange}
               />
               <label>Name</label>
@@ -100,7 +106,7 @@ class CheckoutBilling extends React.Component {
                 type="text"
                 name="billAddress"
                 maxLength="75"
-                value={this.state.address}
+                value={this.state.billAddress}
                 onChange={this.handleChange}
               />
               <label>Address</label>
@@ -110,14 +116,14 @@ class CheckoutBilling extends React.Component {
                 type="text"
                 name="billCity"
                 maxLength="50"
-                value={this.state.city}
+                value={this.state.billCity}
                 onChange={this.handleChange}
               />
               <label>City</label>
             </div>
 
             <div className="formfield">
-              <select value={this.state.state} name= "billState" onChange={this.handleChange}>
+              <select value={this.state.billState} name= "billState" onChange={this.handleChange}>
                 <option disabled key="0" value="0">
                   {" "}
                   -- select a state --{" "}
@@ -182,7 +188,7 @@ class CheckoutBilling extends React.Component {
                 type="text"
                 name="billZip"
                 maxLength="15"
-                value={this.state.zip}
+                value={this.state.billZip}
                 onChange={this.handleChange}
               />
               <label>Zip</label>

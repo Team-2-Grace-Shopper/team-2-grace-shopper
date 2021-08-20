@@ -33,14 +33,11 @@ export const getOrders = () => {
 };
 
 export const getOrdersForPage = (parms) => {
-    console.log('in thunk - PARMS:', parms)
     return async (dispatch) => {
         const { data: orders } = await axios.get('/api/orders/page', {params: parms})
-        console.log('ORDERS', orders)
         dispatch(_getOrders(orders));
     }
 }
-
 
 //REDUCER
 

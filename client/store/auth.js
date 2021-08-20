@@ -44,7 +44,7 @@ export const authenticate = (username, password, method, name) => async (dispatc
           authorization: res.data.token,
         },    })
  
-      moveCartToDatabase(cart, user);
+      moveCartToDatabase(cart[0], user);
       window.localStorage.removeItem('cart');
     };
 

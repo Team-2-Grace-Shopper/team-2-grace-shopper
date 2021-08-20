@@ -20,11 +20,11 @@ router.get('/page', async (req, res, next) => {
     const { userId, limit, offset } = req.query;
     console.log('IN API, req.params=', req.query)
     const orders = await Order.findAll({
-      // attributes: ['id', 'orderDate', 'status', 'type'],
       include: [{ model: User}, 
                 { model: Orderline, include: Product }],
-
-      where: {type: 'order', userId: userId, status: 'closed'}
+      where: {type: 'order', userId: userId},
+      order: [ ['status', 'ASC'], ['orderDate', 'DESC'] ]
+//      where: {type: 'order', userId: userId, status: 'closed'}
     })
     res.json(orders)
   } catch (err) {

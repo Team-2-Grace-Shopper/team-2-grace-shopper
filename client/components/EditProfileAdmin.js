@@ -74,7 +74,7 @@ class _EditProfileAdmin extends React.Component {
   }
 
   render() {
-    console.log(this.state)
+    console.log(this.props, 'PROFILE PROPS')
     if (this.state.loading) {
       return "Retrieving your information...";
     }
@@ -82,7 +82,7 @@ class _EditProfileAdmin extends React.Component {
       <div id="content-wrapper">
         <div id="profilecontainer">
           <div className="container" id="profileleft">
-            <h2 className="profilehdr">Update<br />{this.state.name}'s<br />profile</h2>
+            <h2 className="profilehdr">Update a User Info</h2>
           </div>
           {/* <div className="profilehdr">
           
@@ -92,7 +92,7 @@ class _EditProfileAdmin extends React.Component {
               <span className="timedAlert">
                 {this.state.message && <h3> {this.state.message} </h3>}
               </span>
-              <h2>{this.state.name}</h2>
+              <h2>{this.state.dispName}</h2>
               <br />
               <div className="formfield">
                 <input

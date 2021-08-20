@@ -1,6 +1,6 @@
 const router = require('express').Router()
 module.exports = router
-const { models: { Product, Country }} = require('../db')
+const { models: { Product, Country } } = require('../db')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -21,5 +21,14 @@ router.get('/coffee/:id', async (req, res, next) => {
     res.send(coffee)
   } catch (err) {
     next(err)
+  }
+})
+router.post('/:id', async (req, res, next) => {
+  const id = req.body.id * 1;
+  try {
+    const product = await Product.update(req.body, { where: { id: id } });
+    res.json(product);
+  } catch (err) {
+    next(err);
   }
 })
