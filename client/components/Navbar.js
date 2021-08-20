@@ -27,6 +27,7 @@ class Navbar extends Component {
   async componentDidUpdate(prevProps){
     if (this.props.userId != prevProps.userId){
 //    if (this.props.nbrCartItems != prevProps.nbrCartItems){
+  console.log('CDU', this.props)
       await this.props.getCart(this.props.userId);
     }
   }

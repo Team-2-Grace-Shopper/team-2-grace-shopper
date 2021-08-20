@@ -101,7 +101,6 @@ export class Coffees extends React.Component {
     return (
       <div id='content-wrapper'>
         <Toaster />
-
         <div className="container filterList">
           <div className="filter">
             <div className="sortBy">
