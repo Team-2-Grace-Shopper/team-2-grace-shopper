@@ -18,7 +18,7 @@ class OrderConfirmation extends React.Component {
 
   sendEmail = async (order) => {
     init("user_HuaybJLdnOoIDOZ3t63oD"); // this would be secure in a production app
-    const orderTot = order.orderlines.reduce((tot, c) => c.quantity * c.price, 0);
+    const orderTot = order.orderlines.reduce((tot, c) => tot + c.quantity * c.price, 0);
     const orderLines = order.orderlines.map( (c,i) => `
       <tr><td class="center">${i+1}</td><td>${c.product.name}</td><td class="center">${c.quantity}</td><td class="right">${c.price}</td></tr>
       `

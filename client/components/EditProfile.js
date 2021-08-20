@@ -78,6 +78,7 @@ class _EditProfile extends React.Component {
     }
     return (
       <div id="content-wrapper">
+      <div id="fb-root"></div>
         <div id="profilecontainer">
           <div className="container" id="profileleft">
             <h2 className="profilehdr">Update Your Profile</h2>
@@ -223,7 +224,7 @@ class _EditProfile extends React.Component {
               </button>
               </div>
             </form>
-          </div>
+            </div>
         </div>
       </div>
     );
