@@ -20,11 +20,6 @@ const getImages = async (dir) => {
     }));
   return Array.prototype.concat(...files);
   }
-  
-//const productImages = getImages('./public/images/products/coffee').then((res,err) => console.log(res))
-//const accyImages = getImages('./public/images/products/accessories').then((res,err) => console.log(res))
-//getImages('.').then((res,err) => console.log(res))
-
 
 const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) => {
   const productImages = await getImages('./public/images/products/coffee');
@@ -100,6 +95,9 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
   }
 
   const userUsernames = [];
+  // seed user "0" to be used for guest orders
+  await User.create({id: 0, name: "Account for guest user's orders", username: 'GUEST', password:'Not!a$valid#account++', isAdmin: false})
+
   for (let i = 0; i < nbrUsers; i++){
     const username = faker.internet.email();
     userUsernames.push(username);

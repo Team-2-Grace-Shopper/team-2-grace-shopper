@@ -18,7 +18,6 @@ router.get('/', async (req, res, next) => {
 router.get('/page', async (req, res, next) => {
   try {
     const { userId, limit, offset } = req.query;
-    console.log('IN API, req.params=', req.query)
     const orders = await Order.findAll({
       include: [{ model: User}, 
                 { model: Orderline, include: Product }],
