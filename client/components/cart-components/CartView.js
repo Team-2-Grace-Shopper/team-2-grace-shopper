@@ -14,11 +14,15 @@ class CartView extends React.Component {
     }
 
     componentDidMount() { 
-        const { userId } = this.props;
+        console.log('CDM props', this.props)
+        let { userId } = this.props;
         if (userId) {
-            this.props.getCart(userId);
+            console.log('ABOUT TO CALL getCart')
+           this.props.getCart(userId);
+        } 
+        if (this.props.cart.userId === 0){
+            this.props.getCart(0);
         }
-        
     }
 
     componentDidUpdate(prevProps) {
@@ -29,8 +33,12 @@ class CartView extends React.Component {
 
 
     render () {
-        if (!this.props.cart[0]) {
-            return <h3>You have no items in your cart.</h3>
+        console.log('props', this.props)
+        console.log('*****', typeof this.props.cart, Array.isArray(this.props.cart))
+        if (!this.props.cart.length) {
+            return (<div id="content-wrapper">
+                        <h3>You have no items in your cart.</h3>
+                    </div>)
         }
         
         const { orderlines } = this.props.cart[0];
@@ -54,9 +62,6 @@ class CartView extends React.Component {
             displayType='text'
         />
 
-        // console.log('This is props', this.props)
-        // console.log('This is local Storage', window.localStorage)
-
         return (
             <div id="content-wrapper">
                 <div id="profilecontainer" className="cartview">
@@ -71,20 +76,20 @@ class CartView extends React.Component {
                             <div>
                                 {orderlines.map(orderline =>
                                     <div className='cartItem' key={orderline.productId}>
-                                        <div>
-                                            {orderline.product.type === 'coffee' ?
-                                                (<Link to={`/coffees/${orderline.product.id}`}>
+                                    <div>
+                                        {orderline.product.type === 'coffee' ?
+                                            (<Link to={`/coffees/${orderline.product.id}`}>
+                                                <img src={orderline.product.imageUrl1} />
+                                                {/* <h3>{orderline.product.name}</h3> */}
+                                            </Link>
+                                            ) : (
+                                                <Link to={`/accessories/${orderline.product.id}`}>
                                                     <img src={orderline.product.imageUrl1} />
                                                     {/* <h3>{orderline.product.name}</h3> */}
                                                 </Link>
-                                                ) : (
-                                                    <Link to={`/accessories/${orderline.product.id}`}>
-                                                        <img src={orderline.product.imageUrl1} />
-                                                        {/* <h3>{orderline.product.name}</h3> */}
-                                                    </Link>
-                                                )
-                                            }
-                                        </div>
+                                            )
+                                        }
+                                    </div>
 
                                         <div>
                                             <h3>{orderline.product.name}</h3>

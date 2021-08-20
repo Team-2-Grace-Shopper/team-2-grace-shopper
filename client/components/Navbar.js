@@ -108,12 +108,10 @@ class Navbar extends Component {
 const mapState = (state) => {
   let cartItems = 0;
   if (window.localStorage.getItem('cart')) {
-    cartItems = JSON.parse(window.localStorage.getItem('cart')).orderlines.length;
+    cartItems = JSON.parse(window.localStorage.getItem('cart'))[0].orderlines.length;
   }
   else {
-    cartItems = state.cart && state.cart.length > 0 ? state.cart[0].orderlines.length : 99;
-  // else if (state.auth && state.cart && state.cart.length > 0 && state.cart[0].orderlines){
-  //   cartItems = state.cart[0].orderlines.length;
+    cartItems = state.cart && state.cart.length > 0 ? state.cart[0].orderlines.length : 0;
   }
 
   return {
