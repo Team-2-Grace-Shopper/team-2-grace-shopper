@@ -45,9 +45,8 @@ const _ChosenCoffeeCard = ({ chosenCoffee, userId, addToCart }) => {
                         <br />
 
                         <div>
-                        <h3>{chosenCoffee.onSale && <h3><del>${chosenCoffee.price}</del> - sale:  ${chosenCoffee.salePrice}</h3>}
+                        {<h3>{chosenCoffee.onSale}</h3> && <h3><del>${chosenCoffee.price}</del> - sale:  ${chosenCoffee.salePrice}</h3>}
                         {!chosenCoffee.onSale && <h3>${chosenCoffee.price}</h3>}
-                        </h3>
                     </div>
                     <div className='quantityButton'>
                         <ul>

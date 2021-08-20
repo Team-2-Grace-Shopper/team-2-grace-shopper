@@ -39,7 +39,38 @@ const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
           <h3>{coffee.name}</h3>
         </Link>
       </div>
-      <div>
+
+      { coffee.inventory * 1 === 0 ?
+        <div>
+          <div>
+            <p className="disabled">Out of Stock</p>
+          </div>
+          <button className="ctadisabled">ADD TO CART</button>
+        </div>
+        :
+        <div>
+          <div>
+            <ul>
+              <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
+              <li>{count}</li>
+              <button onClick={() => {
+                count < coffee.inventory ?
+                  setCount(count + 1)
+                  :
+                  notify2();
+              }
+              }>+</button>
+            </ul>
+            <p>{coffee.onSale && <span><del>${coffee.price}</del> - sale:  ${coffee.salePrice}</span>}
+              {!coffee.onSale && <span>${coffee.price}</span>}
+            </p>
+          </div>
+          <button className={count > 0 ? 'cta' : 'ctadisabled'}
+            onClick={() => addToShopCart(userId, coffee.id, count, coffee.price, coffee)}
+          >ADD TO CART</button>
+        </div>
+      }
+      {/* <div>
         <div>
           <ul>
             <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
@@ -59,7 +90,7 @@ const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
         <button className={count > 0 ? 'cta' : 'ctadisabled'}
           onClick={ () => addToShopCart(userId, coffee.id, count, coffee.price, coffee) }
         >ADD TO CART</button>
-      </div>
+      </div> */}
     </div>
   )
 }

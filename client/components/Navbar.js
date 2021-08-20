@@ -57,7 +57,7 @@ class Navbar extends Component {
             {/* MOVE ABOVE TO OVER THE CART */}
           </Link>
           <div>
-            <Link to="/coffees">Coffee</Link>
+            <Link to="/coffees">Coffees</Link>
             <Link to="/accessories">Accessories</Link>
           </div>
         </div>
