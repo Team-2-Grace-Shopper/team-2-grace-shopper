@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import StarRatings from "react-star-ratings";
 import AccessoryCarousel from './AccessoryCarousel';
 import { addToCart } from '../store/cart';
@@ -18,48 +17,57 @@ const addToShopCart = (userId, id, count, price, accessory) =>{
 
 const _ChosenAccessoryCard = ({ chosenAccessory, userId, addToCart }) => {
     const [count, setCount] = useState(1);
+    
     return (
         <div key= { chosenAccessory.id }>
             <div className= 'singleItem'>
-                <div className= 'chosenAccessory' key={chosenAccessory.id}>
-                    <span>
-                        <StarRatings
-                            rating={chosenAccessory.rating * 1}
-                            starRatedColor="gold"
-                            numberOfStars={5}
-                            name="rating"
-                            starDimension="15px"
-                            starSpacing="0px"
-                        />
-                    </span>
-                    {chosenAccessory.onSale ? <span className="label">ON SALE</span> : null}
-                    <AccessoryCarousel chosenAccessory={chosenAccessory} key={chosenAccessory.id}/>
-                    <h1>{ chosenAccessory.name }</h1>
-                    <p>{ chosenAccessory.description }</p>
-                    <p>{ chosenAccessory.weight }oz</p>
+                <div className= 'chosenCoffeeInfo container' key={chosenAccessory.id}>
+                    <div className='photoCarousel'>
+                        {chosenAccessory.onSale ? <span className="label">ON SALE</span> : null}
+                        <AccessoryCarousel chosenAccessory={chosenAccessory} key={chosenAccessory.id}/>
+                    </div>
+                    
+                    <div className='productInfo'>
+                        <span>
+                            <StarRatings
+                                rating={chosenAccessory.rating * 1}
+                                starRatedColor="gold"
+                                numberOfStars={5}
+                                name="rating"
+                                starDimension="15px"
+                                starSpacing="0px"
+                            />
+                        </span>
+                        <h1>{ chosenAccessory.name }</h1>
+                        <p>{ chosenAccessory.description }</p>
+                        <p>{ chosenAccessory.weight }oz</p>
+                        <br />
+                        <br />
+
+                        <div>
+                        <h3>{chosenAccessory.onSale && <h3><del>${chosenAccessory.price}</del> - sale:  ${chosenAccessory.salePrice}</h3>}
+                        {!chosenAccessory.onSale && <h3>${chosenAccessory.price}</h3>}
+                        </h3>
+                    </div>
+                    <div className='quantityButton'>
+                        <ul>
+                            <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
+                            <li>{count}</li>
+                            <button onClick={() => {
+                                count < chosenAccessory.inventory ?
+                                    setCount(count + 1)
+                                    :                
+                                    notify2();
+                            }
+                            }>+</button>
+                        </ul>
+
+                        <button className={count > 0 ? 'cta' : 'ctadisabled'}
+                            onClick={() => addToShopCart(userId, chosenAccessory.id, count, chosenAccessory.price, chosenAccessory)}
+                            >ADD TO CART</button>
+                    </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div>
-                <div>
-                    <ul>
-                        <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
-                        <li>{count}</li>
-                        <button onClick={() => {
-                            count < chosenAccessory.inventory ?
-                                setCount(count + 1)
-                                :                
-                                notify2();
-                        }
-                        }>+</button>
-                    </ul>
-                    <p>{chosenAccessory.onSale && <span><del>${chosenAccessory.price}</del> - sale:  ${chosenAccessory.salePrice}</span>}
-                    {!chosenAccessory.onSale && <span>${chosenAccessory.price}</span>}
-                    </p>
-                </div>
-                <button className={count > 0 ? 'cta' : 'ctadisabled'}
-                    onClick={() => addToShopCart(userId, chosenAccessory.id, count, chosenAccessory.price, chosenAccessory)}
-                    >ADD TO CART</button>
             </div>
         </div>
     )

@@ -84,9 +84,6 @@ class _EditProfileAdmin extends React.Component {
           <div className="container" id="profileleft">
             <h2 className="profilehdr">Update User Information</h2>
           </div>
-          {/* <div className="profilehdr">
-          
-        </div> */}
           <div className="container" id="profileright">
             <form onSubmit={this.handleSubmit} id="profileform">
               <span className="timedAlert">

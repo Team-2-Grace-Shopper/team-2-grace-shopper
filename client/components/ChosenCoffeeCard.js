@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import StarRatings from "react-star-ratings";
 import CoffeeCarousel from './CoffeeCarousel';
 import { addToCart } from '../store/cart';
@@ -67,33 +66,8 @@ const _ChosenCoffeeCard = ({ chosenCoffee, userId, addToCart }) => {
                             onClick={() => addToShopCart(userId, chosenCoffee.id, count, chosenCoffee.price, chosenCoffee)}
                             >ADD TO CART</button>
                     </div>
-                    {/* <button className={count > 0 ? 'cta' : 'ctadisabled'}
-                        onClick={() => addToShopCart(userId, chosenCoffee.id, count, chosenCoffee.price, chosenCoffee)}
-                        >ADD TO CART</button> */}
                     </div>
                 </div>
-            </div>
-            
-            <div>
-                {/* <div>
-                    <ul>
-                        <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
-                        <li>{count}</li>
-                        <button onClick={() => {
-                            count < chosenCoffee.inventory ?
-                                setCount(count + 1)
-                                :                
-                                notify2();
-                        }
-                        }>+</button>
-                    </ul>
-                    <p>{chosenCoffee.onSale && <span><del>${chosenCoffee.price}</del> - sale:  ${chosenCoffee.salePrice}</span>}
-                    {!chosenCoffee.onSale && <span>${chosenCoffee.price}</span>}
-                    </p>
-                </div>
-                <button className={count > 0 ? 'cta' : 'ctadisabled'}
-                    onClick={() => addToShopCart(userId, chosenCoffee.id, count, chosenCoffee.price, chosenCoffee)}
-                    >ADD TO CART</button> */}
             </div>
         </div>
     )

@@ -4,8 +4,10 @@ import StarRatings from 'react-star-ratings';
 import { addToCart } from '../store/cart';
 import { connect } from 'react-redux';
 import toast from 'react-hot-toast';
+
 const notify = () => toast('Added to cart!', { duration: 4000, position: 'top-center' });
 const notify2 = () => toast.error('This will exceed our inventory!',  { duration: 3000, position: 'top-center' })
+
 const addToShopCart = (userId, id, count, price, coffee) =>{
   addToCart(userId, id, count, price, coffee);
   notify();

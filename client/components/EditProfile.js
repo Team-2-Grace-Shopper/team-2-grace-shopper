@@ -92,7 +92,7 @@ class _EditProfile extends React.Component {
               <span className="timedAlert">
                 {this.state.message && <h3> {this.state.message} </h3>}
               </span>
-              <h2>{this.props.users[0].name}</h2>
+              <h2>{this.state.dispName}</h2>
               <br />
               <div className="formfield">
                 <input
