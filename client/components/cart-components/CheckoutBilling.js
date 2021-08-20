@@ -214,6 +214,8 @@ class CheckoutBilling extends React.Component {
                 name="cardNumber"
                 minLength= "16"
                 maxLength="16"
+                value = ''
+                onChange={this.handleChange}
               />
               <label>Card Number</label>
             </div>
@@ -223,6 +225,8 @@ class CheckoutBilling extends React.Component {
                 name="Exp Date"
                 minLength= "4"
                 maxLength="4"
+                value = ''
+                onChange={this.handleChange}
               />
               <label>Exp Date</label>
             </div>
