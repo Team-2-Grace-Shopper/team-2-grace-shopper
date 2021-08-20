@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 import { addToCart } from '../store/cart';
 import { connect } from 'react-redux';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 const notify = () => toast('Added to cart!', { duration: 4000, position: 'top-center' });
+const notify2 = () => toast.error('This will exceed our inventory!',  { duration: 3000, position: 'top-center' })
+const addToShopCart = (userId, id, count, price, coffee) =>{
+  addToCart(userId, id, count, price, coffee);
+  notify();
+}
 
 //useState-> function, pass in arg as a default value. Will use default value to create state for this compondent and will return an array with 2 times. 1st- value, 2nd setState function exclusively for that value
 
@@ -37,26 +42,25 @@ const _AllCoffeesCard = ({ coffee, userId, addToCart }) => {
           <ul>
             <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
             <li>{count}</li>
-            <button onClick={() => setCount(count + 1)}>+</button>
+            <button onClick={() => {
+              count < coffee.inventory ?
+                setCount(count + 1)
+                :                
+                notify2();
+            }
+            }>+</button>
           </ul>
           <p>{coffee.onSale && <span><del>${coffee.price}</del> - sale:  ${coffee.salePrice}</span>}
           {!coffee.onSale && <span>${coffee.price}</span>}
           </p>
         </div>
         <button className={count > 0 ? 'cta' : 'ctadisabled'}
-          onClick={() => {
-            addToCart(userId, coffee.id, count, coffee.price, coffee)
-          }}
+          onClick={ () => addToShopCart(userId, coffee.id, count, coffee.price, coffee) }
         >ADD TO CART</button>
       </div>
     </div>
   )
 }
-
-
-
-
-//to do the add to cart you'll have to connect it
 
 const mapStateToProps = (state) => {
   return {
@@ -66,10 +70,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addToCart: (userId, productId, quantity, price, product) => {
-      addToCart(userId, productId, quantity, price, product);
-      notify();
-    },
+    // addToCart: (userId, productId, quantity, price, product) => {
+    //   addToCart(userId, productId, quantity, price, product);
+    //   notify();
+    // },
   }
 }
 
