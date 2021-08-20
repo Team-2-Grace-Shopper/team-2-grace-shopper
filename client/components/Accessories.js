@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getProducts } from "../store/products";
 import AllAccessoriesCard from "./AllAccessoriesCard";
+import { Toaster } from 'react-hot-toast';
 
 export class Accessories extends React.Component {
   constructor(props) {
@@ -64,9 +65,15 @@ export class Accessories extends React.Component {
     location.reload();
   }
   render() {
+    if (this.state.loading) {
+      return <h2 style={{ marginTop: 150, marginBottom: 200, textAlign: 'center' }}>Please wait while we load your favorite beverages!</h2>
+    }
+    
     const accessories = this.state.accessories;
+    
     return (
       <div id='content-wrapper'>
+      <Toaster />
         <div className="container filterList">
           <div className='filter'>
             <div className="sortBy">

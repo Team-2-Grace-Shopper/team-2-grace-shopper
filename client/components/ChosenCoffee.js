@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getProducts } from "../store/products";
 import AllCoffeesCard from "./AllCoffeesCard";
 import ChosenCoffeeCard from "./ChosenCoffeeCard";
+import { Toaster } from 'react-hot-toast';
 
 class ChosenCoffee extends React.Component {
   constructor(props) {
@@ -29,7 +30,8 @@ class ChosenCoffee extends React.Component {
 
     return (
       <div id='content-wrapper'>
-      <ChosenCoffeeCard chosenCoffee={chosenCoffee} key={chosenCoffee.id} />
+        <Toaster />
+        <ChosenCoffeeCard chosenCoffee={chosenCoffee} key={chosenCoffee.id} />
       </div>
     );
   }
