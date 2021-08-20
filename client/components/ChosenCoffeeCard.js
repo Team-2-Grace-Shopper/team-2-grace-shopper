@@ -22,27 +22,60 @@ const _ChosenCoffeeCard = ({ chosenCoffee, userId, addToCart }) => {
     return (
         <div key= { chosenCoffee.id }>
             <div className= 'singleItem'>
-                <div className= 'chosenCoffeeInfo' key={chosenCoffee.id}>
-                    <span>
-                        <StarRatings
-                            rating={chosenCoffee.rating * 1}
-                            starRatedColor="gold"
-                            numberOfStars={5}
-                            name="rating"
-                            starDimension="15px"
-                            starSpacing="0px"
-                        />
-                    </span>
-                    {chosenCoffee.onSale ? <span className="label">ON SALE</span> : null}
-                    <CoffeeCarousel chosenCoffee={chosenCoffee} key={chosenCoffee.id}/>
-                    <h1>{ chosenCoffee.name }</h1>
-                    <p>{ chosenCoffee.description }</p>
-                    <p>{ chosenCoffee.weight }oz</p>
+                <div className= 'chosenCoffeeInfo container' key={chosenCoffee.id}>
+                    <div className='photoCarousel'>
+                        {chosenCoffee.onSale ? <span className="label">ON SALE</span> : null}
+                        <CoffeeCarousel chosenCoffee={chosenCoffee} key={chosenCoffee.id}/>
+                    </div>
+                    
+                    <div className='productInfo'>
+                        <span>
+                            <StarRatings
+                                rating={chosenCoffee.rating * 1}
+                                starRatedColor="gold"
+                                numberOfStars={5}
+                                name="rating"
+                                starDimension="15px"
+                                starSpacing="0px"
+                            />
+                        </span>
+                        <h1>{ chosenCoffee.name }</h1>
+                        <p>{ chosenCoffee.description }</p>
+                        <p>{ chosenCoffee.weight }oz</p>
+                        <br />
+                        <br />
+
+                        <div>
+                        <h3>{chosenCoffee.onSale && <h3><del>${chosenCoffee.price}</del> - sale:  ${chosenCoffee.salePrice}</h3>}
+                        {!chosenCoffee.onSale && <h3>${chosenCoffee.price}</h3>}
+                        </h3>
+                    </div>
+                    <div className='quantityButton'>
+                        <ul>
+                            <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
+                            <li>{count}</li>
+                            <button onClick={() => {
+                                count < chosenCoffee.inventory ?
+                                    setCount(count + 1)
+                                    :                
+                                    notify2();
+                            }
+                            }>+</button>
+                        </ul>
+
+                        <button className={count > 0 ? 'cta' : 'ctadisabled'}
+                            onClick={() => addToShopCart(userId, chosenCoffee.id, count, chosenCoffee.price, chosenCoffee)}
+                            >ADD TO CART</button>
+                    </div>
+                    {/* <button className={count > 0 ? 'cta' : 'ctadisabled'}
+                        onClick={() => addToShopCart(userId, chosenCoffee.id, count, chosenCoffee.price, chosenCoffee)}
+                        >ADD TO CART</button> */}
+                    </div>
                 </div>
             </div>
             
             <div>
-                <div>
+                {/* <div>
                     <ul>
                         <button onClick={() => count > 0 && setCount(count - 1)}>-</button>
                         <li>{count}</li>
@@ -60,7 +93,7 @@ const _ChosenCoffeeCard = ({ chosenCoffee, userId, addToCart }) => {
                 </div>
                 <button className={count > 0 ? 'cta' : 'ctadisabled'}
                     onClick={() => addToShopCart(userId, chosenCoffee.id, count, chosenCoffee.price, chosenCoffee)}
-                    >ADD TO CART</button>
+                    >ADD TO CART</button> */}
             </div>
         </div>
     )

@@ -28,7 +28,7 @@ class ChosenCoffee extends React.Component {
     }
 
     return (
-      <div id='testrun'>
+      <div id='content-wrapper'>
       <ChosenCoffeeCard chosenCoffee={chosenCoffee} key={chosenCoffee.id} />
       </div>
     );
