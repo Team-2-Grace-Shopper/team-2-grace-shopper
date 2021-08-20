@@ -29,10 +29,10 @@ class CheckoutShipping extends React.Component {
       loading: false,
       email: user.username,
       name: user.name,
-      address: user.address,
-      city: user.city,
+      address: user.address || '',
+      city: user.city || '',
       state: user.state ? user.state : "0",
-      zip: user.zip,
+      zip: user.zip || '',
       shipping: "0",
       enableContinue: false,
     });
@@ -41,15 +41,15 @@ class CheckoutShipping extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.user !== this.props.user) {
       const { user } = this.props;
-      console.log('IN CDU', user)
+
       this.setState({
         loading: false,
         email: user.username,
         name: user.name,
-        address: user.address,
-        city: user.city,
+        address: user.address || '',
+        city: user.city || '',
         state: user.state ? user.state : "0",
-        zip: user.zip,
+        zip: user.zip || '',
         shipping: "0",
         enableContinue: false,
       });
