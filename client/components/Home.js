@@ -37,7 +37,7 @@ export class Home extends React.Component {
         <Toaster />
         <div id="home" className="container">
           {/* section headline with line format start */}
-          <hr /><h2 className="hrtxt">Today's Pick</h2>
+          <hr /><h2 className="hrtxt">Today's Picks</h2>
           <br /><br />
           {/* section headline with line format end */}
           <div className="itemList col4">
