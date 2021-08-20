@@ -38,15 +38,22 @@ router.post("/", async (req, res, next) => {
 
 router.post("/line", async (req, res, next) => {
   try {
-    const line = await Orderline.findOne({where: {orderId: req.body.orderId*1, productId:req.body.productId}})
+    const line = await Orderline.findOne({ 
+      where: {orderId: req.body.orderId*1, productId:req.body.productId},
+      include: { model: Product },
+    })
     if (line){
       line.quantity += req.body.quantity;
       await line.save();
       res.send(line);
     }
     else {
-      const cart = await Orderline.create(req.body, { returning: true });
-      res.json(cart);
+      const line = await Orderline.create(req.body, { returning: true });
+      const newLine = await Orderline.findOne({ 
+        where: {id: line.id},
+        include: { model: Product },
+      })
+      res.send(newLine);
     }
 
   } catch (err) {
