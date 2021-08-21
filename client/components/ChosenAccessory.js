@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProducts } from "../store/products";
 import ChosenAccessoryCard from "./ChosenAccessoryCard";
+import CoffeeDetail from './CoffeeDetail'
 import { Toaster } from 'react-hot-toast';
 
 class ChosenAccessory extends React.Component {
@@ -32,6 +33,7 @@ class ChosenAccessory extends React.Component {
       <div id='content-wrapper'>
         <Toaster />
         <ChosenAccessoryCard chosenAccessory={chosenAccessory} />
+        <CoffeeDetail />
       </div>
     );
   }
