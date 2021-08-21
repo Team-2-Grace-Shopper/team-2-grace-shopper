@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getProducts } from "../store/products";
 import AllCoffeesCard from "./AllCoffeesCard";
 import ChosenCoffeeCard from "./ChosenCoffeeCard";
+import CoffeeDetail from './CoffeeDetail'
 import { Toaster } from 'react-hot-toast';
 
 class ChosenCoffee extends React.Component {
@@ -32,6 +33,7 @@ class ChosenCoffee extends React.Component {
       <div id='content-wrapper'>
         <Toaster />
         <ChosenCoffeeCard chosenCoffee={chosenCoffee} key={chosenCoffee.id} />
+        <CoffeeDetail />
       </div>
     );
   }
@@ -56,7 +58,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(ChosenCoffee);
                         return (
                             <div>
                                 <h3>Rating: {chosenCoffee.rating}</h3>
-                                <p>{chosenCoffee.review}</p>             
+                                <p>{chosenCoffee.review}</p>
                             </div>
                         )
                     })}
