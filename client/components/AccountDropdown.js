@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
-const AccountDropdown = ({ handleClick, isLoggedIn, name, isAdmin }) => (
+const AccountDropdown = ({ handleClick, isLoggedIn, name, isAdmin }) => {
+  return (
   <div id="account-dropdown">
     {isLoggedIn ? (
       /* if user is logged in */
@@ -62,16 +63,19 @@ const AccountDropdown = ({ handleClick, isLoggedIn, name, isAdmin }) => (
         </div>
       )}
   </div>
-);
+)
+};
 
 /**
  * CONTAINER
  */
-const mapState = (state) => {
+const mapState = (state, ownProps) => {
+  console.log(state, ownProps)
   return {
     name: state.auth.name,
     isAdmin: state.auth.isAdmin,
     isLoggedIn: !!state.auth.id,
+//    handleResetClick: 
   };
 };
 

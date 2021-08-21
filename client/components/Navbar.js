@@ -13,6 +13,10 @@ class Navbar extends Component {
 
     this.state = {
       showDropdown: false,
+      coffeeClass:'',
+      accyClass: '',
+      prevCoffee: '',
+      prevAccy: '',
     };
     this.showDropdown = this.showDropdown.bind(this);
     this.closeDropdown = this.closeDropdown.bind(this);
@@ -34,6 +38,8 @@ class Navbar extends Component {
 
   showDropdown(ev) {
     ev.preventDefault();
+    this.setState({prevCoffee: this.state.coffeeClass, prevAccy: this.state.accyClass})
+    this.handleResetClick();
     this.setState({ showDropdown: true }, () => {
       document.addEventListener("click", this.closeDropdown);
     });
@@ -44,6 +50,15 @@ class Navbar extends Component {
     });
   }
 
+  handleResetClick=(ev)=>{
+    this.setState({coffeeClass: '', accyClass: ''})
+  }
+  handleCoffeeClick=(ev)=>{
+    this.setState({coffeeClass: 'activeCategory', accyClass: '', prevCoffee: 'activeCategory', prevAccy: ''})
+  }
+  handleAccyClick=(ev)=>{
+    this.setState({coffeeClass: '', accyClass: 'activeCategory', prevCoffee: '', prevAccy: 'activeCategory'})
+  }
 
   render() {
 
@@ -51,43 +66,44 @@ class Navbar extends Component {
     return (
       <div id="navbar">
         <div>
-          <Link to="/home">
+          <Link onClick={this.handleResetClick} to="/home">
             <h1 className="logo">Grace Coffee .</h1>
             {/* MOVE BELOW TO OVER THE CART */}
             {/* <h1>{this.props.nbrCartItems} items in cart</h1> */}
             {/* MOVE ABOVE TO OVER THE CART */}
           </Link>
           <div>
-            <Link to="/coffees">Coffees</Link>
-            <Link to="/accessories">Accessories</Link>
+            <Link to="/coffees" className={this.state.coffeeClass} onClick={this.handleCoffeeClick}>Coffees</Link>
+            <Link to="/accessories" className={this.state.accyClass}  onClick={this.handleAccyClick}>Accessories</Link>
           </div>
         </div>
         <nav>
           {isLoggedIn ? (
             <div>
               {/* The navbar will show these links after you log in */}
-              <a href="#">
+              <a  onClick={this.handleResetClick} href="#">
                 <Icon icon="bx:bx-search" width="20" />
               </a>
-              <Link to="/cart">
+              <Link onClick={this.handleResetClick} to="/cart">
                 <Icon icon="bx:bx-shopping-bag" width="20" />
               </Link>
-              <Link to="/cart" id="cartCountCircle">
+              <Link onClick={this.handleResetClick} to="/cart" id="cartCountCircle">
                 {this.props.nbrCartItems}
               </Link>
               <button onClick={this.showDropdown}><Icon icon="bx:bx-user-circle" width="20" /> {name}</button>
-              {this.state.showDropdown ? <AccountDropdown /> : null}
+              {this.state.showDropdown ? <AccountDropdown handleResetClick={this.handleResetClick}/> : null}
+              
             </div>
           ) : (
               <div>
                 {/* The navbar will show these links before you log in */}
-                <a href="#">
+                <a  onClick={this.handleResetClick} href="#">
                   <Icon icon="bx:bx-search" width="20" />
                 </a>
-                <Link to="/cart">
+                <Link onClick={this.handleResetClick} to="/cart">
                   <Icon icon="bx:bx-shopping-bag" width="20" />
                 </Link>
-                <Link to="/cart" id="cartCountCircle">
+                <Link onClick={this.handleResetClick} to="/cart" id="cartCountCircle">
                   {this.props.nbrCartItems}
                 </Link>
                 <button onClick={this.showDropdown}>

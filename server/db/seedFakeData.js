@@ -7,7 +7,7 @@ const Product = require('./models/Product')
 const { Order, Orderline } = require('./models/Order')
 const db = require('./db');
 
-const { resolve } = require('path');
+// const { resolve } = require('path');
 const { readdir } = require('fs').promises;
 
 const getImages = async (dir) => {
@@ -20,6 +20,152 @@ const getImages = async (dir) => {
   return Array.prototype.concat(...files);
   }
 
+// array with product names so we don't use Faker for them
+const accessoryNames = [
+    'Single Serve Espresso Maker',
+    'Electric Milk Frother',
+    'Toddy Cold Brew Coffee Maker',
+    'Coffee Maker Bodum Black 8oz Cup',
+    'Handheld Milk Frother Black',
+    'Bodum Bistro',
+    'Sand Infusions Kit',
+    'Monaco Glass Removable Infuser 42oz',
+    'Pour Over Kit',
+    'Hario Brew Bottle',
+    'Dripper with Coffee Filter',
+    'Toddy Brew System',
+    'New Orleans-Style Brewing Kit',
+    'Original Grey Dripper',
+    'Coffee Carafe Essential',
+    'Chemex 3-Cup',
+    'Chemex 6-Cup',
+    'Bonavita Connoisseur Coffee Brewer',
+    'Technivorm Select Moccamaster',
+    'Aero Press',
+    'Bodum Chambord 17oz French Press',
+    'Hario Nel Drip Set',
+    'Timbuk2 Weekender Kit',
+    'Fellow Atmos Vacuum Canister',
+    'Personal Oji',
+    'Cold Brew Kit',
+    'Ceramic Coffee Mill',
+    'Encor Coffee Grinder',
+    'Baratza Vario Grinder',
+    'Fellow Ode Grinder',
+    'Baratza Virtuoso Grinder',
+    'Electric Kettle',
+    'Prolex Mini Grinder II',
+    'Takahiro Pour Over Kettle',
+    'Stagg Stovetop Pour-Over Kettle',
+    'Tsuki Usagi Jirushi Slim Pot'
+    ];
+    
+const coffeeNames = [
+  'Brooklyn Blend Coffee',
+  'Classico Coffee',
+  'Flatiron Blend Coffee',
+  'Cold Brew Coffee',
+  'Original Cold Brew',
+  'Chocolate Cold Brew',
+  'Horchata Cold Brew',
+  'Hair Bender Coffee',
+  'Holler Mountain Coffee',
+  'Guatemala El Coffee',
+  'Colombia Cantillo Coffee',
+  'Ethiopia Mordecofe',
+  'Indonesia Bies Penantan',
+  'Honduras El Puente',
+  'Rwanda Huye Mountain',
+  'House Blend',
+  'Indonesia Muhtar',
+  'French Roast',
+  'Trapper Creek Decaf',
+  'Costa Rica Sumava Coffee',
+  'August Roasters Blend',
+  'Italian Roast Espresso',
+  'Colombian Supremo',
+  'Dark Brazil',
+  'Breakfast Blend',
+  'Dark Sumatra Mandheling',
+  'Ethiopian Yirgacheffe',
+  'Hazelnut Flavored Coffee',
+  'Kenya AA',
+  'Fiar Trade Dark Sumatra',
+  'Grandfather Blend®',
+  'Chocolate Raspberry Flavored',
+  'Coconut Cream Pie Iced Coffee',
+  'Organic Bali Blue Moon Coffee',
+  'Black Knite Coffee Bean',
+  'Costa Rican Tarrazu',
+  'Organic Colombian',
+  'Colombian Extra Supremo',
+  'Tanzanian Peaberry',
+  'Organic Haitian Blue',
+  'Ethiopian Sidamo Swiss Decaf',
+  'Organic Peruvian',
+  'Honduran Marcala Coffee',
+  'Mocha Java',
+  'Indian Monsoon Malabar',
+  'Sumatra Mandheling Roasted',
+  'Tiger Nebular Roasted',
+  'Nossa Senhora de Fatima',
+  'Organic Java Taman Dadar',
+  'Monsoon Water Process Decaf',
+  'Colombian Primo Supremo',
+  'Organic Timor',
+  'Dark Ethiopian Yigacheffe Kochere',
+  '100% Jamaica Blue Mountain',
+  'Brazil Fazenda Santa Luzia',
+  'Caffe Americano',
+'Blonde Roast',
+'Caffe Misto',
+'Pike Place',
+'Decaf Pike Place',
+'Cappuccino',
+'Expresso',
+'Expresso con Panna',
+'Flat White',
+'Honey Almon Milk Flate White',
+'Caffe Latte',
+'Cinnamon Dolce Latte',
+'Starbucks Reserve Latte',
+'Starbucks Reserve Hazelnut Bianco Latte',
+'Blond Vanilla Latte',
+'Carmel Macchiato',
+'Expresso Macchiato',
+'Caffe Mocha',
+'Starbucks Reserve Dark Chocolate Mocha',
+'White Chocolate Mocha',
+'Honey Almondmilk Cold Brew',
+'Salted Caramel Cream Cold Brew',
+'Starbucks Reserve Cold Brew',
+'Starbucks Cold Brew',
+'Vanilla Sweet Cream Cold Brew',
+'Starbucks Cold Brew with Milk',
+'Honey Almondmilk Nitro Cold Brew',
+'Starbucks Reserve Nitro Cold Brew',
+'Salted Caramel Cream Nitro Cold Brew',
+'Nito Cold Brew',
+'Vanilla Sweat Cream Nitro Cold Brew',
+'Iced Caffe Americano',
+'Iced Coffee',
+'Iced Coffee with Milk',
+'Iced Expresso',
+'Iced Chocolate Almondmilk Shaken Expresso',
+'Iced Shaken Expresso',
+'Iced Flat Whte',
+'Iced Honey Almondmilk Flat White',
+'Starbucks Reserve Iced Latte',
+'Starbucks Reserve Iced Hazelnut Bianco Latte',
+'Iced Coffe Latte',
+'Iced Cinnamon Dolce Latte',
+'Iced Starbuck Blond Vanilla Latte',
+'Iced Caramel Macchiato',
+'Iced Coffee Mocha',
+'Iced White Chocale Mocha',
+'Starbucks Reserve Iced Dark Chocolate Mocha'
+  ];
+  
 const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) => {
   const productImages = await getImages('./public/images/products/coffee');
   const accyImages = await getImages('./public/images/products/accessories');
@@ -34,6 +180,8 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
   });
 
   const products = [];
+  let coffeeIdx = 0;
+  let accyIdx = 0;
   for (let i = 0; i < nbrProducts; i++){
     const listPrice = (Math.random()*20).toFixed(2);
     const type = Math.random() < .35 ? 'accessory' : 'coffee';
@@ -42,16 +190,26 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
     let url1;
     let url2;
     let url3;
+    let name;
     if (type === 'accessory'){
       category = Math.random() < .5 ? 'mug' : 'grinder';
       url1 = '/images/products/accessories/' + accyImages[Math.floor(Math.random() * accyImages.length)];
       url2 = '/images/products/accessories/' + accyImages[Math.floor(Math.random() * accyImages.length)];
       url3 = '/images/products/accessories/' + accyImages[Math.floor(Math.random() * accyImages.length)];
-
+      if (accyIdx > accessoryNames.length){
+        accyIdx = 0;
+      }
+      name = accessoryNames[accyIdx];
+      accyIdx += 1;
     } else {
       url1 = '/images/products/coffee/' + productImages[Math.floor(Math.random() * productImages.length)];
       url2 = '/images/products/coffee/' + productImages[Math.floor(Math.random() * productImages.length)];
       url3 = '/images/products/coffee/' + productImages[Math.floor(Math.random() * productImages.length)];
+      if (coffeeIdx > coffeeNames.length){
+        coffeeIdx = 0;
+      }
+      name = coffeeNames[coffeeIdx];
+      coffeeIdx += 1;
       const rand = Math.random();
       switch (true){
         case rand < .17:
@@ -74,7 +232,7 @@ const seedFakeData = async (nbrProducts = 100, nbrUsers = 50, nbrOrders = 200) =
       }
     }
     const x = await Product.create({
-      name: faker.commerce.productName(),
+      name: name,
       description: faker.lorem.paragraph(1),
       price: listPrice,
       salePrice: (listPrice*(Math.random())).toFixed(2),

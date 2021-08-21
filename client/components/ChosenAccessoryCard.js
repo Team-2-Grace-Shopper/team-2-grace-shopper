@@ -45,9 +45,8 @@ const _ChosenAccessoryCard = ({ chosenAccessory, userId, addToCart }) => {
                         <br />
 
                         <div>
-                        <h3>{chosenAccessory.onSale && <h3><del>${chosenAccessory.price}</del> - sale:  ${chosenAccessory.salePrice}</h3>}
+                        {chosenAccessory.onSale && <h3><del>${chosenAccessory.price}</del> - sale:  ${chosenAccessory.salePrice}</h3>}
                         {!chosenAccessory.onSale && <h3>${chosenAccessory.price}</h3>}
-                        </h3>
                     </div>
                     <div className='quantityButton'>
                         <ul>
