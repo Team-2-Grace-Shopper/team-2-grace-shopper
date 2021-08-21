@@ -19,6 +19,13 @@ class OrderConfirmation extends React.Component {
   sendEmail = async (order) => {
     init("user_HuaybJLdnOoIDOZ3t63oD"); // this would be secure in a production app
     const orderTot = order.orderlines.reduce((tot, c) => tot + c.quantity * c.price, 0);
+    const orderTotFmt = <NumberFormat value={orderTot}
+      thousandSeparator=','
+      prefix='$'
+      fixedDecimalScale={true}
+      decimalScale={2}
+      displayType='text'
+      />
     const orderLines = order.orderlines.map( (c,i) => `
       <tr><td class="center">${i+1}</td><td>${c.product.name}</td><td class="center">${c.quantity}</td><td class="right">${c.price}</td></tr>
       `
@@ -45,7 +52,7 @@ class OrderConfirmation extends React.Component {
     <h3>Order #${Math.floor(5000 + Math.random()*10000)}</h3>
     <h3>Arriving ${dateFormat(order.shipDate, "ddd, mmm d, yyyy")}</h3>
     <h4>Ship to: ${order.name}</h4>
-    <h4>Order total: $${orderTot} (shipping and tax are separate)</h4>
+    <h4>Order total: ${orderTotFmt} (shipping and tax are separate)</h4>
     <hr>
     <h3>Items</h3>
     <table>
