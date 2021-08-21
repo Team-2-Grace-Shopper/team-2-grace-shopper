@@ -106,6 +106,10 @@ button {
 
 /**************/
 /* Navigation */
+.activeCategory{
+  font-weight: bold;
+  color: #b7926a;
+}
 #navbar {
   width: calc(100% - 4em);
   padding: 0 2em;
@@ -502,7 +506,8 @@ button {
 
 .productInfo ul > * {
   width: 38.5px;
-  line-height: 35px;
+  height: 38.5px;
+  line-height: 38px;
   margin-right: 10px;
   text-align: center;
 }
@@ -563,6 +568,7 @@ button {
 
 .imageActive {
   opacity: 1;
+  width: 100%;
   /* transition-duration: 1s; */
   /* transition: .3s ease-in-out */
 }

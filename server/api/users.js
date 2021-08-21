@@ -2,6 +2,8 @@ const router = require("express").Router();
 const {
   models: { User, Order, Orderline, Product },
 } = require("../db");
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 module.exports = router;
 
 router.get("/", async (req, res, next) => {
@@ -10,6 +12,7 @@ router.get("/", async (req, res, next) => {
       // explicitly select only the id and username fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
+      where: {id: {[Op.gt]: 0}},
       attributes: ["id", "username", "name", "address", "city", "state", "zip"],
       include: Order,
       // include: [

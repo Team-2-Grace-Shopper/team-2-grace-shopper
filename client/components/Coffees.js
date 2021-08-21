@@ -121,16 +121,13 @@ export class Coffees extends React.Component {
                 <input type="radio" id="featured" name="featured" value="featured" onClick={this.handleClick}></input>
                 <label htmlFor="featured">Featured</label>
               </div>
-            </div>
-            <span><strong></strong></span>
-            <div className="Sale">
               <div>
                 <input type="radio" id="sale" name="sale" value="sale" onClick={this.handleClick}></input>
                 <label htmlFor="sale">On sale</label>
               </div>
             </div>
-            <span><strong>Origin</strong></span>
             <div className="Region">
+            <span><strong>Origin</strong></span>
               <div>
                 <input type="radio" id="africa" name="region" value="africa" onClick={this.handleClick}></input>
                 <label htmlFor="africa">Africa</label>
